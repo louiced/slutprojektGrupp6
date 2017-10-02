@@ -1,0 +1,136 @@
+* {
+  font-family: Helvetica;
+}
+.App {
+  position: relative;
+  justify-content: center;
+  text-align: center;
+}
+.flex-row {
+  display: flex;
+  flex-direction: row;
+}
+.flex-col {
+  display: flex;
+  flex-direction: column; 
+}
+.container {
+  justify-content: space-around;
+  position: relative;
+}
+.header {
+  position: relative;
+  justify-content: space-between;
+  background-color: #555;
+  color: #eee;
+  height: 10%;
+  padding: 10px;
+}
+.subHeader {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  z-index: -1;
+  background-color: #555;
+  padding: 15px 70px;
+  box-shadow: 0px 0px 15px 10px rgba(75,75,75,1);
+  width: 83%;
+}
+
+.container.flex-col {
+  /*align-items: center;*/
+  align-items: center;
+}
+
+.registrera, .login {
+  position: relative; 
+  justify-content: flex-start;
+  border: 1px solid #ddd;
+  padding: 50px;
+  margin-top: 20px;
+  margin-bottom: 20px;
+  width: 35%;
+}
+
+input {
+  margin-bottom: 5px;
+  padding: 5px;
+}
+h4 {
+  margin-right: 10px;
+}
+label {
+  margin: 21px 10px 21px 0px;
+}
+.login label {
+  align-self: flex-start;
+}
+.okBtn {
+  background-color: #52ad39;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-weight: bold;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+
+button:hover {
+  cursor: pointer;
+}
+.btn {
+  position: absolute;
+  bottom: 5px;
+  align-self: flex-start;
+  background-color: #52ad39;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-weight: bold;
+}
+#logoutBtn {
+  /*position: absolute;
+  bottom: 60px;*/
+  background-color: #f25507;
+  align-self: flex-end;
+  padding: 7px 15px;
+  border: none;
+  border-radius: 7px;
+  color: white;
+  font-weight: bold;
+}
+
+.btnAdm {
+  background-color: #eee;
+  padding: 7px 15px;
+  border: 1px solid #333;
+  color: #333;
+  font-weight: bold; 
+  border-radius: 7px;
+  margin-left: 7px;
+}
+.btnAdm:last-child {
+  margin-right: 7px;
+}
+.active {
+  background-color: #333;
+  color: #eee;
+  border: 1px solid #eee;
+}
+
+table {
+  padding: 30px;
+  text-align: left;
+}
+table * {
+  padding: 10px;
+}
+tr:nth-child(even) {
+  background-color: #ddd;
+}
+.unavailable {
+  color: red;
+  font-style: italic;
+}
