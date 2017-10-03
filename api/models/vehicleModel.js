@@ -14,4 +14,4 @@ var vehicleSchema = new Schema({
 });
 
 
-module.exports = mongoose.model('Vehicle', vehicleSchema); //class Vehicle
+module.exports = mongoose.model('Vehicles', vehicleSchema); //class Vehicle
