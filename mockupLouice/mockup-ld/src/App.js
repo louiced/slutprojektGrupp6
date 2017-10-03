@@ -15,14 +15,15 @@ class App extends Component {
     return (
       <div className="App flex-col">
         <Header />
-         {/*
+        {/* 
         <Login />
         
         Admin-relaterade components, renderas i Admin??? */}
         <Admin1 />
-        <Admin2 />
-        <Admin3 />
         
+      {/*<Admin2 />
+        <Admin3 />
+        */}
           
         {/* Consumer-relaterade components */}
       </div>
