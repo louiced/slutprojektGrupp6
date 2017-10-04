@@ -4,7 +4,8 @@ var mongoose = require('mongoose'),
     Vehicles = require('../models/vehicleModel.js'),
     Users = require('../models/userModel.js');
 
-//vehicles:
+//VEHICLES:
+//hittar alla vehicle-object
 exports.list_all_vehicles = (req, res) => {
   Vehicles.find({}, (err, vehicle) => {
     if (err)
@@ -13,8 +14,9 @@ exports.list_all_vehicles = (req, res) => {
   })
 }
 
+//skapar ett nytt vehicle-object
 exports.create_a_vehicle = (req, res) => {
-  var new_vehicle = new Vehicle(req.body);
+  var new_vehicle = new Vehicles(req.body);
   new_vehicle.save((err, vehicle) => {
     if (err)
       res.send(err);
@@ -22,6 +24,7 @@ exports.create_a_vehicle = (req, res) => {
   })
 }
 
+//läs in ett vehicle-object utifrån id
 exports.read_a_vehicle = (req, res) => {
   Vehicles.findById(req.params.vehicleId, (err, vehicle) => {
     if (err)
@@ -30,6 +33,7 @@ exports.read_a_vehicle = (req, res) => {
   })
 }
 
+//hitta och uppdatera ett vehicle-object utifrån id
 exports.update_a_vehicle = (req, res) => {
   Vehicles.findOneAndUpdate({_id: req.params.vehicleId}, req.body, {new: true}, (err, vehicle) => {
     if (err)
@@ -38,6 +42,7 @@ exports.update_a_vehicle = (req, res) => {
   })
 }
 
+//ta bort ett vehicle-object utifrån id
 exports.delete_a_vehicle = (req, res) => {
   Vehicles.remove({
     _id: req.params.vehicleId
@@ -48,7 +53,8 @@ exports.delete_a_vehicle = (req, res) => {
   });
 };
 
-//users:
+//USERS:
+//hittar alla user-object
 exports.list_all_users = (req, res) => {
   Users.find({}, (err, user) => {
     if (err)
@@ -57,6 +63,7 @@ exports.list_all_users = (req, res) => {
   })
 }
 
+//skapa nytt user-object
 exports.create_a_user = (req, res) => {
   var new_user = new Users(req.body);
   new_user.save((err, user) => {
@@ -66,6 +73,7 @@ exports.create_a_user = (req, res) => {
   })
 }
 
+//läs in ett user-object utifrån id
 exports.read_a_user = (req, res) => {
   Users.findById(req.params.userId, (err, user) => {
     if (err)
@@ -74,6 +82,7 @@ exports.read_a_user = (req, res) => {
   })
 }
 
+//hitta och uppdater ett user-object utifrån id
 exports.update_a_user = (req, res) => {
   Users.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, (err, user) => {
     if (err)
@@ -82,6 +91,7 @@ exports.update_a_user = (req, res) => {
   })
 }
 
+//ta bort ett user-object utfrån id
 exports.delete_a_user = (req, res) => {
   Users.remove({
     _id: req.params.userId
