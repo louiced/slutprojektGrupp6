@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import BookCar from './bookCar.js';
+import BookCar from './BookCar.js';
 import LoginComponent from './LoginComponent.js';
 import RegisterComponent from './RegisterComponent.js';
 
