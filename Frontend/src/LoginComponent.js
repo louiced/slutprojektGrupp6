@@ -16,12 +16,10 @@ class LoginComponent extends React.Component {
 		this.loginClick = this.loginClick.bind(this);
 	}
 	render(){
-		let navBar = this.props.navBar;
 		let view;
 		switch(this.state.view){
 			case 'Login':
 				view = <div>
-			{navBar}
 			<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
 			<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
 			<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
@@ -67,6 +65,8 @@ class LoginComponent extends React.Component {
 		})
 		*/
 		
+		this.props.updateView('UserView');
+		/*
 		fetch( 'http://localhost:4000/vehicles' )
            .then(resp => resp.json())
            .then(json => {
@@ -76,6 +76,7 @@ class LoginComponent extends React.Component {
            .catch(error => {
                console.warn("API error:", error);
            });
+		   */
 	}
 }
 
