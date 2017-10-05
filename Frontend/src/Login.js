@@ -3,6 +3,7 @@ import './App.css';
 import BookCar from './BookCar.js';
 import LoginComponent from './LoginComponent.js';
 import RegisterComponent from './RegisterComponent.js';
+import UserView from './UserView.js';
 
 class Login extends React.Component{
 	constructor(props){
@@ -23,6 +24,7 @@ class Login extends React.Component{
 		this.ccLoginClick = this.ccLoginClick.bind(this);
 		this.logOut = this.logOut.bind(this);
 		this.switchTab = this.switchTab.bind(this);
+		this.updateView = this.updateView.bind(this);
 	}
 	render(){
 		let view;
@@ -33,14 +35,16 @@ class Login extends React.Component{
 		switch (this.state.view){
 			case 'Login': view = 
 				<div className="mainContent">
-					<LoginComponent navBar={navBar}/>
+					{navBar}
+					<LoginComponent updateView={this.updateView}/>
 				</div>
 				break;
 			case 'registerNewCC': view = <div className="mainContent">
-			
-					<RegisterComponent navBar={navBar}/>
+			{navBar}
+					<RegisterComponent updateView={this.updateView}/>
 				</div>
 			break;
+			case 'UserView': view = <div className="mainContent"><UserView/></div>
 		}
 		return view;
 	}
@@ -57,7 +61,8 @@ class Login extends React.Component{
 		});
 	}
 	switchTab(ev){
-		let id = ev.target.value;
+		console.log(ev.target.id);
+		let id = ev.target.id;
 		let newTabs = [];
 		let view;
 		this.state.tabs.forEach(el => {
@@ -73,6 +78,12 @@ class Login extends React.Component{
 		this.setState({
 			tabs: newTabs,
 			view: view
+		});
+	}
+	
+	updateView(str){
+		this.setState({
+			view: str
 		});
 	}
 }

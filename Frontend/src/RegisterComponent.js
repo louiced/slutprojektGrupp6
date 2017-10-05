@@ -20,12 +20,10 @@ class RegisterComponent extends React.Component {
 		this.handleDrivLicInput = this.handleDrivLicInput.bind(this);
 	}
 	render(){
-		let navBar = this.props.navBar;
 		let view;
 		switch(this.state.view){
 			case 'Login':
 				view = <div>
-			{navBar}
 			<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
 			<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
 			<input type="text" placeholder="Förnamn" onChange={this.handleFirstNameInput}/>
