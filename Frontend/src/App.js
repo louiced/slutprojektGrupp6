@@ -5,7 +5,7 @@ import Login from './Login.js';
 class App extends Component {
   render() {
     return (<div>
-		<div className="header"><span className="brandTag">OLSSONS</span><span className="brandTag2">BILAR</span></div>
+		<div className="header"><span className="brandTag font-effect-3d">OLSSONS</span><span className="brandTag2">BILAR</span></div>
       <div className="App">
         <Login/>
       </div>
