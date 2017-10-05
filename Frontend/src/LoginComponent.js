@@ -56,6 +56,8 @@ class LoginComponent extends React.Component {
 		*/
 		
 		 // TO DO
+		
+		/*
 		axios.get('http://localhost/olsson/users')
 		.then(res => {
 			console.log(res);
@@ -63,7 +65,17 @@ class LoginComponent extends React.Component {
 		.catch(err => {
 			console.log(err);
 		})
+		*/
 		
+		fetch( 'http://localhost:4000/vehicles' )
+           .then(resp => resp.json())
+           .then(json => {
+               console.log("API response:", json);
+               
+           })
+           .catch(error => {
+               console.warn("API error:", error);
+           });
 	}
 }
 
