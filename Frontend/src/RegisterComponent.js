@@ -24,6 +24,7 @@ class RegisterComponent extends React.Component {
 		switch(this.state.view){
 			case 'Login':
 				view = <div>
+						<form onSubmit={this.registerClick}>
 			<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
 			<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
 			<input type="text" placeholder="Förnamn" onChange={this.handleFirstNameInput}/>
@@ -31,7 +32,8 @@ class RegisterComponent extends React.Component {
 			<input type="text" placeholder="åååå-mm-dd-xxxx" onChange={this.handlePersonalNumberInput}/>
 			<input type="text" placeholder="Körkort" onChange={this.handleDrivLicInput}/>
 						<br/>
-			<button className="btn" onClick={this.registerClick}>REGISTRERA</button>
+			<button className="btn" type="submit">REGISTRERA</button>
+							</form>
 		</div>
 				break;
 			case 'UserView': view = <UserView/>
@@ -83,15 +85,105 @@ class RegisterComponent extends React.Component {
 	}
 	
 	
-	registerClick(ev){
+	registerClick(ev) {
 		// Make login automatically
-		this.setState({
-			view: 'UserView'
+		// this.props.updateView('UserView');
+		// Send a POST request
+
+		/*
+				axios.post('http://localhost:4000/users', {
+						name: {
+						first: 'Marre',
+						last: 'Larre'
+					},
+						email: 'marre@mail.nu',
+						password: 'pw',
+						age: 27,
+						driversLicense: 'A'
+					})
+					.then(res => {
+						console.log(res);
+					})
+					.catch(err => {
+						console.log(err);
+					});
+				
+		axios({
+			method: 'post',
+			url: 'http://localhost:4000/users',
+				data: {
+					name: "JAAAAAAAAAVEL"
+				},
+			headers: {
+				"Content-Type": "application/x-www-form-urlencoded"
+			}
 		});
 		
+		*/fetch("http://localhost:4000/users", {
+		headers: {
+			'Accept': 'application/json',
+			'Content-Type': 'application/json'
+		},
+		method: "POST",
+		body: JSON.stringify({
+			name: 'NewTry'
+		})
+	})
+	.then(function (res) {
+		console.log(res)
+	})
+	.catch(function (res) {
+		console.log(res)
+	})
+		/*
+		console.log('pre fetch');
+		fetch('http://localhost:4000/users', {
+				method: 'post',
+				body: JSON.stringify({
+					"name": {
+						"first": "Marre",
+						"last": "Larre"
+					},
+					"email": "marre@mail.nu",
+					"password": "pw",
+					"age": 27,
+					"driversLicense": "A"
+				})
+			})
+			.then(res => {
+				console.log(res);
+			})
+			.catch(err => {
+				console.log(err);
+			});
 		
-		/* // TO DO
-		axios.get('mongodb://localhost/olsson/users')
+		axios({
+			method: 'post',
+			url: 'http://localhost:4000/users',
+			data: {
+				name: {
+				first: 'Marre',
+				last: 'Larre'
+			},
+				email: 'marre@mail.nu',
+				password: 'pw',
+				age: 27,
+				driversLicense: 'A'
+			}
+		});
+		
+		*/
+		/*
+		axios.get('http://localhost:4000/vehicles')
+		.then(res => {
+			console.log(res);
+		})
+		.catch(err => {
+			console.log(err);
+		})
+		
+		 // TO DO
+		axios.get('http://localhost:4000/users')
 		.then(res => {
 			console.log(res);
 		})
