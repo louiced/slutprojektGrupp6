@@ -4,7 +4,7 @@ var express = require('express'),
     mongoose = require('mongoose'),
     Vehicles = require('./api/models/vehicleModel.js'),
     Users = require('./api/models/userModel.js');
-    
+
     bodyParser = require('body-parser');
 
 mongoose.Promise = global.Promise;
@@ -12,14 +12,14 @@ mongoose.connect('mongodb://localhost/olsson', {
   useMongoClient: true
 });
 
-app.use( (req, res, next) => {
-    res.header("Access-Control-Allow-Origin", "*");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
-
+// app.use( (req, res, next) => {
+//     res.header("Access-Control-Allow-Origin", "*");
+//     res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+//     next();
+// });
+console.log('port: ' + process.env.PORT)
 app.use(bodyParser.urlencoded({ extended: true }));
-//app.use(bodyParser.json());
+app.use(bodyParser.json());
 
 
 var routes = require('./api/routes/routers.js');

@@ -12,10 +12,8 @@ module.exports = mongoose.model('Users', userSchema); //class Vehicle
 
 /*{
   name: {
-    type: String,
-    required: true,
-    first: String,
-    last: String
+    first: {type: String},
+    last: {type: String}
   },
   email: {
     required: true,
@@ -28,11 +26,16 @@ module.exports = mongoose.model('Users', userSchema); //class Vehicle
   },
   age: {
     required: true,
-    type: Number 
+    type: Number
   },
   driversLicense: {
     required: true,
     type: String
   },
-  cars: [{type: Object}]
-}*/
+
+  cars: []
+});
+
+
+module.exports = mongoose.model('Users', userSchema); //class Vehicle
+

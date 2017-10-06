@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import UserView from './UserView.js';
+var querystring = require('querystring');
 
 class RegisterComponent extends React.Component {
 	constructor(props){
@@ -40,7 +41,7 @@ class RegisterComponent extends React.Component {
 							  }
 		return view;
 	}
-	
+
 	handleEmailInput(ev){
 		let val = ev.target.value;
 		console.log(val);
@@ -48,149 +49,60 @@ class RegisterComponent extends React.Component {
 			email: val
 		});
 	}
-	
+
 	handlePwInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			pw: val
 		});
 	}
-	
+
 	handleFirstNameInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			firstName: val
 		});
 	}
-	
+
 	handleLastNameInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			lastName: val
 		});
 	}
-	
+
 	handlePersonalNumberInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			personalNumber: val
 		});
 	}
-	
+
 	handleDrivLicInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			driveLicense: val
 		});
 	}
-	
-	
-	registerClick(ev) {
-		// Make login automatically
-		// this.props.updateView('UserView');
-		// Send a POST request
 
-		/*
-				axios.post('http://localhost:4000/users', {
-						name: {
-						first: 'Marre',
-						last: 'Larre'
-					},
-						email: 'marre@mail.nu',
-						password: 'pw',
-						age: 27,
-						driversLicense: 'A'
-					})
-					.then(res => {
-						console.log(res);
-					})
-					.catch(err => {
-						console.log(err);
-					});
-				
+
+
+	registerClick(ev){
 		axios({
 			method: 'post',
-			url: 'http://localhost:4000/users',
-				data: {
-					name: "JAAAAAAAAAVEL"
-				},
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded"
-			}
-		});
-		
-		*/fetch("http://localhost:4000/users", {
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		method: "POST",
-		body: JSON.stringify({
-			name: 'NewTry'
-		})
-	})
-	.then(function (res) {
-		console.log(res)
-	})
-	.catch(function (res) {
-		console.log(res)
-	})
-		/*
-		console.log('pre fetch');
-		fetch('http://localhost:4000/users', {
-				method: 'post',
-				body: JSON.stringify({
-					"name": {
-						"first": "Marre",
-						"last": "Larre"
-					},
-					"email": "marre@mail.nu",
-					"password": "pw",
-					"age": 27,
-					"driversLicense": "A"
-				})
-			})
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-		
-		axios({
-			method: 'post',
-			url: 'http://localhost:4000/users',
+			url: 'http://localhost:3000/users',
 			data: {
 				name: {
-				first: 'Marre',
-				last: 'Larre'
-			},
-				email: 'marre@mail.nu',
-				password: 'pw',
-				age: 27,
-				driversLicense: 'A'
+			    first: 'yifei',
+			    last: 'wang'
+			  },
+			  email:  'heosdf@icloud.com',
+			  password: 'dsfsdf',
+			  age: 34,
+			  driversLicense: 'B',
+			  cars: [{'tes': 'sdf'}]
 			}
-		});
-		
-		*/
-		/*
-		axios.get('http://localhost:4000/vehicles')
-		.then(res => {
-			console.log(res);
-		})
-		.catch(err => {
-			console.log(err);
-		})
-		
-		 // TO DO
-		axios.get('http://localhost:4000/users')
-		.then(res => {
-			console.log(res);
-		})
-		.catch(err => {
-			console.log(err);
-		})
-		*/
+        });		
 	}
 }
 
