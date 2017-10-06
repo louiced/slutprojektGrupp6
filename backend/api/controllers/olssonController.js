@@ -58,12 +58,19 @@ exports.list_all_users = (req, res) => {
 }
 
 exports.create_a_user = (req, res) => {
+	res.end('end');
+	let obj = req.body;
+	console.log(obj);
+	console.log(obj.name);
+	console.log(typeof(req.body));
+	
+	/*
   var new_user = new Users(req.body);
   new_user.save((err, user) => {
     if (err)
       res.send(err);
     res.json(user);
-  })
+  })*/
 }
 
 exports.read_a_user = (req, res) => {
