@@ -102,7 +102,8 @@ class RegisterComponent extends React.Component {
 			  driversLicense: 'B',
 			  cars: [{'tes': 'sdf'}]
 			}
-        });		
+		});
+
 	}
 }
 
