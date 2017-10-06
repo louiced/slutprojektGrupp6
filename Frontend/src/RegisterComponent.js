@@ -32,11 +32,7 @@ class RegisterComponent extends React.Component {
 			<input type="text" placeholder="åååå-mm-dd-xxxx" onChange={this.handlePersonalNumberInput}/>
 			<input type="text" placeholder="Körkort" onChange={this.handleDrivLicInput}/>
 						<br/>
-<<<<<<< HEAD
-			<button className="btn" type="submit" onClick={this.registerClick}>REGISTRERA</button>
-=======
-			<button className="btn" type="submit" onClick="this.registerClick">REGISTRERA</button>
->>>>>>> f4ca466ba09091cf261bec7c03fcdb4df513af70
+			<button className="btn"  onClick={this.registerClick}>REGISTRERA</button>
 		</div>
 				break;
 			case 'UserView': view = <UserView/>
