@@ -84,48 +84,9 @@ class RegisterComponent extends React.Component {
 			driveLicense: val
 		});
 	}
-<<<<<<< HEAD
 
 
 	registerClick(ev){
-=======
-	
-	
-	registerClick(ev) {
->>>>>>> 136e54463fe06e9ff80696d417acc221d6a45032
-		// Make login automatically
-		// this.props.updateView('UserView');
-		// Send a POST request
-
-		/*
-				axios.post('http://localhost:4000/users', {
-						name: {
-						first: 'Marre',
-						last: 'Larre'
-					},
-						email: 'marre@mail.nu',
-						password: 'pw',
-						age: 27,
-						driversLicense: 'A'
-					})
-					.then(res => {
-						console.log(res);
-					})
-					.catch(err => {
-						console.log(err);
-					});
-				
-		axios({
-			method: 'post',
-			url: 'http://localhost:4000/users',
-				data: {
-					name: "JAAAAAAAAAVEL"
-				},
-			headers: {
-				"Content-Type": "application/x-www-form-urlencoded"
-			}
-		});
-<<<<<<< HEAD
 		axios({
 			method: 'post',
 			url: 'http://localhost:3000/users',
@@ -140,85 +101,7 @@ class RegisterComponent extends React.Component {
 			  driversLicense: 'B',
 			  cars: [{'tes': 'sdf'}]
 			}
-});
-
-		/* // TO DO
-		axios.get('mongodb://localhost/olsson/users')
-=======
-		
-		*/fetch("http://localhost:4000/users", {
-		headers: {
-			'Accept': 'application/json',
-			'Content-Type': 'application/json'
-		},
-		method: "POST",
-		body: JSON.stringify({
-			name: 'NewTry'
-		})
-	})
-	.then(function (res) {
-		console.log(res)
-	})
-	.catch(function (res) {
-		console.log(res)
-	})
-		/*
-		console.log('pre fetch');
-		fetch('http://localhost:4000/users', {
-				method: 'post',
-				body: JSON.stringify({
-					"name": {
-						"first": "Marre",
-						"last": "Larre"
-					},
-					"email": "marre@mail.nu",
-					"password": "pw",
-					"age": 27,
-					"driversLicense": "A"
-				})
-			})
-			.then(res => {
-				console.log(res);
-			})
-			.catch(err => {
-				console.log(err);
-			});
-		
-		axios({
-			method: 'post',
-			url: 'http://localhost:4000/users',
-			data: {
-				name: {
-				first: 'Marre',
-				last: 'Larre'
-			},
-				email: 'marre@mail.nu',
-				password: 'pw',
-				age: 27,
-				driversLicense: 'A'
-			}
-		});
-		
-		*/
-		/*
-		axios.get('http://localhost:4000/vehicles')
-		.then(res => {
-			console.log(res);
-		})
-		.catch(err => {
-			console.log(err);
-		})
-		
-		 // TO DO
-		axios.get('http://localhost:4000/users')
->>>>>>> 136e54463fe06e9ff80696d417acc221d6a45032
-		.then(res => {
-			console.log(res);
-		})
-		.catch(err => {
-			console.log(err);
-		})
-		*/
+})
 	}
 }
 
