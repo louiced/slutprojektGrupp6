@@ -29,7 +29,7 @@ class LoginComponent extends React.Component {
 							  }
 		return view;
 	}
-	
+
 	handleEmailInput(ev){
 		let val = ev.target.value;
 		console.log(val);
@@ -37,14 +37,14 @@ class LoginComponent extends React.Component {
 			email: val
 		});
 	}
-	
+
 	handlePwInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			pw: val
 		});
 	}
-	
+
 	loginClick(ev){
 		// Make login automatically
 		/*
@@ -52,9 +52,9 @@ class LoginComponent extends React.Component {
 			view: 'UserView'
 		});
 		*/
-		
+
 		 // TO DO
-		
+
 		/*
 		axios.get('http://localhost/olsson/users')
 		.then(res => {
@@ -64,14 +64,14 @@ class LoginComponent extends React.Component {
 			console.log(err);
 		})
 		*/
-		
+
 		this.props.updateView('UserView');
 		/*
 		fetch( 'http://localhost:4000/vehicles' )
            .then(resp => resp.json())
            .then(json => {
                console.log("API response:", json);
-               
+
            })
            .catch(error => {
                console.warn("API error:", error);

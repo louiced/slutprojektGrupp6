@@ -4,10 +4,8 @@ var mongoose = require('mongoose'),
 //ett schema bestämmer formatet för våra models olika egenskaper
 var userSchema = new Schema({
   name: {
-    type: String,
-    required: true,
-    first: String,
-    last: String
+    first: {type: String},
+    last: {type: String}
   },
   email: {
     required: true,
@@ -20,13 +18,13 @@ var userSchema = new Schema({
   },
   age: {
     required: true,
-    type: Number 
+    type: Number
   },
   driversLicense: {
     required: true,
     type: String
   },
-  cars: [{type: Object}]
+  cars: []
 });
 
 
