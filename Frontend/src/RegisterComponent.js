@@ -25,7 +25,6 @@ class RegisterComponent extends React.Component {
 		switch(this.state.view){
 			case 'Login':
 				view = <div>
-						<form onSubmit={this.registerClick}>
 			<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
 			<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
 			<input type="text" placeholder="Förnamn" onChange={this.handleFirstNameInput}/>
@@ -33,8 +32,7 @@ class RegisterComponent extends React.Component {
 			<input type="text" placeholder="åååå-mm-dd-xxxx" onChange={this.handlePersonalNumberInput}/>
 			<input type="text" placeholder="Körkort" onChange={this.handleDrivLicInput}/>
 						<br/>
-			<button className="btn" type="submit">REGISTRERA</button>
-							</form>
+			<button className="btn" type="submit" onClick={this.registerClick}>REGISTRERA</button>
 		</div>
 				break;
 			case 'UserView': view = <UserView/>
