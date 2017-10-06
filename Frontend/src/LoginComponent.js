@@ -9,13 +9,17 @@ class LoginComponent extends React.Component {
 		this.state={
 			email: '',
 			pw: '',
-			view: 'Login'
+			view: 'Login',
+            isLoggedIn: false
 		};
 		this.handleEmailInput = this.handleEmailInput.bind(this);
 		this.handlePwInput = this.handlePwInput.bind(this);
 		this.loginClick = this.loginClick.bind(this);
+		this.updateLoginStatus = this.updateLoginStatus.bind(this);
+		this.validateLogin = this.validateLogin.bind(this);
 	}
 	render(){
+      //console.log('uv', this.props.updateView());
 		let view;
 		switch(this.state.view){
 			case 'Login':
@@ -44,39 +48,49 @@ class LoginComponent extends React.Component {
 			pw: val
 		});
 	}
-
+    
+    log(){
+      console.log('log');
+    }
+    
+    updateLoginStatus(){
+      console.log('updateLoginStatus: ', this.state.isLoggedIn);
+      this.setState({
+        isLoggedIn: true
+      })
+    }
+    
+    validateLogin(){
+      console.log('validate: ', this.state.isLoggedIn);
+      if(this.state.isLoggedIn === true) {
+        this.props.updateView('UserView');
+      }
+    }
+  
 	loginClick(ev){
-		// Make login automatically
-		/*
-		this.setState({
-			view: 'UserView'
-		});
-		*/
-
-		 // TO DO
-
-		/*
-		axios.get('http://localhost/olsson/users')
-		.then(res => {
-			console.log(res);
-		})
-		.catch(err => {
-			console.log(err);
-		})
-		*/
-
-		this.props.updateView('UserView');
-		/*
-		fetch( 'http://localhost:4000/vehicles' )
-           .then(resp => resp.json())
-           .then(json => {
-               console.log("API response:", json);
-
-           })
-           .catch(error => {
-               console.warn("API error:", error);
-           });
-		   */
+      let self = this;
+      console.log('self.isLoggedIn i loginclick: ', self.state.isLoggedIn)
+      
+      axios.get('http://localhost:3000/users')
+      .then(function (response) {
+        console.log('response.data: ', response.data);
+        
+        //self.setState({isLoggedIn: true});
+        //console.log('isLoggedIn then', self.state.isLoggedIn);
+        //console.log('self: ', self);
+        //self.log();
+        
+        self.updateLoginStatus();
+        self.validateLogin();
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+      
+      /*console.log('isLoggedIn före if', self.state.isLoggedIn);
+      if(self.state.isLoggedIn)
+          console.log('isLoggedIn efter if', self.state.isLoggedIn);
+          self.props.updateView('UserView');*/
 	}
 }
 
