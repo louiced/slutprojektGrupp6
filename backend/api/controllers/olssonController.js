@@ -58,7 +58,9 @@ exports.list_all_users = (req, res) => {
 }
 
 exports.create_a_user = (req, res) => {
+  // let bo = JSON.stringify(req.body);
   var new_user = new Users(req.body);
+  console.log('req:  !!!!!!!')
   new_user.save((err, user) => {
     if (err)
       res.send(err);

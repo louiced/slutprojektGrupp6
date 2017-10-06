@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import UserView from './UserView.js';
+var querystring = require('querystring');
 
 class RegisterComponent extends React.Component {
 	constructor(props){
@@ -38,7 +39,7 @@ class RegisterComponent extends React.Component {
 							  }
 		return view;
 	}
-	
+
 	handleEmailInput(ev){
 		let val = ev.target.value;
 		console.log(val);
@@ -46,50 +47,64 @@ class RegisterComponent extends React.Component {
 			email: val
 		});
 	}
-	
+
 	handlePwInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			pw: val
 		});
 	}
-	
+
 	handleFirstNameInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			firstName: val
 		});
 	}
-	
+
 	handleLastNameInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			lastName: val
 		});
 	}
-	
+
 	handlePersonalNumberInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			personalNumber: val
 		});
 	}
-	
+
 	handleDrivLicInput(ev){
 		let val = ev.target.value;
 		this.setState({
 			driveLicense: val
 		});
 	}
-	
-	
+
+
 	registerClick(ev){
 		// Make login automatically
 		this.setState({
 			view: 'UserView'
 		});
-		
-		
+		axios({
+			method: 'post',
+			url: 'http://localhost:3000/users',
+			data: {
+				name: {
+			    first: 'yifei',
+			    last: 'wang'
+			  },
+			  email:  'heosdf@icloud.com',
+			  password: 'dsfsdf',
+			  age: 34,
+			  driversLicense: 'B',
+			  cars: [{'tes': 'sdf'}]
+			}
+});
+
 		/* // TO DO
 		axios.get('mongodb://localhost/olsson/users')
 		.then(res => {

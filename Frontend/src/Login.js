@@ -33,7 +33,7 @@ class Login extends React.Component{
 					<li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Registrera</span></li>
 				</ul>;
 		switch (this.state.view){
-			case 'Login': view = 
+			case 'Login': view =
 				<div className="mainContent">
 					{navBar}
 					<LoginComponent updateView={this.updateView}/>
@@ -48,13 +48,13 @@ class Login extends React.Component{
 		}
 		return view;
 	}
-	
+
 	ccLoginClick(ev){
 		this.setState({
 			view: 'bookCar'
 		});
 	}
-	
+
 	logOut(ev){
 		this.setState({
 			view: 'Login'
@@ -80,7 +80,7 @@ class Login extends React.Component{
 			view: view
 		});
 	}
-	
+
 	updateView(str){
 		this.setState({
 			view: str
@@ -92,11 +92,11 @@ export default Login;
 
 
 /*
-				
+
 				<div className="btnBox">
 				<button className="btn" onClick={this.ccLoginClick}>LOGGA IN SOM KUND</button>
 				<button className="btn">LOGGA IN SOM ADMIN</button>
 				<button className="logOutBtn btn" onClick={this.logOut}>Logga ut</button>
 			</div>
-			
+
 			<button className="logOutBtn btn" onClick={this.logOut}>Logga ut</button>*/
