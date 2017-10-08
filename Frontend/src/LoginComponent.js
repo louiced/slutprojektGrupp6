@@ -10,7 +10,8 @@ class LoginComponent extends React.Component {
 			email: '',
 			pw: '',
 			view: 'Login',
-            isLoggedIn: false
+            isLoggedIn: false,
+            loggedInAs: null
 		};
 		this.handleEmailInput = this.handleEmailInput.bind(this);
 		this.handlePwInput = this.handlePwInput.bind(this);
@@ -49,49 +50,46 @@ class LoginComponent extends React.Component {
 		});
 	}
     
-    log(){
-      console.log('log');
+    
+    //uppdaterar state så att loggedIn = true OM user matchar user i db
+    updateLoginStatus(response){
+      let allUsers = response.data;
+      allUsers.forEach( (el) => {
+        if(this.state.email === el.email && this.state.pw === el.password)
+          this.setState({
+            isLoggedIn: true,
+            loggedInAs: el
+          })
+      });
     }
     
-    updateLoginStatus(){
-      console.log('updateLoginStatus: ', this.state.isLoggedIn);
-      this.setState({
-        isLoggedIn: true
-      })
-    }
-    
+    //admin ? AdminView : UserView
     validateLogin(){
-      console.log('validate: ', this.state.isLoggedIn);
+      console.log('validate isLoggedIn: ', this.state.isLoggedIn);
+      console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in
+      
       if(this.state.isLoggedIn === true) {
-        this.props.updateView('UserView');
-      }
+        if(this.state.email !== 'admin@olsson.se') {
+          this.props.updateView('UserView');
+        } else {
+        console.log('adminview');
+        //this.props.updateView('AdminView');
+        }
+      } //else if isLoggedIn = false -> Oops!
     }
   
 	loginClick(ev){
-      let self = this;
-      console.log('self.isLoggedIn i loginclick: ', self.state.isLoggedIn)
-      
+      let self = this;      
       axios.get('http://localhost:3000/users')
       .then(function (response) {
-        console.log('response.data: ', response.data);
-        
-        //self.setState({isLoggedIn: true});
-        //console.log('isLoggedIn then', self.state.isLoggedIn);
-        //console.log('self: ', self);
-        //self.log();
-        
-        self.updateLoginStatus();
-        self.validateLogin();
+        console.log(response);
+        self.updateLoginStatus(response); //finns user/admin i db? -> loggedIn = true, annars oops and retry!
+        self.validateLogin();             //loggedInAs admin/user? -> render UserView/AdminView
       })
       .catch(function (error) {
         console.log(error);
-      });
-      
-      /*console.log('isLoggedIn före if', self.state.isLoggedIn);
-      if(self.state.isLoggedIn)
-          console.log('isLoggedIn efter if', self.state.isLoggedIn);
-          self.props.updateView('UserView');*/
-	}
+      }); 
+    }
 }
 
 export default LoginComponent;

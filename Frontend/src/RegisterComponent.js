@@ -38,6 +38,18 @@ class RegisterComponent extends React.Component {
 		return view;
 	}
 
+    /*
+    validering av input:
+    - email: ska innehålla @, googla!
+    - pw: pw.length >= ?
+    - firstname: != ''
+    - lastname: != ''
+    - age typeof Number
+    - driversLicense: array, varje element typeof String
+    
+    #throw err, visa felmeddelande?
+    */
+  
 	handleEmailInput(ev){
 		let val = ev.target.value;
 		console.log(val);
