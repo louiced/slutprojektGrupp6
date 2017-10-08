@@ -56,24 +56,21 @@ class RegisterComponent extends React.Component {
       console.log('obj.name.first: ', obj.name.first);
       console.log('obj.name.last: ', obj.name.last);
       
-      //let bool = false;
       
       for(let key in obj) {
         if(obj.hasOwnProperty('name')) {
           
-          //tomma fält eller undefined?
+          //tomma fält eller undefined:
           if(obj.name.first === '' || 
              obj.name.last === '' ||
              obj.name.first === undefined ||
              obj.name.last === undefined || 
              obj.email === '' || 
              obj.email === undefined || 
-             //obj.email.indexOf('@') -1 ||
              obj.password === '' || 
              obj.password === undefined || 
              obj.age === '' || 
              obj.age === undefined || 
-             //isNaN(obj.age) || 
              obj.driversLicense === '' || 
              obj.driversLicense === undefined) {
             
@@ -81,6 +78,7 @@ class RegisterComponent extends React.Component {
             console.log('returning false');
             return false;
           } else {
+            //felaktigt format:
             if(obj.email.indexOf('@') === -1) {
               console.log('felaktig emailadress');
               return false;
@@ -92,75 +90,8 @@ class RegisterComponent extends React.Component {
             console.log('returning true');
             return true;
           }
-          
-          
-          /*
-          if(obj.name.first !== '' && obj.name.last !== '' && obj.name.first !== undefined && obj.name.last !== undefined) {
-            console.log('returns true for name');
-            bool = true;
-          } else {
-            console.log('returns false for name');
-            bool = false;
-          }
-          
-          if(obj.email !== '' && obj.email.indexOf('@') >= 0) {
-            console.log('returns true for email');
-            bool = true;
-          } else {
-            console.log('returns false for email');
-            bool = false;
-          }
-          */
-          
-          
-          
-          
-          
-          
         } 
       }
-      /*console.log('bool: ', bool);
-      if(bool === true) {
-        return true;
-      } else {
-        return false;
-      }*/
-      /*
-      let ok = false;
-      
-      if(this.state.firstName !== '' 
-         && this.state.lastName !== '' 
-         && this.state.firstName !== undefined 
-         && this.state.lastName !== undefined)
-        ok = true;
-      else {ok = false;}
-      
-      if(this.state.email !== ''
-        && this.state.email !== undefined) // && obj.email.indexOf('@') >= 0
-        ok = true;
-      else {ok = false;}
-      
-      if(this.state.pw !== ''
-        && this.state.pw !== undefined)
-        ok = true;
-      else {ok = false;}
-      
-      if(this.state.age !== '' 
-         && !isNaN(this.state.age)
-         && this.state.age !== undefined)
-        ok = true;
-      else {ok = false;}
-      
-      if(this.state.driversLicense !== ''
-        && this.state.driversLicense !== undefined)
-        ok = true;
-      else {ok = false;}
-      
-      if(ok === true)
-        return true;
-      else
-        return false;
-      */
     }
   
 	handleEmailInput(ev){
@@ -237,7 +168,7 @@ class RegisterComponent extends React.Component {
         //mellansteg: Tack för din registrering!
         console.log('tack för din registrering');
         this.props.updateView('UserView');
-      } else {                                 //annars stanna kvar på registerNewCC   
+      } else {                                 //TODO: rendera felmeddelande   
         console.log('post did not succeed');
         this.props.updateView('registerNewCC');
       }
