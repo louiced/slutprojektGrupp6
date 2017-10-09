@@ -29,9 +29,9 @@ class UserView extends React.Component {
 					<li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Mina bokningar</span></li>
 				</ul>
 		switch (this.state.view){
-			case 'bookCar': view = <div>{navBar}<BookCar/></div>
+			case 'bookCar': view = <div>{navBar}<BookCar userId={this.props.userId}/></div>
 				break;
-			case 'showBookings': view = <div>{navBar}<ShowBookings/></div>
+			case 'showBookings': view = <div>{navBar}<ShowBookings userId={this.props.userId}/></div>
 				break;
 			}
 		return view;

@@ -25,6 +25,7 @@ class ViewSelector extends React.Component{
 		this.logOut = this.logOut.bind(this);
 		this.switchTab = this.switchTab.bind(this);
 		this.updateView = this.updateView.bind(this);
+		this.updateUserId = this.updateUserId.bind(this);
 	}
 	render(){
 		let view;
@@ -36,7 +37,7 @@ class ViewSelector extends React.Component{
 			case 'Login': view =
 				<div className="mainContent">
 					{navBar}
-					<LoginComponent updateView={this.updateView}/>
+					<LoginComponent updateView={this.updateView} updateUserId={this.updateUserId}/>
 				</div>
 				break;
 			case 'registerNewCC': view = <div className="mainContent">
@@ -44,7 +45,7 @@ class ViewSelector extends React.Component{
 					<RegisterComponent updateView={this.updateView}/>
 				</div>
 			break;
-			case 'UserView': view = <div className="mainContent"><UserView/></div>
+			case 'UserView': view = <div className="mainContent"><UserView userId={this.state.userId}/></div>
 		}
 		return view;
 	}
@@ -84,6 +85,12 @@ class ViewSelector extends React.Component{
 	updateView(str){
 		this.setState({
 			view: str
+		});
+	}
+	
+	updateUserId(str){
+		this.setState({
+			userId: str
 		});
 	}
 }

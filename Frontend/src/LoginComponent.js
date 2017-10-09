@@ -33,8 +33,6 @@ class LoginComponent extends React.Component {
 						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
 					</div>
 				break;
-			case 'UserView': 
-				view = <UserView/>
 		}
 		return view;
 	}
@@ -75,6 +73,7 @@ class LoginComponent extends React.Component {
       
       if(this.state.isLoggedIn === true) {
         if(this.state.email !== 'admin@olsson.se') {
+          this.props.updateUserId(this.state.loggedInAs._id);
           this.props.updateView('UserView');
         } else {
         console.log('adminview');

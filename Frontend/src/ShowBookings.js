@@ -37,7 +37,7 @@ class ShowBookings extends React.Component {
 	
 	componentDidMount(){
 		let self = this;
-		axios.get('http://localhost:3000/users/59d73b7c0f2e760c2853b0f0')
+		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
 			self.renderCars(res.data.cars);
 		})
@@ -60,7 +60,7 @@ class ShowBookings extends React.Component {
 		
 		axios({
 			method: 'put',
-			url: 'http://localhost:3000/users/59d73b7c0f2e760c2853b0f0',
+			url: `http://localhost:3000/users/${this.props.userId}`,
 			data: {
 				cars: newBookedCars
 			}

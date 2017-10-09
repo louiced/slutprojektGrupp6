@@ -13,7 +13,6 @@ class ListCars extends React.Component{
 		this.updateStateCars = this.updateStateCars.bind(this);
 	}
 	render(){
-		console.log(this.props.data);
 		let list = this.props.data.map(el => {
 			return <div className="carBox" key={el._id} data-id={el._id}>
 				<span>{el.brand}</span><br/>
@@ -27,10 +26,13 @@ class ListCars extends React.Component{
 	}
 	
 	componentDidMount(){
-		//console.log('componentDidMount');
+		console.log('componentDidMount');
+		console.log(this.props.userId);
+		
 		let self = this;
-		axios.get('http://localhost:3000/users/59d73b7c0f2e760c2853b0f0')
+		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
+			console.log(res.data.cars);
 			self.updateStateCars(res.data.cars);
 		})
 		.catch(err => {
@@ -62,7 +64,7 @@ class ListCars extends React.Component{
 		bookedCars.push(data);
 		axios({
 			method: 'put',
-			url: 'http://localhost:3000/users/59d73b7c0f2e760c2853b0f0',
+			url: `http://localhost:3000/users/${this.props.userId}`,
 			data: {
 				cars: bookedCars
 			}

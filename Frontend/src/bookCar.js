@@ -27,9 +27,12 @@ class BookCar extends React.Component {
 		this.findCars = this.findCars.bind(this);
 		this.handleReturnDate = this.handleReturnDate.bind(this);
 		this.handlePickupDate = this.handlePickupDate.bind(this);
+		this.handleGearChange = this.handleGearChange.bind(this);
+		this.handleDriveLicChange = this.handleDriveLicChange.bind(this);
+		this.handleFuelChange = this.handleFuelChange.bind(this);
+		this.handleMaxRentChange = this.handleMaxRentChange.bind(this);
 	}
 	render(){
-		console.log(this.state);
 		let view;
 		switch(this.state.view){
 			case 'bookCar': view = <div>
@@ -69,7 +72,7 @@ class BookCar extends React.Component {
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
 		</div>
 				break;
-			case 'showCars': view = <ListCars data={this.state.data}/>
+			case 'showCars': view = <ListCars data={this.state.data} userId={this.props.userId}/>
 				break;
 			default: view = <div>Default</div>
 							  }
@@ -86,13 +89,11 @@ class BookCar extends React.Component {
 		let self = this;
 		axios.get('http://localhost:3000/vehicles')
 		.then(res => {
-			//console.log(res);
 			self.renderCars(res.data);
 		})
 		.catch(err => {
 			console.log(err);
 		})
-		// Switch view: Render new component
 	}
 	
 	handlePickupDate(ev){
@@ -136,14 +137,4 @@ class BookCar extends React.Component {
 	
 }
 
-
-/*
-class ShowCarList {
-	componentDidMount(){
-		// Make GET request
-		// Map list of cars
-		// Filter?
-	}
-}
-*/
 export default BookCar;
