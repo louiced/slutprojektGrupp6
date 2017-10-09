@@ -56,10 +56,6 @@ class UserView extends React.Component {
 			view: view
 		});
 	}
-	
-	findCars(ev){
-		
-	}
 }
 
 export default UserView;
