@@ -5,7 +5,7 @@ import LoginComponent from './LoginComponent.js';
 import RegisterComponent from './RegisterComponent.js';
 import UserView from './UserView.js';
 
-class Login extends React.Component{
+class ViewSelector extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -88,7 +88,7 @@ class Login extends React.Component{
 	}
 }
 
-export default Login;
+export default ViewSelector;
 
 
 /*

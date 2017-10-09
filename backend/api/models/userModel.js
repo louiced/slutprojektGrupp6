@@ -3,14 +3,6 @@ var mongoose = require('mongoose'),
 
 //ett schema bestämmer formatet för våra models olika egenskaper
 var userSchema = new Schema({
-	name: String
-});
-
-
-module.exports = mongoose.model('Users', userSchema); //class Vehicle
-
-
-/*{
   name: {
     first: {type: String},
     last: {type: String}
@@ -32,10 +24,10 @@ module.exports = mongoose.model('Users', userSchema); //class Vehicle
     required: true,
     type: String
   },
-
   cars: []
 });
 
 
 module.exports = mongoose.model('Users', userSchema); //class Vehicle
+
 
