@@ -2,6 +2,10 @@ import React from 'react';
 import './App.css';
 import axios from 'axios';
 import ListCars from './ListCars.js';
+import DatePicker from 'react-datepicker';
+import moment from 'moment';
+
+import 'react-datepicker/dist/react-datepicker.css';
 
 
 class BookCar extends React.Component {
@@ -20,8 +24,8 @@ class BookCar extends React.Component {
 			],
 			view: 'bookCar',
 			data: {},
-			pickupDate: '',
-			returnDate: ''
+			pickupDate: moment(),
+			returnDate: moment()
 		};
 		this.renderCars = this.renderCars.bind(this);
 		this.findCars = this.findCars.bind(this);
@@ -31,6 +35,7 @@ class BookCar extends React.Component {
 		this.handleDriveLicChange = this.handleDriveLicChange.bind(this);
 		this.handleFuelChange = this.handleFuelChange.bind(this);
 		this.handleMaxRentChange = this.handleMaxRentChange.bind(this);
+		this.handleDateChange = this.handleDateChange.bind(this);
 	}
 	render(){
 		let view;
@@ -38,35 +43,30 @@ class BookCar extends React.Component {
 			case 'bookCar': view = <div>
 			<h2>Boka en bil</h2>
 			<h4>Välj datum</h4>
-		<form>
-			<span>Boka från: </span><input type="date" name="bookDate" min={new Date()} onChange={this.handlePickupDate}/>
-		</form>
-			<form>
-			<span>Till och med:  </span><input type="date" name="bookDate" min={new Date()} onChange={this.handleReturnDate}/>
-		</form>
+				<span>Jag vill hyra en bil från: </span><DatePicker selected={this.state.pickupDate} onChange={this.handlePickupDate}/>
+				<span>Till och med: </span><DatePicker selected={this.state.returnDate} onChange={this.handleReturnDate}/>
 			<h4>Filtrera din sökning</h4>
 			<div className="filterBox">
-				<span>Automat/manuell <select name="auto/man" onChange={this.handleGearChange}>
+				<span>Automat/manuell: <select name="auto/man" onChange={this.handleGearChange}>
 					<option value="" defaultValue></option>
 					<option value="automatic">Automatisk</option>
 					<option value="manual">Manuell</option>
 				</select>
 					</span>
-				<span>Körkortstyp <select name="driveLic" onChange={this.handleDriveLicChange}>
+				<span>Körkortstyp: <select name="driveLic" onChange={this.handleDriveLicChange}>
 					<option value="" defaultValue></option>
 					<option value="A" >A</option>
 					<option value="B">B</option>
 				</select>
 					</span> 
-				<span>Bränsle <select name="fuel" onChange={this.handleFuelChange}>
+				<span>Bränsle: <select name="fuel" onChange={this.handleFuelChange}>
 					<option value="" defaultValue></option>
 					<option value="Diesel" >Diesel</option>
 					<option value="Gasoline">Bensin</option>
 					<option value="Electricity">El</option>
 				</select>
 					</span>
-				<span>Maxhyra 
-				<input type="number" name="quantity" min="0" max="5000" value="5000" onChange={this.handleMaxRentChange}/>
+				<span>Maxhyra per dag: <input type="number" name="quantity" min="0" max="5000" value="5000" onChange={this.handleMaxRentChange}/>
 				</span>
 			</div>
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
@@ -96,18 +96,18 @@ class BookCar extends React.Component {
 		})
 	}
 	
-	handlePickupDate(ev){
-		let pickupDate = ev.target.value;
-		console.log(pickupDate);
+	handlePickupDate(date){
+		//let pickupDate = ev.target.value;
+		//console.log(pickupDate);
 		this.setState({
-			pickupDate: pickupDate
+			pickupDate: date
 		});
 	}
 	
-	handleReturnDate(ev){
-		let returnDate = ev.target.value;
+	handleReturnDate(date){
+		//let returnDate = ev.target.value;
 		this.setState({
-			returnDate: returnDate
+			returnDate: date
 		});
 	}
 	
@@ -134,7 +134,19 @@ class BookCar extends React.Component {
 			maxRentFilter: ev.target.value
 		});
 	}
+	handleDateChange(date) {
+		this.setState({
+			startDate: date
+		});
+	}
 	
 }
+
+/*<form>
+			<span>Boka från: </span><input type="date" name="bookDate" min={new Date()} onChange={this.handlePickupDate}/>
+		</form>
+			<form>
+			<span>Till och med:  </span><input type="date" name="bookDate" min={new Date()} onChange={this.handleReturnDate}/>
+		</form>*/
 
 export default BookCar;
