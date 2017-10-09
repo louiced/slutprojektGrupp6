@@ -10,7 +10,8 @@ var vehicleSchema = new Schema({
   year: Number,
   gearbox: String,
   dagshyra: Number,
-  kommentar: String
+  kommentar: String,
+  status: String
 });
 
 
