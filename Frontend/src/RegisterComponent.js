@@ -24,18 +24,22 @@ class RegisterComponent extends React.Component {
 		switch(this.state.view){
 			case 'Login':
 				view = <div>
-			<input type="text" placeholder="Förnamn" onChange={this.handleFirstNameInput}/>
-			<input type="text" placeholder="Efternamn" onChange={this.handleLastNameInput}/>
-            <input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
-			<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
-			<input type="text" placeholder="Ålder" onChange={this.handleAgeInput}/>
-			<input type="text" placeholder="Körkort" onChange={this.handleDrivLicInput}/>
-						<br/>
-			<button className="btn" onClick={this.registerClick}>REGISTRERA</button>
-		</div>
-				break;
-			case 'UserView': view = <UserView/>
-							  }
+                  <input type="text" placeholder="Förnamn" onChange={this.handleFirstNameInput}/>
+                  <input type="text" placeholder="Efternamn" onChange={this.handleLastNameInput}/>
+                  <input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
+                  <input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
+                  <input type="text" placeholder="Ålder" onChange={this.handleAgeInput}/>
+                  <input type="text" placeholder="Körkort" onChange={this.handleDrivLicInput}/>
+                  <br/>
+                  <button className="btn" onClick={this.registerClick}>REGISTRERA</button>
+		        </div>
+                  break;
+			case 'UserView': 
+            view = <UserView/>
+              break;
+				
+            
+		}
 		return view;
 	}
 
@@ -80,6 +84,7 @@ class RegisterComponent extends React.Component {
           } else {
             //felaktigt format:
             if(obj.email.indexOf('@') === -1) {
+				this.setState({msg: 'felaktig emailadress'});
               console.log('felaktig emailadress');
               return false;
             } else if(isNaN(obj.age)) {

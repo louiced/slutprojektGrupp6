@@ -126,3 +126,10 @@ select, input {
 	border-radius: 5px;
 }
 
+.errMsgCss {
+	color: red;
+}
+
+.hidden {
+	display: none;
+}

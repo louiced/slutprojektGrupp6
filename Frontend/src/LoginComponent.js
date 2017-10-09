@@ -11,7 +11,9 @@ class LoginComponent extends React.Component {
 			pw: '',
 			view: 'Login',
             isLoggedIn: false,
-            loggedInAs: null
+            loggedInAs: null,
+			errMsg: null,
+			errMsgCss: 'errMsgCss hidden'
 		};
 		this.handleEmailInput = this.handleEmailInput.bind(this);
 		this.handlePwInput = this.handlePwInput.bind(this);
@@ -28,6 +30,7 @@ class LoginComponent extends React.Component {
 			<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
 			<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
 			<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
+			<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
 		</div>
 				break;
 			case 'UserView': view = <UserView/>
@@ -45,6 +48,7 @@ class LoginComponent extends React.Component {
 
 	handlePwInput(ev){
 		let val = ev.target.value;
+		console.log(val);
 		this.setState({
 			pw: val
 		});
@@ -65,8 +69,8 @@ class LoginComponent extends React.Component {
     
     //admin ? AdminView : UserView
     validateLogin(){
-      console.log('validate isLoggedIn: ', this.state.isLoggedIn);
-      console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in
+      console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
+      console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
       
       if(this.state.isLoggedIn === true) {
         if(this.state.email !== 'admin@olsson.se') {
@@ -75,7 +79,12 @@ class LoginComponent extends React.Component {
         console.log('adminview');
         //this.props.updateView('AdminView');
         }
-      } //else if isLoggedIn = false -> Oops!
+      } else if (this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
+		  this.setState({
+			  errMsg: 'Epost och lösenord mastchade inget i databasen. Försök igen!',
+			  errMsgCss: 'errMsgCss'
+		  })
+	  }
     }
   
 	loginClick(ev){
