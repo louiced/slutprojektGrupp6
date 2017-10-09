@@ -135,3 +135,11 @@ select, input {
 	width: 100px;
 }
 
+.errMsgCss {
+	color: red;
+}
+
+.hidden {
+	display: none;
+}
+
