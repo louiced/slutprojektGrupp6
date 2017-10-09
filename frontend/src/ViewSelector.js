@@ -4,8 +4,9 @@ import BookCar from './BookCar.js';
 import LoginComponent from './LoginComponent.js';
 import RegisterComponent from './RegisterComponent.js';
 import UserView from './UserView.js';
+import AdminView from './AdminView.js';
 
-class Login extends React.Component{
+class ViewSelector extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -37,7 +38,7 @@ class Login extends React.Component{
 				<div className="mainContent">
 					{navBar}
 					<LoginComponent updateView={this.updateView}/>
-				</div>
+		 		</div>
 				break;
 			case 'registerNewCC': view = <div className="mainContent">
 			{navBar}
@@ -45,8 +46,11 @@ class Login extends React.Component{
 				</div>
 			break;
 			case 'UserView': view = <div className="mainContent"><UserView/></div>
+			break;
+			case 'AdminView': view = <div className="mainContent"><AdminView/></div>
 		}
 		return view;
+
 	}
 
 	ccLoginClick(ev){
@@ -88,7 +92,7 @@ class Login extends React.Component{
 	}
 }
 
-export default Login;
+export default ViewSelector;
 
 
 /*

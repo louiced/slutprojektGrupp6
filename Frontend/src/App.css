@@ -11,7 +11,7 @@ html {
 	display: flex;
 	justify-content: center;
 	font-family: Roboto Condensed;
-	
+
 }
 
 .mainContent {
@@ -97,7 +97,7 @@ html {
 	cursor: pointer;
 	border-bottom: 2px solid rgba(204, 0, 0, .0);
 	border-top: 2px solid rgba(204, 0, 0, .0);
-	
+
 }
 
 .navBar span:hover {
@@ -125,4 +125,32 @@ select, input {
 	padding: 5px;
 	border-radius: 5px;
 }
-
+.list-group{
+	list-style: none;
+	width: auto;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+}
+.list-item{
+	width: 45%;
+}
+.form{
+	margin-top: 4%;
+	display: flex;
+	flex-direction: column;
+}
+.createForm1{
+	display: flex;
+	justify-content: space-around;
+}
+.createForm2{
+	display: flex;
+	justify-content: space-around;
+	margin-top: 1%;
+}
+.addButton{
+	width: 56px;
+	background-color: rgba(	204, 0, 0, .7);
+	border-radius: 5px;
+}

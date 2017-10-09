@@ -42,7 +42,7 @@ class BookCar extends React.Component {
 					<option value="A" >A</option>
 					<option value="B">B</option>
 				</select>
-					</span> 
+					</span>
 				<span>Bränsle <select name="fuel">
 					<option value="" defaultValue></option>
 					<option value="Diesel" >Diesel</option>
@@ -50,17 +50,17 @@ class BookCar extends React.Component {
 					<option value="Electricity">El</option>
 				</select>
 					</span>
-				<span>Maxhyra 
+				<span>Maxhyra
 				<input type="number" name="quantity" min="0" max="5000" value="5000"/>
 				</span>
 			</div>
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
 		</div>
 	}
-	
+
 	findCars(ev){
 		console.log('click');
-		
+
 		// Switch view: Render new component
 	}
 }

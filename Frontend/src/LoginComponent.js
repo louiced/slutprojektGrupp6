@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import UserView from './UserView.js';
+import ShowCars from './ShowCars.js';
 
 class LoginComponent extends React.Component {
 	constructor(props){
@@ -65,7 +66,7 @@ class LoginComponent extends React.Component {
 		})
 		*/
 
-		this.props.updateView('UserView');
+		this.props.updateView('AdminView');
 		/*
 		fetch( 'http://localhost:4000/vehicles' )
            .then(resp => resp.json())
