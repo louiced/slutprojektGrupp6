@@ -4,6 +4,7 @@ import UpdateCars from './UpdateCars.js';
 import CreateCars from './CreateCars.js';
 import DeleteCars from './DeleteCars.js';
 import LoginComponent from './LoginComponent.js';
+import Update from './Update.js';
 
 class AdminView extends React.Component{
   constructor(props){
@@ -25,7 +26,11 @@ class AdminView extends React.Component{
         {
 					class: '',
 					id: 'tab4'
-				}
+				},
+        {
+          class: '',
+          id: 'tab5'
+        }
 			],
 			view: 'showCars'
     }
@@ -75,6 +80,9 @@ switchTab(ev){
     case 'tab4':
       view = 'deleteCars'
       break;
+    case 'tab5':
+      view = 'update'
+      break;
   }
 
   this.setState({
@@ -95,13 +103,16 @@ switchTab(ev){
               view = <div>{navBar} <ShowCars/></div>;
               break;
             case  'createCars':
-              view =  <div>{navBar} <CreateCars/></div>;
+              view =  <div>{navBar} <CreateCars updateView={this.switchTab}/></div>;
               break;
             case  'updateCars':
-              view =  <div>{navBar} <UpdateCars/></div>;
+              view =  <div>{navBar} <UpdateCars changeView={this.switchTab}/></div>;
               break;
             case  'deleteCars':
               view = <div>{navBar} <DeleteCars/></div>;
+              break;
+            case  'update':
+              view = <div>{navBar} <Update /></div>;
               break;
           }
     return view;

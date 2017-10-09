@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
+import ShowCars from './ShowCars';
 
 class CreateCars extends React.Component{
   constructor(props){
@@ -66,22 +67,27 @@ class CreateCars extends React.Component{
     },()=>{})
   }
   createCar(){
-    debugger
-      axios({
-        method: 'post',
-        url: 'http://localhost:3000/vehicles',
-        data: {
-          fordonstyp: this.state.fordontype,
-          brand: this.state.brand,
-          model: this.state.model,
-          year: this.state.year,
-          gearbox: this.state.gearbox,
-          dagshyra: this.state.dailyFee,
-          status: this.state.status,
-          kommentar: this.state.comment
-        }
-      });
-    }
+    axios({
+      method: 'post',
+      url: 'http://localhost:3000/vehicles',
+      data: {
+        fordonstyp: this.state.fordontype,
+        brand: this.state.brand,
+        model: this.state.model,
+        year: this.state.year,
+        gearbox: this.state.gearbox,
+        dagshyra: this.state.dailyFee,
+        status: this.state.status,
+        kommentar: this.state.comment
+      }
+    })
+    .then(function (response) {
+      
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
 
   render(){
     return <div className='form'>
