@@ -27,14 +27,15 @@ class LoginComponent extends React.Component {
 		switch(this.state.view){
 			case 'Login':
 				view = <div>
-			<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
-			<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
-			<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
-			<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
-		</div>
+						<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
+						<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
+						<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
+						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
+					</div>
 				break;
-			case 'UserView': view = <UserView/>
-							  }
+			case 'UserView': 
+				view = <UserView/>
+		}
 		return view;
 	}
 

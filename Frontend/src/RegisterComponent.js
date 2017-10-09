@@ -8,7 +8,9 @@ class RegisterComponent extends React.Component {
 	constructor(props){
 		super(props);
 		this.state={
-			view: 'Login'
+			view: 'Login',
+			errMsg: null,
+			errMsgCss: 'errMsgCss hidden'
 		};
 		this.handleEmailInput = this.handleEmailInput.bind(this);
 		this.handlePwInput = this.handlePwInput.bind(this);
@@ -31,6 +33,7 @@ class RegisterComponent extends React.Component {
                   <input type="text" placeholder="Ålder" onChange={this.handleAgeInput}/>
                   <input type="text" placeholder="Körkort" onChange={this.handleDrivLicInput}/>
                   <br/>
+				  <p className={this.state.errMsgCss}>{this.state.errMsg}</p>
                   <button className="btn" onClick={this.registerClick}>REGISTRERA</button>
 		        </div>
                   break;
@@ -80,15 +83,27 @@ class RegisterComponent extends React.Component {
             
             console.log('inga fält får lämnas tomma');
             console.log('returning false');
+			this.setState({
+				errMsg: 'Inga fält får lämnas tomma.',
+				errMsgCss: 'errMsgCss'
+			});  
+			  
             return false;
           } else {
             //felaktigt format:
             if(obj.email.indexOf('@') === -1) {
-				this.setState({msg: 'felaktig emailadress'});
+				this.setState({
+					errMsg: 'felaktig emailadress',
+					errMsgCss: 'errMsgCss'
+				});
               console.log('felaktig emailadress');
               return false;
             } else if(isNaN(obj.age)) {
-              console.log('ålder måste vara en siffra')
+              console.log('ålder måste vara en siffra');
+				this.setState({
+					errMsg: 'Ålder måste vara en siffra',
+					errMsgCss: 'errMsgCss'
+				});
               return false;
             }
             
