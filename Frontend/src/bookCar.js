@@ -76,7 +76,7 @@ class BookCar extends React.Component {
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
 		</div>
 				break;
-			case 'listCars': view = <ListCars data={this.state.data} userId={this.props.userId}/>
+			case 'listCars': view = <ListCars data={this.state.data} userId={this.props.userId} pickupDate={this.state.pickupDate} returnDate={this.state.returnDate}/>
 				break;
 			default: view = <div>Default</div>
 							  }
@@ -105,11 +105,14 @@ class BookCar extends React.Component {
 		let newData = [];
 		for (let o in data){
 			let obj = data[o];
-			//console.log(obj.gearbox === this.state.gearFilter);
-			//console.log(obj.fuel === this.state.fuelFilter);
-			console.log(obj.dagshyra <= this.state.maxRentFilter);
-			if(obj.gearbox === this.state.gearFilter && obj.fuel === this.state.fuelFilter && obj.dagshyra <= this.state.maxRentFilter){
-				newData.push(obj);
+			if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
+				if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
+					if(obj.dailyFee <= this.state.maxRentFilter){
+						if(obj.driversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
+							newData.push(obj);
+						}
+					}
+				}
 			} 
 		}
 		this.renderCars(newData);
@@ -172,5 +175,7 @@ class ShowCarList {
 		// Filter?
 	}
 }
+
+&& obj.dailyFee <= this.state.maxRentFilter && obj.driversLicense === this.state.driveLicFilter
 */
 
