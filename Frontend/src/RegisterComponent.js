@@ -159,6 +159,22 @@ class RegisterComponent extends React.Component {
 
 
 	registerClick(ev){
+
+		axios({
+			method: 'post',
+			url: 'http://localhost:3000/users',
+			data: {
+				name: {
+			    first: 'yifei',
+			    last: 'wang'
+			  },
+			  email:  'heosdf@icloud.com',
+			  password: 'dsfsdf',
+			  age: 34,
+			  driversLicense: 'B',
+			  cars: [{'tes': 'sdf'}]
+			}
+		});
       
       /*console.log('state: ', this.state);
       console.log('age: ', this.state.age);

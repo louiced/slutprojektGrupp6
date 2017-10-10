@@ -29,3 +29,5 @@ var userSchema = new Schema({
 
 
 module.exports = mongoose.model('Users', userSchema); //class Vehicle
+
+

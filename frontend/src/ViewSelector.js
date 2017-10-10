@@ -5,7 +5,7 @@ import LoginComponent from './LoginComponent.js';
 import RegisterComponent from './RegisterComponent.js';
 import UserView from './UserView.js';
 
-class Login extends React.Component{
+class ViewSelector extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
@@ -25,6 +25,7 @@ class Login extends React.Component{
 		this.logOut = this.logOut.bind(this);
 		this.switchTab = this.switchTab.bind(this);
 		this.updateView = this.updateView.bind(this);
+		this.updateUserId = this.updateUserId.bind(this);
 	}
 	render(){
 		let view;
@@ -36,7 +37,7 @@ class Login extends React.Component{
 			case 'Login': view =
 				<div className="mainContent">
 					{navBar}
-					<LoginComponent updateView={this.updateView}/>
+					<LoginComponent updateView={this.updateView} updateUserId={this.updateUserId}/>
 				</div>
 				break;
 			case 'registerNewCC': view = <div className="mainContent">
@@ -44,7 +45,7 @@ class Login extends React.Component{
 					<RegisterComponent updateView={this.updateView}/>
 				</div>
 			break;
-			case 'UserView': view = <div className="mainContent"><UserView/></div>
+			case 'UserView': view = <div className="mainContent"><UserView userId={this.state.userId}/></div>
 		}
 		return view;
 	}
@@ -86,9 +87,15 @@ class Login extends React.Component{
 			view: str
 		});
 	}
+	
+	updateUserId(str){
+		this.setState({
+			userId: str
+		});
+	}
 }
 
-export default Login;
+export default ViewSelector;
 
 
 /*

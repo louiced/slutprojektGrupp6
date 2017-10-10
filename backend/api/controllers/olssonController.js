@@ -66,13 +66,13 @@ exports.list_all_users = (req, res) => {
 //skapa nytt user-object
 exports.create_a_user = (req, res) => {
 
-  var new_user = new Users(req.body);
-  console.log('req:  !!!!!!!')
-  new_user.save((err, user) => {
-    if (err)
-      res.send(err);
-    res.json(user);
-  })
+ var new_user = new Users(req.body);
+ console.log('req:  !!!!!!!')
+ new_user.save((err, user) => {
+   if (err)
+     res.send(err);
+   res.json(user);
+ })
 }
 
 //läs in ett user-object utifrån id

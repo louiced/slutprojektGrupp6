@@ -33,8 +33,6 @@ class LoginComponent extends React.Component {
 						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
 					</div>
 				break;
-			case 'UserView': 
-				view = <UserView/>
 		}
 		return view;
 	}
@@ -75,6 +73,7 @@ class LoginComponent extends React.Component {
       
       if(this.state.isLoggedIn === true) {
         if(this.state.email !== 'admin@olsson.se') {
+          this.props.updateUserId(this.state.loggedInAs._id);
           this.props.updateView('UserView');
         } else {
         console.log('adminview');
@@ -89,6 +88,9 @@ class LoginComponent extends React.Component {
     }
   
 	loginClick(ev){
+		this.props.updateUserId('59db86564ea876260441ec21');
+		this.props.updateView('UserView');
+		/*
       let self = this;      
       axios.get('http://localhost:3000/users')
       .then(function (response) {
@@ -99,6 +101,7 @@ class LoginComponent extends React.Component {
       .catch(function (error) {
         console.log(error);
       }); 
+	  */
     }
 }
 

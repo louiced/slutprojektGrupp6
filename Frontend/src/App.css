@@ -126,6 +126,15 @@ select, input {
 	border-radius: 5px;
 }
 
+.carBox {
+	border: 1px solid black;
+	background-color: white;
+}
+
+.carImg {
+	width: 100px;
+}
+
 .errMsgCss {
 	color: red;
 }
@@ -133,3 +142,4 @@ select, input {
 .hidden {
 	display: none;
 }
+

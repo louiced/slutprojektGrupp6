@@ -20,7 +20,7 @@ mongoose.connect('mongodb://localhost/olsson', {
 console.log('port: ' + process.env.PORT)
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(bodyParser.json());
-// app.use(express.static('public'))
+
 
 var routes = require('./api/routes/routers.js');
 routes(app);
