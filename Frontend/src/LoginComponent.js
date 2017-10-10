@@ -88,7 +88,7 @@ class LoginComponent extends React.Component {
     }
   
 	loginClick(ev){
-		this.props.updateUserId('59db86564ea876260441ec21');
+		this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
 		this.props.updateView('UserView');
 		/*
       let self = this;      
