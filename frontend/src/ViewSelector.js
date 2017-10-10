@@ -4,6 +4,7 @@ import BookCar from './BookCar.js';
 import LoginComponent from './LoginComponent.js';
 import RegisterComponent from './RegisterComponent.js';
 import UserView from './UserView.js';
+import AdminView from './AdminView.js';
 
 class ViewSelector extends React.Component{
 	constructor(props){
@@ -39,15 +40,21 @@ class ViewSelector extends React.Component{
 					{navBar}
 					<LoginComponent updateView={this.updateView} updateUserId={this.updateUserId}/>
 				</div>
+
 				break;
 			case 'registerNewCC': view = <div className="mainContent">
 			{navBar}
 					<RegisterComponent updateView={this.updateView}/>
 				</div>
 			break;
+
 			case 'UserView': view = <div className="mainContent"><UserView userId={this.state.userId}/></div>
+			break;
+			case 'AdminView': view = <div className="mainContent"><AdminView/></div>
+
 		}
 		return view;
+
 	}
 
 	ccLoginClick(ev){

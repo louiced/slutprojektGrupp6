@@ -17,6 +17,7 @@ exports.list_all_vehicles = (req, res) => {
 //skapar ett nytt vehicle-object
 exports.create_a_vehicle = (req, res) => {
   var new_vehicle = new Vehicles(req.body);
+  // console.log(req.body)
   new_vehicle.save((err, vehicle) => {
     if (err)
       res.send(err);

@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 import axios from 'axios';
 import UserView from './UserView.js';
+import ShowCars from './ShowCars.js';
 
 class LoginComponent extends React.Component {
 	constructor(props){
@@ -76,8 +77,8 @@ class LoginComponent extends React.Component {
           this.props.updateUserId(this.state.loggedInAs._id);
           this.props.updateView('UserView');
         } else {
-        console.log('adminview');
-        //this.props.updateView('AdminView');
+          console.log('adminview');
+          this.props.updateView('AdminView');
         }
       } else if (this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
 		  this.setState({
@@ -90,6 +91,7 @@ class LoginComponent extends React.Component {
 	loginClick(ev){
 		this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
 		this.props.updateView('UserView');
+
 		/*
       let self = this;      
       axios.get('http://localhost:3000/users')

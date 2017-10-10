@@ -60,6 +60,7 @@ class BookCar extends React.Component {
 				</select>
 					</span> 
 				<span>Bränsle: <select name="fuel" onChange={this.handleFuelChange}>
+
 					<option value="" defaultValue></option>
 					<option value="Diesel" >Diesel</option>
 					<option value="Gasoline">Bensin</option>
@@ -67,6 +68,7 @@ class BookCar extends React.Component {
 				</select>
 					</span>
 				<span>Maxhyra per dag: <input type="number" name="quantity" min="0" max="5000" value="5000" onChange={this.handleMaxRentChange}/>
+
 				</span>
 			</div>
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
@@ -84,7 +86,7 @@ class BookCar extends React.Component {
 			view: 'showCars'
 		});
 	}
-	
+
 	findCars(ev){
 		let self = this;
 		axios.get('http://localhost:3000/vehicles')
@@ -150,3 +152,14 @@ class BookCar extends React.Component {
 		</form>*/
 
 export default BookCar;
+
+/*
+class ShowCarList {
+	componentDidMount(){
+		// Make GET request
+		// Map list of cars
+		// Filter?
+	}
+}
+*/
+
