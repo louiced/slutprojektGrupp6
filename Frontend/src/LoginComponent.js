@@ -89,12 +89,9 @@ class LoginComponent extends React.Component {
     }
 
 	loginClick(ev){
-<<<<<<< HEAD
 		this.props.updateView('AdminView');
 	}
-=======
-		this.props.updateUserId('59db86564ea876260441ec21');
-		this.props.updateView('UserView');
+
 		/*
       let self = this;
       axios.get('http://localhost:3000/users')
