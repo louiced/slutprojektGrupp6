@@ -7,7 +7,7 @@ class UpdateCars extends React.Component{
     this.state = {
       carsInfo: []
     }
-  // this.handleUpdate = this.handleUpdate.bind(this);
+
   }
   componentDidMount(){
     let self = this
@@ -21,9 +21,7 @@ class UpdateCars extends React.Component{
       console.log(error);
     });
   }
-  // handleUpdate(){
-  //   this.props.changeView()
-  // }
+
 
   render(){
     let carList = this.state.carsInfo.map(car=> {
@@ -35,7 +33,6 @@ class UpdateCars extends React.Component{
           <span className="label">dailyFee: </span><span> {car.dailyFee}</span>
           <span className="label">year: </span><span> {car.year}</span>
           <span className="label">fuel: </span><span> {car.fuel}</span>
-          <span className="label">status: </span><span> {car.status}</span>
           <span className="label">requiredDrivingLicense: </span><span> {car.requiredDrivingLicense}</span>
           <span className="label">vehicleType: </span><span> {car.vehicleType}</span>
           <br/>

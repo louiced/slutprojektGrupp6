@@ -20,14 +20,14 @@ class LoginComponent extends React.Component {
 		let view;
 		switch(this.state.view){
 			case 'Login':
-				view = <div>
-			<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
-			<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
-			<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
-		</div>
-				break;
+			view = <div>
+				<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
+				<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
+				<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
+			</div>
+			break;
 			case 'UserView': view = <UserView/>
-							  }
+		}
 		return view;
 	}
 
@@ -47,37 +47,7 @@ class LoginComponent extends React.Component {
 	}
 
 	loginClick(ev){
-		// Make login automatically
-		/*
-		this.setState({
-			view: 'UserView'
-		});
-		*/
-
-		 // TO DO
-
-		/*
-		axios.get('http://localhost/olsson/users')
-		.then(res => {
-			console.log(res);
-		})
-		.catch(err => {
-			console.log(err);
-		})
-		*/
-
 		this.props.updateView('AdminView');
-		/*
-		fetch( 'http://localhost:4000/vehicles' )
-           .then(resp => resp.json())
-           .then(json => {
-               console.log("API response:", json);
-
-           })
-           .catch(error => {
-               console.warn("API error:", error);
-           });
-		   */
 	}
 }
 
