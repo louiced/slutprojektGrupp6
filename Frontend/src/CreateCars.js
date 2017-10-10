@@ -6,14 +6,14 @@ class CreateCars extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      fordontype: '',
+      vehicleType: '',
       brand: '',
       model: '',
       year: '',
       gearbox: '',
       dailyFee: '',
-      comment: '',
-      status: 'available'
+      comments: '',
+      status: ''
     }
   this.createCar = this.createCar.bind(this);
    this.fordontype = this.fordontype.bind(this);
@@ -26,8 +26,9 @@ class CreateCars extends React.Component{
     this.handleYear = this.handleYear.bind(this);
   }
   fordontype(ev){
+
     this.setState({
-      fordontype: ev.target.value
+      vehicleType: ev.target.value
     },()=>{})
 
   }
@@ -58,7 +59,7 @@ class CreateCars extends React.Component{
   }
   handleComment(ev){
     this.setState({
-      comment: ev.target.value
+      comments: ev.target.value
     },()=>{})
   }
   handleYear(ev){
@@ -67,18 +68,19 @@ class CreateCars extends React.Component{
     },()=>{})
   }
   createCar(){
+
     axios({
       method: 'post',
       url: 'http://localhost:3000/vehicles',
       data: {
-        fordonstyp: this.state.fordontype,
+        vehicleType: this.state.vehicleType,
         brand: this.state.brand,
         model: this.state.model,
         year: this.state.year,
         gearbox: this.state.gearbox,
-        dagshyra: this.state.dailyFee,
+        dailyFee: this.state.dailyFee,
         status: this.state.status,
-        kommentar: this.state.comment
+        comments: this.state.comment
       }
     })
     .then(function (response) {
@@ -92,8 +94,8 @@ class CreateCars extends React.Component{
   render(){
     return <div className='form'>
       <div className="createForm1">
-        <select required value={this.state.fordontype}  onChange={this.fordontype}>
-          <option disabled selected hidden>Please Choose fordontype</option>
+        <select value={this.state.vehicleType}  onChange={this.fordontype}>
+          <option value='' disabled defaultValue hidden>Please Choose fordontype</option>
           <option value="personbil">personbil</option>
           <option value="lätt lastbil">lätt lastbil</option>
           <option value="Trehjuling">Trehjuling</option>
@@ -110,11 +112,11 @@ class CreateCars extends React.Component{
       </div>
       <div className="createForm2">
         <select required value={this.state.status}  onChange={this.handleStatus}>
-          <option disabled selected hidden>Please Choose status</option>
+          <option value='' disabled defaultValue hidden>Please Choose status</option>
           <option value="available">available</option>
           <option value="unavailable">unavailable</option>
         </select>
-        <input type="text" value={this.state.comment} onChange={this.handleComment} placeholder='comments'/>
+        <textarea type="text" value={this.state.comments} onChange={this.handleComment} placeholder='comments'/>
         <button className='addButton' onClick={this.createCar}>Add</button>
       </div>
     </div>

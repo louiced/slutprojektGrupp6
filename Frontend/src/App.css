@@ -132,6 +132,9 @@ select, input {
 	flex-direction: column;
 	justify-content: space-between;
 }
+.li{
+	list-style: none;
+}
 .list-item{
 	width: 45%;
 }

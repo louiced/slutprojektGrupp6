@@ -48,7 +48,6 @@ class LoginComponent extends React.Component {
 
 	handlePwInput(ev){
 		let val = ev.target.value;
-		console.log(val);
 		this.setState({
 			pw: val
 		});
@@ -104,8 +103,6 @@ class LoginComponent extends React.Component {
         console.log(error);
       });
 	  */
-    }
->>>>>>> 41bc2d24a7940e5aded4426f399fbf45ffedc790
 }
 
 export default LoginComponent;

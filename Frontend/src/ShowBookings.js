@@ -19,7 +19,7 @@ class ShowBookings extends React.Component {
 					<span>{car.brand}</span><br/>
 				<span>{car.model}</span><br/>
 				<span>{car.fordonstyp}</span><br/>
-				<img className="carImg" src={car.imgLink} alt="#"/> 
+				<img className="carImg" src={car.imgLink} alt="#"/>
 					<button data-id={car._id} onClick={this.anullBooking} className="btn">Avboka</button>
 				</div>
 			})
@@ -31,10 +31,10 @@ class ShowBookings extends React.Component {
 			view = <div><h2>Mina bokningar</h2>
 				<span>Inga bokningar för närvarande</span><br/></div>
 		}
-		
+
 		return view;
 	}
-	
+
 	componentDidMount(){
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
@@ -45,19 +45,19 @@ class ShowBookings extends React.Component {
 			console.log(err);
 		})
 	}
-	
+
 	renderCars(data){
 		this.setState({
 			bookedCars: data
 		});
 	}
-	
+
 	anullBooking(ev){
 		let carId = ev.target.getAttribute('data-id');
 		let newBookedCars = this.state.bookedCars.filter(car => {
 			return car._id !== carId
 		});
-		
+
 		axios({
 			method: 'put',
 			url: `http://localhost:3000/users/${this.props.userId}`,
@@ -65,7 +65,7 @@ class ShowBookings extends React.Component {
 				cars: newBookedCars
 			}
 		});
-		
+
 		this.setState({
 			bookedCars: newBookedCars
 		});
