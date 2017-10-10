@@ -77,6 +77,7 @@ class LoginComponent extends React.Component {
     validateLogin(){
       console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
       console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
+      console.log('validate, loggedInAs.name.first: ', this.state.loggedInAs.name.first); 
       
       if(this.state.isLoggedIn === true) {
         if(this.state.email !== 'admin@olsson.se') {
