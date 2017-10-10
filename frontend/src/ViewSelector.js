@@ -38,7 +38,7 @@ class ViewSelector extends React.Component{
 			case 'Login': view =
 				<div className="mainContent">
 					{navBar}
-					<LoginComponent updateView={this.updateView} updateUserId={this.updateUserId}/>
+					<LoginComponent updateView={this.updateView} updateUserId={this.updateUserId} updateUserInfo={this.props.updateUserInfo}/>
 				</div>
 
 				break;

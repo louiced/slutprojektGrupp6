@@ -3,15 +3,17 @@ var mongoose = require('mongoose'),
 
 //ett schema bestämmer formatet för våra models olika egenskaper
 var vehicleSchema = new Schema({
-  fordonstyp: String,
-  requiredDrivingLicense: String,
+  vehicleType: String,
+  requiredDriversLicense: String,
   brand: String,
   model: String,
   year: Number,
   gearbox: String,
-  dagshyra: Number,
-  kommentar: String,
-  status: String
+  dailyFee: Number,
+  fuel: String,
+  comments: [{type: String}],
+  status: String,
+  bookings: []
 });
 
 

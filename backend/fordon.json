@@ -1,7 +1,7 @@
 [
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Mazda",
     "model": "323i",
     "year": 1991,
@@ -9,12 +9,13 @@
     "dailyFee": 298,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/7/72/Mazda_323f_green_front_20080301.jpg",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Volvo",
     "model": "V40",
     "year": 1997,
@@ -22,12 +23,13 @@
     "gearbox": "manuell",
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Volvo-V40.jpg",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "lätt lastbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Mercedez-Benz",
     "model": "Sprinter 316 CDI",
     "year": 2003,
@@ -35,12 +37,13 @@
     "gearbox": null,
     "imgLink": "#",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "lätt lastbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Volkswagen",
     "model": "LT 46b",
     "year": 1999,
@@ -48,12 +51,13 @@
     "gearbox": null,
     "imgLink": "#",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Peugeot",
     "model": "308",
     "year": 2007,
@@ -61,12 +65,13 @@
     "gearbox": "manuell",
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/4/40/Peugeot_308_5-T%C3%BCrer_front.JPG",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "tung lastbil",
-    "requiredDrivingLicense": "CE",
+    "requiredDriversLicense": "CE",
     "brand": "Mercedes-Benz",
     "model": "Atego 8 16 L 4 x 2",
     "year": 1995,
@@ -74,14 +79,15 @@
     "gearbox": null,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Mercedes-Benz_Atego_white_strasbourg.JPG",
     "fuel": null,
-    "comments": {
+    "comments": [{
         "damages": "Större reva på högersida skåp."
-    },
-    "status": "available"
+    }],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Audi",
     "model": "A4",
     "year": 2000,
@@ -89,12 +95,13 @@
     "gearbox": "automat",
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/7/79/Audi_A4_B7_Avant_2.0_TDI.JPG",
     "fuel": "95",
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Volvo",
     "model": "S50",
     "year": 2005,
@@ -102,12 +109,13 @@
     "dailyFee": 498,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Volvo_V50_--_04-20-2010.jpg",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "motorcykel",
-    "requiredDrivingLicense": "A",
+    "requiredDriversLicense": "A",
     "brand": "Yamaha",
     "model": "YCF R1",
     "year": 2001,
@@ -115,12 +123,13 @@
     "dailyFee": 498,
     "imgLink": '#',
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Toyota",
     "model": "Aygo",
     "year": null,
@@ -128,12 +137,13 @@
     "dailyFee": 198,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Toyota_Aygo_front_20071204.jpg",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "ATV",
-    "requiredDrivingLicense": "A1",
+    "requiredDriversLicense": "A1",
     "brand": "Can-Am",
     "model": "Outlander 570",
     "year": 2008,
@@ -141,12 +151,13 @@
     "dailyFee": 598,
     "imgLink": '#',
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Saab",
     "model": "9-5 2.3 Super linear",
     "year": 2003,
@@ -154,11 +165,13 @@
     "dailyFee": 198,
     "imgLink": '#',
     "fuel": "95",
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "Trehjuling",
+	"requiredDriversLicense": "",
     "brand": "Can-Am",
     "model": "Spyder Roadster",
     "year": 2015,
@@ -166,12 +179,13 @@
     "dailyFee": 798,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/5/52/BRP_Can-Am_Spyder_Roadster_20100810c.JPG",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Kia",
     "model": "Optima kombi",
     "year": 2001,
@@ -179,12 +193,13 @@
     "dailyFee": 498,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/eb/2011_Kia_Optima_Hybrid_--_05-19-2011.jpg",
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "lätt lastbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Fiat",
     "model": "Ducato 2.3 Volymskåp maxi",
     "year": 2006,
@@ -192,12 +207,13 @@
     "dailyFee": 798,
     "imgLink": null,
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Toyota",
     "model": "Aygo",
     "year": 2009,
@@ -205,33 +221,36 @@
     "dailyFee": 198,
     "imgLink": null,
     "fuel": null,
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Volvo",
     "model": "c30",
     "year": null,
     "gearbox": null,
     "dailyFee": 225,
     "fuel": "diesel",
-    "comments": {
+    "comments": [{
         "damages": "Backen är väldigt trög att få i."
-    },
-    "status": "available"
+    }],
+    "status": "available",
+	"bookings": []
   },
   {
     "vehicleType": "personbil",
-    "requiredDrivingLicense": "B",
+    "requiredDriversLicense": "B",
     "brand": "Volvo",
     "model": "v70",
     "year": 1996,
     "gearbox": "manuell",
     "dailyFee": 298,
     "fuel": "diesel",
-    "comments": null,
-    "status": "available"
+    "comments": [],
+    "status": "available",
+	"bookings": []
   }
 ]

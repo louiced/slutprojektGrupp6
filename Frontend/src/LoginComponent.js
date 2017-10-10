@@ -59,11 +59,17 @@ class LoginComponent extends React.Component {
     updateLoginStatus(response){
       let allUsers = response.data;
       allUsers.forEach( (el) => {
-        if(this.state.email === el.email && this.state.pw === el.password)
+        if(this.state.email === el.email && this.state.pw === el.password) {
+		  console.log('el mail: ', el.email, this.state.email);
           this.setState({
             isLoggedIn: true,
             loggedInAs: el
           })
+		this.props.updateUserInfo(el);
+		}
+		
+		console.log('state, loggedInAs: ', this.state.loggedInAs);
+		console.log('el, loggedInAs: ', el);
       });
     }
     
@@ -89,10 +95,10 @@ class LoginComponent extends React.Component {
     }
   
 	loginClick(ev){
-		this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
-		this.props.updateView('UserView');
+		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
+		//this.props.updateView('UserView');
 
-		/*
+
       let self = this;      
       axios.get('http://localhost:3000/users')
       .then(function (response) {
@@ -103,7 +109,6 @@ class LoginComponent extends React.Component {
       .catch(function (error) {
         console.log(error);
       }); 
-	  */
     }
 }
 
