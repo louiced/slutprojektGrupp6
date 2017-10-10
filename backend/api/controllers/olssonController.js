@@ -67,13 +67,13 @@ exports.list_all_users = (req, res) => {
 //skapa nytt user-object
 exports.create_a_user = (req, res) => {
 
-  var new_user = new Users(req.body);
-  console.log('req:  !!!!!!!')
-  new_user.save((err, user) => {
-    if (err)
-      res.send(err);
-    res.json(user);
-  })
+ var new_user = new Users(req.body);
+ console.log('req:  !!!!!!!')
+ new_user.save((err, user) => {
+   if (err)
+     res.send(err);
+   res.json(user);
+ })
 }
 
 //läs in ett user-object utifrån id
@@ -87,7 +87,12 @@ exports.read_a_user = (req, res) => {
 
 //hitta och uppdater ett user-object utifrån id
 exports.update_a_user = (req, res) => {
+  console.log('i update_a_user');
   Users.findOneAndUpdate({_id: req.params.userId}, req.body, {new: true}, (err, user) => {
+    console.log('i User find');
+    console.log('params.id: ', req.params.userId);
+    console.log('req.body: ', req.body);
+    console.log('user: ', user);
     if (err)
       res.send(err);
     res.json(user);

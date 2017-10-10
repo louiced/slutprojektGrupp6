@@ -12,9 +12,8 @@ module.exports = (app) => {
     .delete(olssonApi.delete_a_vehicle);  //Ta bort ett fordon
 
   app.route('/users')
-    //.get(olssonApi.list_all_users)  //Visa alla users, vid login
-    .get(olssonApi.list_all_users)
-    .post(olssonApi.create_a_user);  //Skapa nytt konto
+    .get(olssonApi.list_all_users)  //Visa alla users, vid login
+    .post(olssonApi.create_a_user);   //Skapa nytt konto
 
   app.route('/users/:userId')
     .get(olssonApi.read_a_user) //Mina bokningar

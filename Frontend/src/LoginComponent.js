@@ -10,23 +10,30 @@ class LoginComponent extends React.Component {
 		this.state={
 			email: '',
 			pw: '',
-			view: 'Login'
+			view: 'Login',
+            isLoggedIn: false,
+            loggedInAs: null,
+			errMsg: null,
+			errMsgCss: 'errMsgCss hidden'
 		};
 		this.handleEmailInput = this.handleEmailInput.bind(this);
 		this.handlePwInput = this.handlePwInput.bind(this);
 		this.loginClick = this.loginClick.bind(this);
+		this.updateLoginStatus = this.updateLoginStatus.bind(this);
+		this.validateLogin = this.validateLogin.bind(this);
 	}
 	render(){
+      //console.log('uv', this.props.updateView());
 		let view;
 		switch(this.state.view){
 			case 'Login':
-			view = <div>
-				<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
-				<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
-				<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
-			</div>
-			break;
-			case 'UserView': view = <UserView/>
+				view = <div>
+						<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
+						<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
+						<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
+						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
+					</div>
+				break;
 		}
 		return view;
 	}
@@ -41,14 +48,67 @@ class LoginComponent extends React.Component {
 
 	handlePwInput(ev){
 		let val = ev.target.value;
+		console.log(val);
 		this.setState({
 			pw: val
 		});
 	}
 
+
+    //uppdaterar state så att loggedIn = true OM user matchar user i db
+    updateLoginStatus(response){
+      let allUsers = response.data;
+      allUsers.forEach( (el) => {
+        if(this.state.email === el.email && this.state.pw === el.password)
+          this.setState({
+            isLoggedIn: true,
+            loggedInAs: el
+          })
+      });
+    }
+
+    //admin ? AdminView : UserView
+    validateLogin(){
+      console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
+      console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
+
+      if(this.state.isLoggedIn === true) {
+        if(this.state.email !== 'admin@olsson.se') {
+          this.props.updateUserId(this.state.loggedInAs._id);
+          this.props.updateView('UserView');
+        } else {
+        console.log('adminview');
+        //this.props.updateView('AdminView');
+        }
+      } else if (this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
+		  this.setState({
+			  errMsg: 'Epost och lösenord mastchade inget i databasen. Försök igen!',
+			  errMsgCss: 'errMsgCss'
+		  })
+	  }
+    }
+
 	loginClick(ev){
+<<<<<<< HEAD
 		this.props.updateView('AdminView');
 	}
+=======
+		this.props.updateUserId('59db86564ea876260441ec21');
+		this.props.updateView('UserView');
+		/*
+      let self = this;
+      axios.get('http://localhost:3000/users')
+      .then(function (response) {
+        console.log(response);
+        self.updateLoginStatus(response); //finns user/admin i db? -> loggedIn = true, annars oops and retry!
+        self.validateLogin();             //loggedInAs admin/user? -> render UserView/AdminView
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+	  */
+    }
+>>>>>>> 41bc2d24a7940e5aded4426f399fbf45ffedc790
 }
 
 export default LoginComponent;
