@@ -9,7 +9,7 @@
     "dailyFee": 298,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/7/72/Mazda_323f_green_front_20080301.jpg",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -23,7 +23,7 @@
     "gearbox": "manuell",
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/b/b3/Volvo-V40.jpg",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -37,7 +37,7 @@
     "gearbox": null,
     "imgLink": "#",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -51,7 +51,7 @@
     "gearbox": null,
     "imgLink": "#",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -65,7 +65,7 @@
     "gearbox": "manuell",
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/4/40/Peugeot_308_5-T%C3%BCrer_front.JPG",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -95,7 +95,7 @@
     "gearbox": "automat",
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/7/79/Audi_A4_B7_Avant_2.0_TDI.JPG",
     "fuel": "95",
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -109,7 +109,7 @@
     "dailyFee": 498,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/ea/Volvo_V50_--_04-20-2010.jpg",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -123,7 +123,7 @@
     "dailyFee": 498,
     "imgLink": '#',
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -137,7 +137,7 @@
     "dailyFee": 198,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/e1/Toyota_Aygo_front_20071204.jpg",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -151,7 +151,7 @@
     "dailyFee": 598,
     "imgLink": '#',
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -165,7 +165,7 @@
     "dailyFee": 198,
     "imgLink": '#',
     "fuel": "95",
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -179,7 +179,7 @@
     "dailyFee": 798,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/5/52/BRP_Can-Am_Spyder_Roadster_20100810c.JPG",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -193,7 +193,7 @@
     "dailyFee": 498,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/e/eb/2011_Kia_Optima_Hybrid_--_05-19-2011.jpg",
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -207,7 +207,7 @@
     "dailyFee": 798,
     "imgLink": null,
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -221,7 +221,7 @@
     "dailyFee": 198,
     "imgLink": null,
     "fuel": null,
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -249,7 +249,7 @@
     "gearbox": "manuell",
     "dailyFee": 298,
     "fuel": "diesel",
-    "comments": null,
+    "comments": [],
     "status": "available",
 	"bookings": []
   }
