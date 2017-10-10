@@ -13,20 +13,26 @@ class ListCars extends React.Component{
 		this.updateStateCars = this.updateStateCars.bind(this);
 	}
 	render(){
-		let list = this.props.data.map(el => {
+		if (this.props.data.length > 0){
+			let list = this.props.data.map(el => {
 			return <div className="carBox" key={el._id} data-id={el._id}>
 				<span>{el.brand}</span><br/>
 				<span>{el.model}</span><br/>
-				<span>{el.fordonstyp}</span><br/>
+				<span>{el.vehicleType}</span><br/>
 				<img className="carImg" src={el.imgLink} alt="#"/>
 				<button className="btn" onClick={this.bookCarClick}>Boka</button>
 			</div>
 		})
 		return <ul>{list}</ul>
+		} else {
+			return <span>Inga bilar överlevde filtret</span>
+		}
+		
 	}
 	
 	componentDidMount(){
-		console.log(this.props.data);
+		console.log(this.props.returnDate.valueOf());
+		console.log(this.props.pickupDate.valueOf());
 		
 		
 		// Gets previous booked cars
@@ -45,12 +51,29 @@ class ListCars extends React.Component{
 		let obj;
 		this.props.data.forEach(data => {
 			if (data._id === id){
-				obj = data;
+				obj = {
+					carObj: data,
+					pickupDate: this.props.pickupDate.valueOf(),
+					returnDate: this.props.returnDate.valueOf()
+				};
 			}
 		})
+		let self = this;
+		axios.get(`http://localhost:3000/vehicles/${id}`)
+		.then(res => {
+			self.updateStateBookings(res.data.bookings, id);
+		})
+		.catch(err => {
+			console.log(err);
+		})
 		
-		this.updateUserDocument(obj);
-		
+	}
+	
+	updateStateBookings(list, id){
+		this.setState({
+			previousCarBookings: list
+		});
+		this.updateVehicleDocument(id);
 	}
 	
 	updateStateCars(list){
@@ -60,7 +83,9 @@ class ListCars extends React.Component{
 	}
 	
 	updateUserDocument(data) {
+		console.log(this.state.bookedCars);
 		let bookedCars = this.state.bookedCars;
+		
 		bookedCars.push(data);
 		axios({
 			method: 'put',
@@ -72,8 +97,31 @@ class ListCars extends React.Component{
 	}
 	
 	updateVehicleDocument(id){
+		let list = this.state.previousCarBookings;
+		let obj = {
+			pickupDate: this.props.pickupDate.valueOf(),
+			returnDate: this.props.returnDate.valueOf()
+		}
+		list.push(obj);
+		//console.log(list.length);
+		console.log(id);
+		axios({
+			method: 'put',
+			url: `http://localhost:3000/vehicles/${id}`,
+			data: {
+				bookings:  list
+			}
+		});
 		
 	}
 }
+
+/*axios({
+			method: 'put',
+			url: `http://localhost:3000/vehicles/59dccaf4d556aa9aef8ea0e1`,
+			data: {
+				bookings: list
+			}
+		});*/
 
 export default ListCars;
