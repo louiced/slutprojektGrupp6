@@ -11,7 +11,7 @@ var vehicleSchema = new Schema({
   gearbox: String,
   dailyFee: Number,
   fuel: String,
-  comments: [{type: String}],
+  comments: [],
   status: String,
   bookings: []
 });

@@ -13,9 +13,10 @@ class ShowBookings extends React.Component {
 	}
 	render(){
 		let view;
-		if (this.state.bookedCars.length > 0){
+		if (this.state.bookedCars.length > 0){ //
+			let key = 0;
 				let carList = this.state.bookedCars.map(car => {
-				return <div className="carBox" key={car.carObj._id}>
+				return <div className="carBox" key={key++}>
 					<span>{car.carObj.brand}</span><br/>
 				<span>{car.carObj.model}</span><br/>
 				<span>{car.carObj.vehicleType}</span><br/>
@@ -44,10 +45,10 @@ class ShowBookings extends React.Component {
 		.catch(err => {
 			console.log(err);
 		})
+		//this.anullBooking();
 	}
 	
 	renderCars(data){
-		console.log(typeof(data[0].pickupDate));
 		this.setState({
 			bookedCars: data
 		});
@@ -55,6 +56,7 @@ class ShowBookings extends React.Component {
 	
 	anullBooking(ev){
 		let carId = ev.target.getAttribute('data-id');
+		
 		let newBookedCars = this.state.bookedCars.filter(car => {
 			return car.carObj._id !== carId
 		});
@@ -66,7 +68,7 @@ class ShowBookings extends React.Component {
 				cars: newBookedCars
 			}
 		});
-		
+		console.log(newBookedCars);
 		this.setState({
 			bookedCars: newBookedCars
 		});

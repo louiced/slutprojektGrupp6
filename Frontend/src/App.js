@@ -10,7 +10,7 @@ class App extends Component {
 				<span className="brandTag2">BILAR</span>
 			</div>
 			<div className="App">
-				<ViewSelector updateUserInfo={this.updateUserInfo}/>
+				<ViewSelector/>
 			</div>
 		</div>
     );
