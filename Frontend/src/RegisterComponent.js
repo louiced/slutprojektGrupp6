@@ -24,6 +24,7 @@ class RegisterComponent extends React.Component {
 		this.handleDrivLicInput = this.handleDrivLicInput.bind(this);
 		this.validateInput = this.validateInput.bind(this);
 		this.userExists = this.userExists.bind(this);
+		this.renderThanks = this.renderThanks.bind(this);
 	}
 	render(){
 		let view;
@@ -41,11 +42,11 @@ class RegisterComponent extends React.Component {
                   <button className="btn" onClick={this.registerClick}>REGISTRERA</button>
 		        </div>
                   break;
-			case 'UserView': 
-            view = <UserView/>
-              break;
-				
-            
+            case 'Thanks':
+          		view = <div className="thanksForRegMsg">
+					<h1>Tack för din registrering!</h1>
+				</div>
+				break;
 		}
 
 		return view;
@@ -66,7 +67,18 @@ class RegisterComponent extends React.Component {
       });
     }
   
-  
+  	renderThanks() {
+		this.setState({
+			view: 'Thanks'
+		})
+		console.log('render thanks körs');
+		console.log(this.state.view);
+		let self = this;
+		setTimeout(function() {
+			self.props.updateView('UserView');
+		}, 3000);
+	}
+	
     validateInput(obj){
       for(let key in obj) {
         if(obj.hasOwnProperty('name')) {
@@ -156,9 +168,6 @@ class RegisterComponent extends React.Component {
           url: 'http://localhost:3000/users',
           data: obj
         });
-        //mellansteg: Tack för din registrering!
-        console.log('tack för din registrering');
-        this.props.updateView('UserView');
     }
   
 	handleEmailInput(ev){
@@ -233,6 +242,9 @@ class RegisterComponent extends React.Component {
 
         if(ifExists === false) {
           this.post(obj);
+		  this.renderThanks();
+		  console.log(this.state.view);	
+		  console.log('tack för din registrering');
         } else {
           console.log('post did not succeed, user already exists');
           this.props.updateView('registerNewCC');
