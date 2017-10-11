@@ -40,7 +40,6 @@ class LoginComponent extends React.Component {
 
 	handleEmailInput(ev){
 		let val = ev.target.value;
-		console.log(val);
 		this.setState({
 			email: val
 		});
@@ -48,7 +47,6 @@ class LoginComponent extends React.Component {
 
 	handlePwInput(ev){
 		let val = ev.target.value;
-		console.log(val);
 		this.setState({
 			pw: val
 		});
@@ -96,10 +94,10 @@ class LoginComponent extends React.Component {
     }
   
 	loginClick(ev){
-		this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
-		this.props.updateView('UserView');
+		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
+		//this.props.updateView('UserView');
 
-/*
+
       let self = this;      
       axios.get('http://localhost:3000/users')
       .then(function (response) {
@@ -110,7 +108,7 @@ class LoginComponent extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-	  */
+	  
     }
 }
 

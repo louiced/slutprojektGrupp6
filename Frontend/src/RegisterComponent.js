@@ -67,6 +67,25 @@ class RegisterComponent extends React.Component {
       });
     }
   
+	
+	getIdAndSend(mail){
+	  let self = this;
+	  axios.get('http://localhost:3000/users')
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data);
+        let found = response.data.find( (obj) =>{
+			return obj.email === mail
+		});
+		
+		self.props.updateUserId(found._id);
+		self.props.updateUserInfo(found);		  
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+	}
+	
   	renderThanks() {
 		this.setState({
 			view: 'Thanks'
@@ -242,10 +261,11 @@ class RegisterComponent extends React.Component {
 
         if(ifExists === false) {
           this.post(obj);
-		  this.renderThanks();
-		  console.log(this.state.view);	
-		  console.log('tack för din registrering');
+		  this.renderThanks(); //visa tack för registrering, visar sen UserView
+		  this.getIdAndSend(obj.email);
+		  
         } else {
+			//visa felmeddelande
           console.log('post did not succeed, user already exists');
           this.props.updateView('registerNewCC');
         }
