@@ -42,41 +42,25 @@ class ViewSelector extends React.Component{
 		} else {
 			logOutBox = <div>LOGUTBOXJÄVEL</div>
 		}
-		
+
 		let navBar = <ul className="navBar">
 					<li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Logga in</span></li>
 					<li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Registrera</span></li>
 				</ul>;
 		switch (this.state.view){
-<<<<<<< HEAD
-			case 'Login': view =
-				<div className="mainContent">
-					{navBar}
-					<LoginComponent updateView={this.updateView} updateUserId={this.updateUserId}/>
-				</div>
-=======
 			case 'Login': view = <div className="mainContent">
 						{navBar}
 						<LoginComponent updateView={this.updateView} updateUserId={this.updateUserId} updateUserInfo={this.updateUserInfo}/>
 					</div>
->>>>>>> 5d79e51a1d4d6f602e23bdacb509143fa81c42a0
 				break;
 			case 'registerNewCC': view = <div className="mainContent">
 			{navBar}
 					<RegisterComponent updateView={this.updateView}/>
 				</div>
 			break;
-<<<<<<< HEAD
-			case 'UserView': view = <div className="mainContent"><UserView userId={this.state.userId}/></div>
-			break;
-			case 'AdminView': view = <div className="mainContent"><AdminView /></div>
-=======
-
 			case 'UserView': view = <div>{logOutBox}<div className="mainContent"><UserView userId={this.state.userId}/></div></div>
 			break;
 			case 'AdminView': view = <div className="mainContent"><AdminView/></div>
-
->>>>>>> 5d79e51a1d4d6f602e23bdacb509143fa81c42a0
 		}
 		return view;
 
@@ -125,13 +109,13 @@ class ViewSelector extends React.Component{
 			userId: str
 		});
 	}
-	
+
 	logOutClick(ev){
 		this.setState({
 			view: 'Login'
 		});
 	}
-	
+
 	updateUserInfo(user) {
 		this.setState({
 			loggedInAs: user

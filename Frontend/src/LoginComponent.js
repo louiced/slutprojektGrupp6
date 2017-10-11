@@ -66,7 +66,7 @@ class LoginComponent extends React.Component {
           })
 		this.props.updateUserInfo(el);
 		}
-		
+
 		console.log('state, loggedInAs: ', this.state.loggedInAs);
 		console.log('el, loggedInAs: ', el);
       });
@@ -92,33 +92,22 @@ class LoginComponent extends React.Component {
 		  })
 	  }
     }
-<<<<<<< HEAD
 
-	loginClick(ev){
-		this.props.updateView('AdminView');
-	}
-
-		/*
-      let self = this;
-=======
-  
 	loginClick(ev){
 		this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
 		this.props.updateView('UserView');
-
-/*
-      let self = this;      
->>>>>>> 5d79e51a1d4d6f602e23bdacb509143fa81c42a0
-      axios.get('http://localhost:3000/users')
-      .then(function (response) {
-        console.log(response);
-        self.updateLoginStatus(response); //finns user/admin i db? -> loggedIn = true, annars oops and retry!
-        self.validateLogin();             //loggedInAs admin/user? -> render UserView/AdminView
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-	  */
+}
+    //   let self = this;
+    //   axios.get('http://localhost:3000/users')
+    //   .then(function (response) {
+    //     console.log(response);
+    //     self.updateLoginStatus(response); //finns user/admin i db? -> loggedIn = true, annars oops and retry!
+    //     self.validateLogin();             //loggedInAs admin/user? -> render UserView/AdminView
+    //   })
+    //   .catch(function (error) {
+    //     console.log(error);
+    //   });
+	  // 
 }
 
 export default LoginComponent;

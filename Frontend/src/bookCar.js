@@ -153,7 +153,6 @@ class BookCar extends React.Component {
 			maxRentFilter: ev.target.value
 		});
 	}
-<<<<<<< HEAD
 	handleDateChange(date) {
 		this.setState({
 			startDate: date
