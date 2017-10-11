@@ -13,6 +13,7 @@ class CreateCars extends React.Component{
       gearbox: '',
       dailyFee: '',
       comments: '',
+      commentArray: [],
       status: ''
     }
   this.createCar = this.createCar.bind(this);
@@ -58,8 +59,10 @@ class CreateCars extends React.Component{
     },()=>{})
   }
   handleComment(ev){
+
     this.setState({
       comments: ev.target.value
+
     },()=>{})
   }
   handleYear(ev){
@@ -68,7 +71,8 @@ class CreateCars extends React.Component{
     },()=>{})
   }
   createCar(){
-
+    let commentArray = this.state.commentArray;
+    commentArray.push(this.state.comments)
     axios({
       method: 'post',
       url: 'http://localhost:3000/vehicles',
@@ -80,7 +84,7 @@ class CreateCars extends React.Component{
         gearbox: this.state.gearbox,
         dailyFee: this.state.dailyFee,
         status: this.state.status,
-        comments: this.state.comment
+        comments: commentArray
       }
     })
     .then(function (response) {

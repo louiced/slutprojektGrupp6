@@ -12,7 +12,8 @@ class Update extends React.Component{
         year: this.props.data.year,
         gearbox: this.props.data.gearbox,
         dailyFee: this.props.data.dailyFee,
-        comments: this.props.data.comments.damages,
+        comments: this.props.data.comments,
+        commentArray: [],
         status: 'available'
       }
     }
@@ -82,6 +83,8 @@ class Update extends React.Component{
     },()=>{})
   }
   createCar(){
+    let commentArray = this.state.commentArray;
+    commentArray.push(this.state.comments)
     axios({
       method: 'post',
       url: 'http://localhost:3000/vehicles',
@@ -93,7 +96,7 @@ class Update extends React.Component{
         gearbox: this.state.gearbox,
         dagshyra: this.state.dailyFee,
         status: this.state.status,
-        comments: this.state.comment
+        comments: commentArray
       }
     })
     .then(function (response) {

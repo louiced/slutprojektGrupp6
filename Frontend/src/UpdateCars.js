@@ -42,7 +42,9 @@ class UpdateCars extends React.Component{
 //this.props.updateView('update',x)
   render(){
     let carList = this.state.carsInfo.map(car=> {
-      if(car.comments !== null && car.comments!==undefined){
+      if(car.comments.length !== 0){
+        let content = car.comments.map(x=>{return <li >{x}</li>})
+
         return <li className="item" key={car._id} data-id={car._id} >
           <span className="label">vehicleType: </span><span> {car.vehicleType}</span>
           <span className="label">brand:</span> <span>{car.brand}</span>
@@ -52,11 +54,11 @@ class UpdateCars extends React.Component{
           <span className="label">year: </span><span> {car.year}</span>
           <span className="label">fuel: </span><span> {car.fuel}</span>
           <span className="label">requiredDrivingLicense: </span><span> {car.requiredDrivingLicense}</span>
-          <span className="label">comments: </span><span> {car.comments.damages}</span>
+          <span className="label">comments: </span><span> <ul className='li'>{content}</ul></span>
           <br/>
           <img className='list-item'  src={car.imgLink} alt=""/>
           <br/>
-          <button className='deleteButton'  oonClick={()=>this.props.updateView('update',car)}>Update</button>
+          <button className='deleteButton'  onClick={()=>this.props.updateView('update',car)}>Update</button>
         </li>
       }
       else{
@@ -79,5 +81,4 @@ class UpdateCars extends React.Component{
     return <ul className='li'>{carList}</ul>
   }
 }
-
 export default UpdateCars;
