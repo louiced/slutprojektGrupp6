@@ -10,7 +10,10 @@ class RegisterComponent extends React.Component {
 		this.state={
 			view: 'Login',
 			errMsg: null,
-			errMsgCss: 'errMsgCss hidden'
+			errMsgCss: 'errMsgCss hidden',
+			emailInputCss: '',
+			ageInputCss: '',
+            allUsers: []
 		};
 		this.handleEmailInput = this.handleEmailInput.bind(this);
 		this.handlePwInput = this.handlePwInput.bind(this);
@@ -20,6 +23,7 @@ class RegisterComponent extends React.Component {
 		this.handleAgeInput = this.handleAgeInput.bind(this);
 		this.handleDrivLicInput = this.handleDrivLicInput.bind(this);
 		this.validateInput = this.validateInput.bind(this);
+		this.userExists = this.userExists.bind(this);
 	}
 	render(){
 		let view;
@@ -28,9 +32,9 @@ class RegisterComponent extends React.Component {
 				view = <div>
                   <input type="text" placeholder="Förnamn" onChange={this.handleFirstNameInput}/>
                   <input type="text" placeholder="Efternamn" onChange={this.handleLastNameInput}/>
-                  <input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
+                  <input type="text" className={this.state.emailInputCss} placeholder="Epost" onChange={this.handleEmailInput}/>
                   <input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
-                  <input type="text" placeholder="Ålder" onChange={this.handleAgeInput}/>
+                  <input type="text" className={this.state.ageInputCss} placeholder="Ålder" onChange={this.handleAgeInput}/>
                   <input type="text" placeholder="Körkort" onChange={this.handleDrivLicInput}/>
                   <br/>
 				  <p className={this.state.errMsgCss}>{this.state.errMsg}</p>
@@ -47,24 +51,23 @@ class RegisterComponent extends React.Component {
 		return view;
 	}
 
-    /*
-    validering av input:
-    - email: ska innehålla @, googla!
-    - pw: pw.length >= ?
-    - firstname: != ''
-    - lastname: != ''
-    - age typeof Number
-    - driversLicense: array, varje element typeof String
-    
-    #throw err, visa felmeddelande?
-    */
+    componentDidMount() {
+      let self = this;
+      axios.get('http://localhost:3000/users')
+      .then(function (response) {
+        console.log(response);
+        console.log(response.data);
+        self.setState({
+          allUsers: response.data
+        })
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
+  
+  
     validateInput(obj){
-      console.log('state: ', this.state);
-      console.log('obj: ', obj);
-      console.log('obj.name.first: ', obj.name.first);
-      console.log('obj.name.last: ', obj.name.last);
-      
-      
       for(let key in obj) {
         if(obj.hasOwnProperty('name')) {
           
@@ -91,28 +94,71 @@ class RegisterComponent extends React.Component {
 			  
             return false;
           } else {
-            //felaktigt format:
+            //felaktigt format email:
             if(obj.email.indexOf('@') === -1) {
 				this.setState({
 					errMsg: 'felaktig emailadress',
-					errMsgCss: 'errMsgCss'
+					errMsgCss: 'errMsgCss',
+					emailInputCss: 'attention'
 				});
               console.log('felaktig emailadress');
               return false;
-            } else if(isNaN(obj.age)) {
+            } else {
+				this.setState({
+					emailInputCss: ''
+				})
+			}
+			
+			//felaktigt format age:
+			if(isNaN(obj.age)) {
               console.log('ålder måste vara en siffra');
 				this.setState({
 					errMsg: 'Ålder måste vara en siffra',
-					errMsgCss: 'errMsgCss'
+					errMsgCss: 'errMsgCss',
+					ageInputCss: 'attention'
 				});
               return false;
-            }
-            
-            console.log('returning true');
+            } else {
+				this.setState({
+					ageInputCss: '',
+				})
+			}
+            console.log('returning true for validation');
             return true;
           }
         } 
       }
+    }
+  
+    userExists() {
+      //jmf state.email och response.email
+      console.log(this.state.allUsers);
+      let exists = this.state.allUsers.find( (el) => {
+        return el.email === this.state.email;
+      });
+      
+      console.log('exists? ', exists);
+      
+      if(exists === undefined) {
+        console.log('returning false for userexists');
+        return false;
+      } else {
+        console.log('returning true for userexists');
+        return true;
+      }
+      
+      
+    }
+  
+    post(obj) {
+      axios({
+          method: 'post',
+          url: 'http://localhost:3000/users',
+          data: obj
+        });
+        //mellansteg: Tack för din registrering!
+        console.log('tack för din registrering');
+        this.props.updateView('UserView');
     }
   
 	handleEmailInput(ev){
@@ -178,19 +224,31 @@ class RegisterComponent extends React.Component {
       }
       //console.log('obj: ', obj);
       
-      let validated = this.validateInput(obj);//kontrollera att obj har giltiga värden
+      let validated = this.validateInput(obj); //kontrollera att obj har giltiga värden, isf return true
+      console.log('try to post this obj: ', obj);
       
-      if(validated === true) {                //om allt stämmer, gör en post, gå till UserView
-        axios({
+      if(validated === true) { //om allt stämmer, kontrollera om anv redan finns, om inte: gör en post, gå till UserView
+        let ifExists = this.userExists();
+        console.log('ifExists: ', ifExists);  //undefined?!
+
+        if(ifExists === false) {
+          this.post(obj);
+        } else {
+          console.log('post did not succeed, user already exists');
+          this.props.updateView('registerNewCC');
+        }
+        
+        /*axios({
             method: 'post',
             url: 'http://localhost:3000/users',
             data: obj
         });
         //mellansteg: Tack för din registrering!
         console.log('tack för din registrering');
-        this.props.updateView('UserView');
+        this.props.updateView('UserView');*/
+        
       } else {                                 //TODO: rendera felmeddelande   
-        console.log('post did not succeed');
+        console.log('post did not succeed, validation error');
         this.props.updateView('registerNewCC');
       }
 
