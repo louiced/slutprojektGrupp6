@@ -16,14 +16,14 @@ class CreateCars extends React.Component{
       status: ''
     }
   this.createCar = this.createCar.bind(this);
-   this.fordontype = this.fordontype.bind(this);
-   this.handleBrand = this.handleBrand.bind(this);
-   this.handleModel = this.handleModel.bind(this);
-   this.handleStatus = this.handleStatus.bind(this);
-   this.handleGearbox = this.handleGearbox.bind(this);
-   this.handleDailyFee = this.handleDailyFee.bind(this);
-   this.handleComment = this.handleComment.bind(this);
-    this.handleYear = this.handleYear.bind(this);
+  this.fordontype = this.fordontype.bind(this);
+  this.handleBrand = this.handleBrand.bind(this);
+  this.handleModel = this.handleModel.bind(this);
+  this.handleStatus = this.handleStatus.bind(this);
+  this.handleGearbox = this.handleGearbox.bind(this);
+  this.handleDailyFee = this.handleDailyFee.bind(this);
+  this.handleComment = this.handleComment.bind(this);
+  this.handleYear = this.handleYear.bind(this);
   }
   fordontype(ev){
 

@@ -23,7 +23,7 @@ class LoginComponent extends React.Component {
 		this.validateLogin = this.validateLogin.bind(this);
 	}
 	render(){
-      //console.log('uv', this.props.updateView());
+      console.log(this.state);
 		let view;
 		switch(this.state.view){
 			case 'Login':
@@ -58,11 +58,17 @@ class LoginComponent extends React.Component {
     updateLoginStatus(response){
       let allUsers = response.data;
       allUsers.forEach( (el) => {
-        if(this.state.email === el.email && this.state.pw === el.password)
+        if(this.state.email === el.email && this.state.pw === el.password) {
+		  console.log('el mail: ', el.email, this.state.email);
           this.setState({
             isLoggedIn: true,
             loggedInAs: el
           })
+		this.props.updateUserInfo(el);
+		}
+		
+		console.log('state, loggedInAs: ', this.state.loggedInAs);
+		console.log('el, loggedInAs: ', el);
       });
     }
 
@@ -76,8 +82,8 @@ class LoginComponent extends React.Component {
           this.props.updateUserId(this.state.loggedInAs._id);
           this.props.updateView('UserView');
         } else {
-        console.log('adminview');
-        //this.props.updateView('AdminView');
+          console.log('adminview');
+          this.props.updateView('AdminView');
         }
       } else if (this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
 		  this.setState({
@@ -86,6 +92,7 @@ class LoginComponent extends React.Component {
 		  })
 	  }
     }
+<<<<<<< HEAD
 
 	loginClick(ev){
 		this.props.updateView('AdminView');
@@ -93,6 +100,15 @@ class LoginComponent extends React.Component {
 
 		/*
       let self = this;
+=======
+  
+	loginClick(ev){
+		this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
+		this.props.updateView('UserView');
+
+/*
+      let self = this;      
+>>>>>>> 5d79e51a1d4d6f602e23bdacb509143fa81c42a0
       axios.get('http://localhost:3000/users')
       .then(function (response) {
         console.log(response);

@@ -25,7 +25,11 @@ class BookCar extends React.Component {
 			view: 'bookCar',
 			data: {},
 			pickupDate: moment(),
-			returnDate: moment()
+			returnDate: moment(),
+			maxRentFilter: 5000,
+			fuelFilter: undefined,
+			driveLicFilter: undefined,
+			gearFilter: undefined
 		};
 		this.renderCars = this.renderCars.bind(this);
 		this.findCars = this.findCars.bind(this);
@@ -35,7 +39,6 @@ class BookCar extends React.Component {
 		this.handleDriveLicChange = this.handleDriveLicChange.bind(this);
 		this.handleFuelChange = this.handleFuelChange.bind(this);
 		this.handleMaxRentChange = this.handleMaxRentChange.bind(this);
-		this.handleDateChange = this.handleDateChange.bind(this);
 	}
 	render(){
 		let view;
@@ -43,14 +46,14 @@ class BookCar extends React.Component {
 			case 'bookCar': view = <div>
 			<h2>Boka en bil</h2>
 			<h4>Välj datum</h4>
-				<span>Jag vill hyra en bil från: </span><DatePicker selected={this.state.pickupDate} onChange={this.handlePickupDate}/>
-				<span>Till och med: </span><DatePicker selected={this.state.returnDate} onChange={this.handleReturnDate}/>
+				<span>Jag vill hyra en bil från: </span><DatePicker dateFormat="YYYY/MM/DD" selected={this.state.pickupDate} onChange={this.handlePickupDate}/>
+				<span>Till och med: </span><DatePicker dateFormat="YYYY/MM/DD" selected={this.state.returnDate} onChange={this.handleReturnDate}/>
 			<h4>Filtrera din sökning</h4>
 			<div className="filterBox">
 				<span>Automat/manuell: <select name="auto/man" onChange={this.handleGearChange}>
 					<option value="" defaultValue></option>
-					<option value="automatic">Automatisk</option>
-					<option value="manual">Manuell</option>
+					<option value="automat">Automatisk</option>
+					<option value="manuell">Manuell</option>
 				</select>
 					</span>
 				<span>Körkortstyp: <select name="driveLic" onChange={this.handleDriveLicChange}>
@@ -61,18 +64,17 @@ class BookCar extends React.Component {
 					</span>
 				<span>Bränsle: <select name="fuel" onChange={this.handleFuelChange}>
 					<option value="" defaultValue></option>
-					<option value="Diesel" >Diesel</option>
-					<option value="Gasoline">Bensin</option>
-					<option value="Electricity">El</option>
+					<option value="95" >Bensin 95</option>
+					<option value="diesel">Diesel</option>
 				</select>
 					</span>
-				<span>Maxhyra per dag: <input type="number" name="quantity" min="0" max="5000" value="5000" onChange={this.handleMaxRentChange}/>
+				<span>Maxhyra per dag: <input type="number" name="quantity" min="0" max="5000" defaultValue="5000" onChange={this.handleMaxRentChange}/>
 				</span>
 			</div>
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
 		</div>
 				break;
-			case 'showCars': view = <ListCars data={this.state.data} userId={this.props.userId}/>
+			case 'listCars': view = <ListCars data={this.state.data} userId={this.props.userId} pickupDate={this.state.pickupDate} returnDate={this.state.returnDate}/>
 				break;
 			default: view = <div>Default</div>
 							  }
@@ -81,7 +83,7 @@ class BookCar extends React.Component {
 	renderCars(data){
 		this.setState({
 			data,
-			view: 'showCars'
+			view: 'listCars'
 		});
 	}
 
@@ -89,11 +91,28 @@ class BookCar extends React.Component {
 		let self = this;
 		axios.get('http://localhost:3000/vehicles')
 		.then(res => {
-			self.renderCars(res.data);
+			//console.log(res.data);
+			self.filterCars(res.data);
 		})
 		.catch(err => {
 			console.log(err);
 		})
+	}
+	filterCars(data){
+		let newData = [];
+		for (let o in data){
+			let obj = data[o];
+			if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
+				if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
+					if(obj.dailyFee <= this.state.maxRentFilter){
+						if(obj.driversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
+							newData.push(obj);
+						}
+					}
+				}
+			}
+		}
+		this.renderCars(newData);
 	}
 
 	handlePickupDate(date){
@@ -134,12 +153,12 @@ class BookCar extends React.Component {
 			maxRentFilter: ev.target.value
 		});
 	}
+<<<<<<< HEAD
 	handleDateChange(date) {
 		this.setState({
 			startDate: date
 		});
 	}
-
 }
 
 /*<form>
@@ -150,3 +169,14 @@ class BookCar extends React.Component {
 		</form>*/
 
 export default BookCar;
+/*
+class ShowCarList {
+	componentDidMount(){
+		// Make GET request
+		// Map list of cars
+		// Filter?
+	}
+}
+
+&& obj.dailyFee <= this.state.maxRentFilter && obj.driversLicense === this.state.driveLicFilter
+*/

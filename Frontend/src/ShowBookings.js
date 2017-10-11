@@ -15,12 +15,12 @@ class ShowBookings extends React.Component {
 		let view;
 		if (this.state.bookedCars.length > 0){
 				let carList = this.state.bookedCars.map(car => {
-				return <div className="carBox" key={car._id}>
-					<span>{car.brand}</span><br/>
-				<span>{car.model}</span><br/>
-				<span>{car.fordonstyp}</span><br/>
-				<img className="carImg" src={car.imgLink} alt="#"/>
-					<button data-id={car._id} onClick={this.anullBooking} className="btn">Avboka</button>
+				return <div className="carBox" key={car.carObj._id}>
+					<span>{car.carObj.brand}</span><br/>
+				<span>{car.carObj.model}</span><br/>
+				<span>{car.carObj.vehicleType}</span><br/>
+				<img className="carImg" src={car.carObj.imgLink} alt="#"/>
+					<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
 				</div>
 			})
 				view = <div>
@@ -47,6 +47,7 @@ class ShowBookings extends React.Component {
 	}
 
 	renderCars(data){
+		console.log(typeof(data[0].pickupDate));
 		this.setState({
 			bookedCars: data
 		});
@@ -55,7 +56,7 @@ class ShowBookings extends React.Component {
 	anullBooking(ev){
 		let carId = ev.target.getAttribute('data-id');
 		let newBookedCars = this.state.bookedCars.filter(car => {
-			return car._id !== carId
+			return car.carObj._id !== carId
 		});
 
 		axios({
