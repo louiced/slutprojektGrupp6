@@ -13,7 +13,11 @@ class RegisterComponent extends React.Component {
 			errMsgCss: 'errMsgCss hidden',
 			emailInputCss: '',
 			ageInputCss: '',
-            allUsers: []
+			passwordInputCss: '',
+			nameFirstInputCss: '',
+			nameLastInputCss: '',
+			driversLicenseInputCss: '',
+      allUsers: []
 		};
 		this.handleEmailInput = this.handleEmailInput.bind(this);
 		this.handlePwInput = this.handlePwInput.bind(this);
@@ -31,12 +35,12 @@ class RegisterComponent extends React.Component {
 		switch(this.state.view){
 			case 'Login':
 				view = <div>
-                  <input type="text" placeholder="Förnamn" onChange={this.handleFirstNameInput}/>
-                  <input type="text" placeholder="Efternamn" onChange={this.handleLastNameInput}/>
+                  <input type="text" className={this.state.nameFirstInputCss} placeholder="Förnamn" onChange={this.handleFirstNameInput}/>
+                  <input type="text" className={this.state.nameLastInputCss} placeholder="Efternamn" onChange={this.handleLastNameInput}/>
                   <input type="text" className={this.state.emailInputCss} placeholder="Epost" onChange={this.handleEmailInput}/>
-                  <input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
+                  <input type="password" className={this.state.passwordInputCss} placeholder="Lösenord" onChange={this.handlePwInput}/>
                   <input type="text" className={this.state.ageInputCss} placeholder="Ålder" onChange={this.handleAgeInput}/>
-                  <input type="text" placeholder="Körkort" onChange={this.handleDrivLicInput}/>
+                  <input type="text" className={this.state.driversLicenseInputCss} placeholder="Körkort" onChange={this.handleDrivLicInput}/>
                   <br/>
 				  <p className={this.state.errMsgCss}>{this.state.errMsg}</p>
                   <button className="btn" onClick={this.registerClick}>REGISTRERA</button>
@@ -95,11 +99,9 @@ class RegisterComponent extends React.Component {
 			self.props.updateView('UserView');
 		}, 3000);
 	}
-
     validateInput(obj){
       for(let key in obj) {
         if(obj.hasOwnProperty('name')) {
-
           //tomma fält eller undefined:
           if(obj.name.first === '' ||
              obj.name.last === '' ||
@@ -113,49 +115,84 @@ class RegisterComponent extends React.Component {
              obj.age === undefined ||
              obj.driversLicense === '' ||
              obj.driversLicense === undefined) {
+							 console.log('inga fält får lämnas tomma');
+							 console.log('returning false');
+							 this.setState({
+								 errMsg: 'Inga fält får lämnas tomma.',
+								 errMsgCss: 'errMsgCss'
+							 });
+							 return false;
+						 } else {
+							 //felaktigt format email:
+							 if(obj.email.indexOf('@') === -1) {
+								 this.setState({
+									 errMsg: 'felaktig emailadress',
+									 errMsgCss: 'errMsgCss',
+									 emailInputCss: 'attention'
+								 });
+								 console.log('felaktig emailadress');
+								 return false;
+							 } else {
+								 this.setState({
+									 emailInputCss: ''
+								 })
+							 }
+							 //felaktigt format age:
+							 if(isNaN(obj.age)) {
+								 console.log('ålder måste vara en siffra');
+								 this.setState({
+									 errMsg: 'Ålder måste vara en siffra',
+									 errMsgCss: 'errMsgCss',
+									 ageInputCss: 'attention'
+								 });
+								 return false;
+							 } else {
+								 this.setState({
+									 ageInputCss: '',
+								 })
+							 }
 
-            console.log('inga fält får lämnas tomma');
-            console.log('returning false');
-			this.setState({
-				errMsg: 'Inga fält får lämnas tomma.',
-				errMsgCss: 'errMsgCss'
-			});
-
-            return false;
-          } else {
-            //felaktigt format email:
-            if(obj.email.indexOf('@') === -1) {
-				this.setState({
-					errMsg: 'felaktig emailadress',
-					errMsgCss: 'errMsgCss',
-					emailInputCss: 'attention'
-				});
-              console.log('felaktig emailadress');
-              return false;
-            } else {
-				this.setState({
-					emailInputCss: ''
-				})
-			}
-			//felaktigt format age:
-			if(isNaN(obj.age)) {
-				console.log('ålder måste vara en siffra');
-				this.setState({
-					errMsg: 'Ålder måste vara en siffra',
-					errMsgCss: 'errMsgCss',
-					ageInputCss: 'attention'
-				});
-				return false;
-			} else {
-				this.setState({
-					ageInputCss: '',
-				})
-			}
-			console.log('returning true for validation');
-			return true;
-		}
-	}
-}
+							 if(typeOf(obj.name.first)!== 'string') {
+								 this.setState({
+									 errMsg: 'Namn får bara vara bokstäver',
+									 errMsgCss: 'errMsgCss',
+									 nameInputCss: 'attention'
+								 });
+								 return false;
+							 } else {
+								 this.setState({
+									 nameFirstInputCss: '',
+								 })
+							 }
+							 if(typeOf(obj.name.last)!== 'string') {
+								 this.setState({
+									 errMsg: 'Namn får bara vara bokstäver',
+									 errMsgCss: 'errMsgCss',
+									 nameInputCss: 'attention'
+								 });
+								 return false;
+							 } else {
+								 this.setState({
+									 nameLastInputCss: '',
+								 })
+							 }
+							 if(typeOf(obj.driversLicense)!== 'string') {
+								 this.setState({
+									 errMsg: 'Körkort får bara ha bokstäver eller siffror',
+									 errMsgCss: 'errMsgCss',
+									 nameInputCss: 'attention'
+								 });
+								 return false;
+							 } else {
+								 this.setState({
+									 driversLicenseInputCss: '',
+								 })
+							 }
+							 console.log('returning true for validation');
+							 return true;
+						 }
+					 }
+				 }
 }
     userExists() {
       //jmf state.email och response.email
@@ -244,8 +281,6 @@ class RegisterComponent extends React.Component {
       }
       //console.log('obj: ', obj);
       let validated = this.validateInput(obj); //kontrollera att obj har giltiga värden, isf return true
-      console.log('try to post this obj: ', obj);
-
       if(validated === true) { //om allt stämmer, kontrollera om anv redan finns, om inte: gör en post, gå till UserView
         let ifExists = this.userExists();
         console.log('ifExists: ', ifExists);  //undefined?!

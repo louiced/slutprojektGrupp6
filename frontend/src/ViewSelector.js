@@ -63,7 +63,6 @@ class ViewSelector extends React.Component{
 			case 'AdminView': view = <div className="mainContent"><AdminView/></div>
 		}
 		return view;
-
 	}
 
 	ccLoginClick(ev){
