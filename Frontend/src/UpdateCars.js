@@ -46,14 +46,15 @@ class UpdateCars extends React.Component{
         let content = car.comments.map(x=>{return <li >{x}</li>})
 
         return <li className="item" key={car._id} data-id={car._id} >
-          <span className="label">vehicleType: </span><span> {car.vehicleType}</span>
-          <span className="label">brand:</span> <span>{car.brand}</span>
-          <span className="label">gearbox:</span> <span>{car.gearbox}</span>
-          <span className="label">model: </span><span> {car.model}</span>
-          <span className="label">dailyFee: </span><span> {car.dailyFee}</span>
-          <span className="label">year: </span><span> {car.year}</span>
-          <span className="label">fuel: </span><span> {car.fuel}</span>
-          <span className="label">requiredDrivingLicense: </span><span> {car.requiredDrivingLicense}</span>
+          <span className="label">Brand:</span> <span>{car.brand}</span>
+          <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
+          <span className="label">Model: </span><span> {car.model}</span>
+          <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
+          <span className="label">Year: </span><span> {car.year}</span>
+          <span className="label">Fuel: </span><span> {car.fuel}</span>
+          <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
+          <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
+          <span className="label">Status: </span><span> {car.status}</span>
           <span className="label">comments: </span><span> <ul className='li'>{content}</ul></span>
           <br/>
           <img className='list-item'  src={car.imgLink} alt=""/>
@@ -63,14 +64,15 @@ class UpdateCars extends React.Component{
       }
       else{
         return <li className="item" key={car._id} data-id={car._id} >
-          <span className="label">brand:</span> <span>{car.brand}</span>
-          <span className="label">gearbox:</span> <span>{car.gearbox}</span>
-          <span className="label">model: </span><span> {car.model}</span>
-          <span className="label">dailyFee: </span><span> {car.dailyFee}</span>
-          <span className="label">year: </span><span> {car.year}</span>
-          <span className="label">fuel: </span><span> {car.fuel}</span>
-          <span className="label">requiredDrivingLicense: </span><span> {car.requiredDrivingLicense}</span>
-          <span className="label">vehicleType: </span><span> {car.vehicleType}</span>
+          <span className="label">Brand:</span> <span>{car.brand}</span>
+          <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
+          <span className="label">Model: </span><span> {car.model}</span>
+          <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
+          <span className="label">Year: </span><span> {car.year}</span>
+          <span className="label">Fuel: </span><span> {car.fuel}</span>
+          <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
+          <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
+          <span className="label">Status: </span><span> {car.status}</span>
           <br/>
           <img className='list-item'  src={car.imgLink} alt=""/>
           <br/>

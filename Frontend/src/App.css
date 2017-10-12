@@ -204,15 +204,12 @@ select, input {
 	border: 1px solid black;
 	background-color: white;
 }
-
 .carImg {
 	width: 100px;
 }
-
 .errMsgCss {
 	color: red;
 }
-
 .hidden {
 	display: none;
 }

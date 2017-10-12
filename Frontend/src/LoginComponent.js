@@ -23,21 +23,20 @@ class LoginComponent extends React.Component {
 		this.validateLogin = this.validateLogin.bind(this);
 	}
 	render(){
-      console.log(this.state);
+		console.log(this.state);
 		let view;
 		switch(this.state.view){
 			case 'Login':
-				view = <div>
-						<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
-						<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
-						<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
-						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
-					</div>
-				break;
+			view = <div>
+				<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
+				<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
+				<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
+				<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
+			</div>
+			break;
 		}
 		return view;
 	}
-
 	handleEmailInput(ev){
 		let val = ev.target.value;
 		console.log(val);

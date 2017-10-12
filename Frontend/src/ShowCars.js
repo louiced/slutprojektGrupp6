@@ -12,7 +12,7 @@ class ShowCars extends React.Component{
 			gearFilter: undefined
     }
    this.filterCars = this.filterCars.bind(this);
-    this.findCars = this.findCars.bind(this);
+   this.findCars = this.findCars.bind(this);
    this.handlemaxRentFilter = this.handlemaxRentFilter.bind(this);
    this.handlefuelFilter = this.handlefuelFilter.bind(this);
    this.handledriveLicFilter = this.handledriveLicFilter.bind(this);
@@ -79,7 +79,6 @@ class ShowCars extends React.Component{
     });
   }
   render(){
-
     let carList = this.state.carsInfo.map(car=> {
       if(car.comments.length !== 0){
         let content = car.comments.map(x=>{return <li>{x}</li>})
@@ -120,8 +119,7 @@ class ShowCars extends React.Component{
           <br/>
         </li>
       }
-    });
-
+    })
     return <div>
       <div className="createForm2">
         <input type="text" value={this.state.maxRentFilter} onChange={this.handlemaxRentFilter} placeholder='maxRentFilter'/>
