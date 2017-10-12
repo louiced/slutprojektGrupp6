@@ -23,7 +23,6 @@ class ListCars extends React.Component{
 					<img className="carImg" src={el.imgLink} alt="#"/>
 				</div>
 				<div className="carInfo">
-					<p>datum</p>
 					<p>{el.brand} - {el.model}</p>
 					<p>{el.vehicleType}</p>
 				</div>
@@ -38,7 +37,6 @@ class ListCars extends React.Component{
 					<img className="carImg" src={el.imgLink} alt="#"/>
 				</div>
 				<div className="carInfo">
-					<p>datum</p>
 					<p>{el.brand} - {el.model}</p>
 					<p>{el.vehicleType}</p>
 				</div>
@@ -53,12 +51,17 @@ class ListCars extends React.Component{
 				</div>								   
 		} else if(this.props.data.length > 0 && this.props.unavailableCars.length <= 0){
 			let list = this.props.data.map(el => {
-			return <div className="carBox" key={el._id} data-id={el._id}>
-				<span>{el.brand}</span><br/>
-				<span>{el.model}</span><br/>
-				<span>{el.vehicleType}</span><br/>
-				<img className="carImg" src={el.imgLink} alt="#"/>
-				<button className="btn" onClick={this.bookCarClick}>Boka</button>
+			return <div className="carBox row" key={el._id} data-id={el._id}>
+				<div>
+					<img className="carImg" src={el.imgLink} alt="#"/>
+				</div>
+				<div className="carInfo">
+					<p>{el.brand} - {el.model}</p>
+					<p>{el.vehicleType}</p>
+				</div>
+				<div>
+					<button className="btn" onClick={this.bookCarClick}>Boka</button>
+				</div>
 			</div>
 			})
 			view = <ul>{list}</ul>

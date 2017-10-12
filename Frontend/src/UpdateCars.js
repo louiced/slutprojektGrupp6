@@ -27,7 +27,7 @@ class UpdateCars extends React.Component{
 
   render(){
     let carList = this.state.carsInfo.map(car=> {
-        return <li className="item" key={car._id} data-id={car._id} >
+        return <li className="item" key={car._id} data-id={car._id}>
           <span className="label">brand:</span> <span>{car.brand}</span>
           <span className="label">fordonstyp:</span> <span> {car.fordonstyp}</span>
           <span className="label">gearbox:</span> <span>{car.gearbox}</span>
