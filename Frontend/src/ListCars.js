@@ -13,7 +13,10 @@ class ListCars extends React.Component{
 		this.updateStateCars = this.updateStateCars.bind(this);
 	}
 	render(){
-		if (this.props.data.length > 0){
+		console.log(this.props.unavailableCars);
+		let view;
+		if (this.props.data.length > 0 && this.props.unavailableCars.length > 0){
+			console.log("length > 0" );
 			let list = this.props.data.map(el => {
 			return <div className="carBox" key={el._id} data-id={el._id}>
 				<span>{el.brand}</span><br/>
@@ -22,24 +25,48 @@ class ListCars extends React.Component{
 				<img className="carImg" src={el.imgLink} alt="#"/>
 				<button className="btn" onClick={this.bookCarClick}>Boka</button>
 			</div>
-		})
-		return <ul>{list}</ul>
-		} else {
-			return <span>Inga bilar överlevde filtret</span>
+			})
+			let unavList = this.props.unavailableCars.map(el => {
+			return <div className="carBox" key={el._id} data-id={el._id}>
+				<span>{el.brand}</span><br/>
+				<span>{el.model}</span><br/>
+				<span>{el.vehicleType}</span><br/>
+				<img className="carImg" src={el.imgLink} alt="#"/>
+				<button disabled className="btn">Uppbokad</button>
+			</div>
+			})
+		view = <div>
+					<ul>{list}</ul>
+					<ul>{unavList}</ul>
+				</div>								   
+		} else if(this.props.data.length > 0 && this.props.unavailableCars.length <= 0){
+			let list = this.props.data.map(el => {
+			return <div className="carBox" key={el._id} data-id={el._id}>
+				<span>{el.brand}</span><br/>
+				<span>{el.model}</span><br/>
+				<span>{el.vehicleType}</span><br/>
+				<img className="carImg" src={el.imgLink} alt="#"/>
+				<button className="btn" onClick={this.bookCarClick}>Boka</button>
+			</div>
+			})
+			view = <ul>{list}</ul>
 		}
+ 		
+		return <div>{view}</div>
 		
 	}
 	
 	componentDidMount(){
 		console.log(this.props.returnDate.valueOf());
 		console.log(this.props.pickupDate.valueOf());
+		console.log(this.props.pickupDate.toLocaleString());
 		
 		
-		// Gets previous booked cars
+		// Gets previous booked cars of loggedIn user
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
-			self.updateStateCars(res.data.cars);
+			self.updateStateCars(res.data.cars); //List of booked cars for user
 		})
 		.catch(err => {
 			console.log(err);
@@ -56,6 +83,7 @@ class ListCars extends React.Component{
 					pickupDate: this.props.pickupDate.valueOf(),
 					returnDate: this.props.returnDate.valueOf()
 				};
+				this.updateUserDocument(obj);
 			}
 		})
 		let self = this;
@@ -69,19 +97,22 @@ class ListCars extends React.Component{
 		
 	}
 	
-	updateStateBookings(list, id){
+	// Updates state with previous bookings of specific (clicked) car
+	updateStateBookings(list, id){ 
 		this.setState({
 			previousCarBookings: list
 		});
 		this.updateVehicleDocument(id);
 	}
 	
+	// Updates state with previous bookings for specific user
 	updateStateCars(list){
 		this.setState({
 			bookedCars: list
 		});
 	}
 	
+	// Updates userDB with previous bookings AND new booking
 	updateUserDocument(data) {
 		console.log(this.state.bookedCars);
 		let bookedCars = this.state.bookedCars;
@@ -96,15 +127,21 @@ class ListCars extends React.Component{
 		});
 	}
 	
+	
+	// Updates VehicleDB with previous bookings AND new booking
 	updateVehicleDocument(id){
 		let list = this.state.previousCarBookings;
+		let pickupString = this.props.pickupDate.toLocaleString();
+		let returnString = this.props.returnDate.toLocaleString();
+		let dateString = `${pickupString} - ${returnString}`;
+		//console.log("dateString", dateString);
 		let obj = {
 			pickupDate: this.props.pickupDate.valueOf(),
-			returnDate: this.props.returnDate.valueOf()
-		}
+			returnDate: this.props.returnDate.valueOf(),
+			dateString: dateString
+		};
 		list.push(obj);
 		//console.log(list.length);
-		console.log(id);
 		axios({
 			method: 'put',
 			url: `http://localhost:3000/vehicles/${id}`,
@@ -123,5 +160,9 @@ class ListCars extends React.Component{
 				bookings: list
 			}
 		});*/
+
+/*
+
+*/
 
 export default ListCars;

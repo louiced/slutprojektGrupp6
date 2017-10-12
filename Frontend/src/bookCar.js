@@ -23,7 +23,7 @@ class BookCar extends React.Component {
 				}
 			],
 			view: 'bookCar',
-			data: {},
+			availableCars: {},
 			pickupDate: moment(),
 			returnDate: moment(),
 			maxRentFilter: 5000,
@@ -76,19 +76,15 @@ class BookCar extends React.Component {
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
 		</div>
 				break;
-			case 'listCars': view = <ListCars data={this.state.data} userId={this.props.userId} pickupDate={this.state.pickupDate} returnDate={this.state.returnDate}/>
+			case 'listCars': view = <ListCars data={this.state.availableCars} unavailableCars={this.state.unAvailableCars} userId={this.props.userId} pickupDate={this.state.pickupDate} returnDate={this.state.returnDate}/>
 				break;
 			default: view = <div>Default</div>
 							  }
 		return view;
 	}
-	renderCars(data){
-		this.setState({
-			data,
-			view: 'listCars'
-		});
-	}
-
+	
+	
+	// Gets all vehicles from DB
 	findCars(ev){
 		let self = this;
 		axios.get('http://localhost:3000/vehicles')
@@ -101,23 +97,59 @@ class BookCar extends React.Component {
 		})
 	}
 	
+	
+	// Filters vehicles depending on users choices
 	filterCars(data){
-		let newData = [];
+		let availableCars = [];
+		let unAvailableCars = [];
+		let myPickupDate = this.state.pickupDate.valueOf();
+		let myReturnDate = this.state.returnDate.valueOf();
 		for (let o in data){
 			let obj = data[o];
+			
 			if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
 				if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
 					if(obj.dailyFee <= this.state.maxRentFilter){
 						if(obj.driversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
-							newData.push(obj);
+							let avail = false;
+							if(!obj.bookings.length > 0){
+								avail = true;
+							}
+							obj.bookings.forEach(booking => {
+								if (myPickupDate < booking.pickupDate && myReturnDate < booking.pickupDate){
+									avail = true;
+								} else if (myPickupDate > booking.returnDate && myPickupDate > booking.returnDate){
+									avail = true;
+								} else {
+									avail = false;
+								}
+							})
+							if (avail){
+								console.log('true ', obj);
+								availableCars.push(obj);
+							} else {
+								unAvailableCars.push(obj);
+								console.log('false ', obj);
+							}
 						}
 					}
 				}
 			} 
 		}
-		this.renderCars(newData);
+		this.renderCars(availableCars, unAvailableCars);
 	}
 	
+	renderCars(availableCars, unAvailableCars){
+		this.setState({
+			availableCars,
+			unAvailableCars,
+			view: 'listCars'
+		});
+	}
+
+	
+	// Event handlers
+
 	handlePickupDate(date){
 		//let pickupDate = ev.target.value;
 		//console.log(pickupDate);

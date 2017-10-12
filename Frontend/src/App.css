@@ -64,6 +64,10 @@ html {
 	cursor: pointer;
 }
 
+.btn:disabled {
+	background-color: grey;
+}
+
 .btn:hover {
 	background-color: rgba(	204, 0, 0, .5);
 }
@@ -203,4 +207,6 @@ input.attention {
 	width: 56px;
 	border-radius: 5px;
 }
+
+
 
