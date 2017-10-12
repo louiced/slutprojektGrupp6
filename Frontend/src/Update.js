@@ -82,7 +82,6 @@ class Update extends React.Component{
     },()=>{})
   }
   createCar(){
-
     let commentArray = this.state.commentArray;
     commentArray.push(this.state.comments)
     axios({
@@ -111,10 +110,10 @@ class Update extends React.Component{
           <div className="createForm1">
             <select required value={this.state.vehicleType}  onChange={this.fordontype}>
               <option disabled defaultValue hidden>{this.props.data.vehicleType}</option>
-              <option value="personbil">personbil</option>
-              <option value="lätt lastbil">lätt lastbil</option>
+              <option value="personbil">Personbil</option>
+              <option value="lätt lastbil">Lätt lastbil</option>
               <option value="Trehjuling">Trehjuling</option>
-              <option value="motorcykel">motorcykel</option>
+              <option value="motorcykel">Motorcykel</option>
               <option value="ATV">ATV</option>
             </select>
              <input type="text" value={this.state.brand} onChange={this.handleBrand} placeholder={this.props.data.brand}/>
@@ -128,11 +127,11 @@ class Update extends React.Component{
           <div className="createForm2">
             <select required value={this.state.status}  onChange={this.handleStatus}>
               <option disabled defaultValue hidden>{this.props.data.status}</option>
-              <option value="available">available</option>
-              <option value="unavailable">unavailable</option>
+              <option value="available">Tillgänligt</option>
+              <option value="unavailable">Otillgänligt</option>
             </select>
             <textarea type="text" value={this.state.comments} onChange={this.handleComment} placeholder={this.props.data.comments.damages}/>
-            <button className='addButton' onClick={this.createCar}>Add</button>
+            <button className='addButton' onClick={this.createCar}>Lägg till</button>
           </div>
         </div>
       )

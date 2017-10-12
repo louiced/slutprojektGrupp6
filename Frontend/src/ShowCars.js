@@ -88,16 +88,16 @@ class ShowCars extends React.Component{
         // r.forEach(y=>{x[y]})
         // return <li>{}</li>
         return <li className="item" key={car._id} data-id={car._id} >
-          <span className="label">Brand:</span> <span>{car.brand}</span>
-          <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
-          <span className="label">Model: </span><span> {car.model}</span>
-          <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
-          <span className="label">Year: </span><span> {car.year}</span>
-          <span className="label">Fuel: </span><span> {car.fuel}</span>
-          <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
-          <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
+          <span className="label">Märke:</span> <span>{car.brand}</span>
+          <span className="label">Växellåda:</span> <span>{car.gearbox}</span>
+          <span className="label">Modell: </span><span> {car.model}</span>
+          <span className="label">Dagshyra: </span><span> {car.dailyFee}</span>
+          <span className="label">År: </span><span> {car.year}</span>
+          <span className="label">Bränsle: </span><span> {car.fuel}</span>
+          <span className="label">Obligatoriskt körkort: </span><span> {car.requiredDriversLicense}</span>
+          <span className="label">Fordonstyp: </span><span> {car.vehicleType}</span>
           <span className="label">Status: </span><span> {car.status}</span>
-          <span className="label">Comments: </span><span> <ul className='li'>{content}</ul></span>
+          <span className="label">Kommentarer: </span><span> <ul className='li'>{content}</ul></span>
           <br/>
           <img className='list-item'  src={car.imgLink} alt=""/>
           <br/>
@@ -122,14 +122,14 @@ class ShowCars extends React.Component{
     })
     return <div>
       <div className="createForm2">
-        <input type="text" value={this.state.maxRentFilter} onChange={this.handlemaxRentFilter} placeholder='maxRentFilter'/>
-        <input type="text" value={this.state.fuelFilter} onChange={this.handlefuelFilter} placeholder='fuelFilter'/>
+        <input type="text" value={this.state.maxRentFilter} onChange={this.handlemaxRentFilter} placeholder={this.state.maxRentFilter}/>
+        <input type="text" value={this.state.fuelFilter} onChange={this.handlefuelFilter} placeholder='Bränsle'/>
      </div>
      <div className="createForm2">
-       <input type="text" value={this.state.gearFilter} onChange={this.handlegearFilter} placeholder='gearFilter'/>
-       <input type="text" value={this.state.driveLicFilter} onChange={this.handledriveLicFilter} placeholder='driveLicFilter'/>
+       <input type="text" value={this.state.gearFilter} onChange={this.handlegearFilter} placeholder='VäxelBox'/>
+       <input type="text" value={this.state.driveLicFilter} onChange={this.handledriveLicFilter} placeholder='Körkort'/>
      </div>
-     <button className='deleteButton' onClick={this.findCars}>Filter</button>
+     <button className='deleteButton' onClick={this.findCars}>Filtrera</button>
       <ul className='li'>{carList}</ul>
     </div>
   }

@@ -59,7 +59,6 @@ class CreateCars extends React.Component{
     },()=>{})
   }
   handleComment(ev){
-
     this.setState({
       comments: ev.target.value
 
@@ -98,30 +97,30 @@ class CreateCars extends React.Component{
   render(){
     return <div className='form'>
       <div className="createForm1">
-        <select value={this.state.vehicleType}  onChange={this.fordontype}>
-          <option value='' disabled defaultValue hidden>Please Choose fordontype</option>
-          <option value="personbil">personbil</option>
-          <option value="lätt lastbil">lätt lastbil</option>
+        <select className='selectField' value={this.state.vehicleType}  onChange={this.fordontype}>
+          <option value='' disabled defaultValue hidden>Välj Fordonstyp</option>
+          <option value="personbil">Personbil</option>
+          <option value="lätt lastbil">Lätt lastbil</option>
           <option value="Trehjuling">Trehjuling</option>
-          <option value="motorcykel">motorcykel</option>
+          <option value="motorcykel">Motorcykel</option>
           <option value="ATV">ATV</option>
         </select>
-         <input type="text" value={this.state.brand} onChange={this.handleBrand} placeholder='brand'/>
-         <input type="text" value={this.state.model} onChange={this.handleModel} placeholder='model'/>
+         <input type="text" value={this.state.brand} onChange={this.handleBrand} placeholder='Märke'/>
+         <input type="text" value={this.state.model} onChange={this.handleModel} placeholder='Modell'/>
       </div>
       <div className="createForm2">
-        <input type="text" value={this.state.year} onChange={this.handleYear} placeholder='yyyymmdd'/>
-        <input type="text" value={this.state.gearbox} onChange={this.handleGearbox} placeholder='gearbox'/>
-        <input type="text" value={this.state.dailyFee} onChange={this.handleDailyFee} placeholder='dailyFee'/>
+        <input type="text" value={this.state.year} onChange={this.handleYear} placeholder='År'/>
+        <input type="text" value={this.state.gearbox} onChange={this.handleGearbox} placeholder='Växellåda'/>
+        <input type="text" value={this.state.dailyFee} onChange={this.handleDailyFee} placeholder='Dagshyra'/>
       </div>
-      <div className="createForm2">
-        <select required value={this.state.status}  onChange={this.handleStatus}>
-          <option value='' disabled defaultValue hidden>Please Choose status</option>
-          <option value="available">available</option>
-          <option value="unavailable">unavailable</option>
+      <div className="createForm2 addMargin">
+        <select className='selectField status' required value={this.state.status}  onChange={this.handleStatus}>
+          <option value='' disabled defaultValue hidden>Välj Status</option>
+          <option value="available">Tillgängligt</option>
+          <option value="unavailable">Otillgängligt</option>
         </select>
-        <textarea type="text" value={this.state.comments} onChange={this.handleComment} placeholder='comments'/>
-        <button className='addButton' onClick={this.createCar}>Add</button>
+        <textarea type="text" value={this.state.comments} onChange={this.handleComment} placeholder='Kommentarer'/>
+        <button className='addButton' onClick={this.createCar}>Lägg till</button>
       </div>
     </div>
   }

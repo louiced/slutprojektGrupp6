@@ -201,7 +201,7 @@ input.attention {
 }
 .deleteButton{
 	background-color:rgba(204, 0, 0, .7);
-	width: 56px;
+	width: 68px;
 	border-radius: 5px;
 }
 .carBox {
@@ -216,4 +216,14 @@ input.attention {
 }
 .hidden {
 	display: none;
+}
+.selectField{
+	width: 125px
+}
+.status{
+	margin-left: -18px;
+	margin-top: 10px;
+}
+.addMargin{
+	margin-bottom: 15px;
 }

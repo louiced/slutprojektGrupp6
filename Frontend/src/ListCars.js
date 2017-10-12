@@ -64,7 +64,6 @@ class ListCars extends React.Component{
 		.catch(err => {
 			console.log(err);
 		})
-
 	}
 
 	updateStateBookings(list, id){
@@ -78,11 +77,9 @@ class ListCars extends React.Component{
 			bookedCars: list
 		});
 	}
-
 	updateUserDocument(data) {
 		console.log(this.state.bookedCars);
 		let bookedCars = this.state.bookedCars;
-
 		bookedCars.push(data);
 		axios({
 			method: 'put',
