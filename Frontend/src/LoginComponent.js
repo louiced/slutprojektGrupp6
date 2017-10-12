@@ -64,7 +64,7 @@ class LoginComponent extends React.Component {
             loggedInAs: el
           })
 		this.props.updateUserInfo(el);
-		}
+		}//else?
 		
 		console.log('state, loggedInAs: ', this.state.loggedInAs);
 		console.log('el, loggedInAs: ', el);
@@ -75,8 +75,9 @@ class LoginComponent extends React.Component {
     validateLogin(){
       console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
       console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
-      console.log('validate, loggedInAs.name.first: ', this.state.loggedInAs.name.first); 
       
+	  
+		
       if(this.state.isLoggedIn === true) {
         if(this.state.email !== 'admin@olsson.se') {
           this.props.updateUserId(this.state.loggedInAs._id);
@@ -85,9 +86,15 @@ class LoginComponent extends React.Component {
           console.log('adminview');
           this.props.updateView('AdminView');
         }
-      } else if (this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
+      } else if(this.state.email === '' || this.state.pw === '') {
+		  console.log('hallå!');
 		  this.setState({
-			  errMsg: 'Epost och lösenord mastchade inget i databasen. Försök igen!',
+			  errMsg: 'Inga fält kan lämnas tomma.',
+			  errMsgCss: 'errMsgCss'
+		  })
+	  } else if(this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
+		  this.setState({
+			  errMsg: 'Epost och lösenord matschade inget i databasen. Försök igen!',
 			  errMsgCss: 'errMsgCss'
 		  })
 	  }
@@ -96,7 +103,6 @@ class LoginComponent extends React.Component {
 	loginClick(ev){
 		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
 		//this.props.updateView('UserView');
-
 
       let self = this;      
       axios.get('http://localhost:3000/users')
@@ -108,7 +114,6 @@ class LoginComponent extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-	  
     }
 }
 

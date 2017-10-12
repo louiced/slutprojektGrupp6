@@ -1,0 +1,46 @@
+[
+	{
+		"name": {
+			"first": "Admin",
+			"last": "Olsson"
+		},
+		"email": "admin@olsson.se",
+		"password": "adminolsson",
+		"age": 40,
+		"driversLicense": "B",
+		"cars": []
+	},
+	{
+		"name": {
+			"first": "Louice",
+			"last": "Danielsson"
+		},
+		"email": "louice.danielsson@gmail.com",
+		"password": "sg1",
+		"age": 29,
+		"driversLicense": "B",
+		"cars": []
+	},
+	{
+		"name": {
+			"first": "Yifei",
+			"last": "Wang"
+		},
+		"email": "",
+		"password": "",
+		"age": 27,
+		"driversLicense": "B",
+		"cars": []
+	},
+	{
+		"name": {
+			"first": "Martin",
+			"last": "Larsson"
+		},
+		"email": "",
+		"password": "",
+		"age": 27,
+		"driversLicense": "B",
+		"cars": []
+	}
+]
