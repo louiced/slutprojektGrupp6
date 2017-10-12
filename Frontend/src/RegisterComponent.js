@@ -152,7 +152,7 @@ class RegisterComponent extends React.Component {
 								 })
 							 }
 
-							 if(typeOf(obj.name.first)!== 'string') {
+							 if(typeof(obj.name.first)!== 'string') {
 								 this.setState({
 									 errMsg: 'Namn får bara vara bokstäver',
 									 errMsgCss: 'errMsgCss',
@@ -164,7 +164,7 @@ class RegisterComponent extends React.Component {
 									 nameFirstInputCss: '',
 								 })
 							 }
-							 if(typeOf(obj.name.last)!== 'string') {
+							 if(typeof(obj.name.last)!== 'string') {
 								 this.setState({
 									 errMsg: 'Namn får bara vara bokstäver',
 									 errMsgCss: 'errMsgCss',
@@ -176,7 +176,7 @@ class RegisterComponent extends React.Component {
 									 nameLastInputCss: '',
 								 })
 							 }
-							 if(typeOf(obj.driversLicense)!== 'string') {
+							 if(typeof(obj.driversLicense)!== 'string') {
 								 this.setState({
 									 errMsg: 'Körkort får bara ha bokstäver eller siffror',
 									 errMsgCss: 'errMsgCss',
