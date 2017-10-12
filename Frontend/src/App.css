@@ -136,6 +136,7 @@ select, input {
 	padding: 5px;
 	border-radius: 5px;
 }
+
 ul {
 	margin: 0;
 	padding: 0;
@@ -150,6 +151,7 @@ ul {
 	justify-content: space-around;
 	align-items: center;
 }
+
 .carBox {
 	border-bottom: 1px solid black;
 }
@@ -178,13 +180,15 @@ ul {
 input.attention {
 	border: 1px solid red;
 }
-
 .list-group{
 	list-style: none;
 	width: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+}
+.li{
+	list-style: none;
 }
 .list-item{
 	width: 45%;
@@ -262,3 +266,4 @@ input.attention {
 		display: none;
 	}*/
 }
+

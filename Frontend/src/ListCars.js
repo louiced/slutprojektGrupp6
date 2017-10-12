@@ -68,9 +68,9 @@ class ListCars extends React.Component{
 		}
  		
 		return <div>{view}</div>
-		
+
 	}
-	
+
 	componentDidMount(){
 		console.log(this.props.returnDate.valueOf());
 		console.log(this.props.pickupDate.valueOf());
@@ -87,7 +87,7 @@ class ListCars extends React.Component{
 			console.log(err);
 		})
 	}
-	
+
 	bookCarClick(ev){
 		let id = ev.target.parentElement.getAttribute('data-id');
 		let obj;
@@ -101,6 +101,7 @@ class ListCars extends React.Component{
 				this.updateUserDocument(obj);
 			}
 		})
+		//new Date(1222333).valueOf return number so can compare, new Date(12232323).toLocaleString() can not compare date
 		let self = this;
 		axios.get(`http://localhost:3000/vehicles/${id}`)
 		.then(res => {
@@ -109,11 +110,12 @@ class ListCars extends React.Component{
 		.catch(err => {
 			console.log(err);
 		})
-		
+
 	}
 	
 	// Updates state with previous bookings of specific (clicked) car
 	updateStateBookings(list, id){ 
+
 		this.setState({
 			previousCarBookings: list
 		});
@@ -131,7 +133,7 @@ class ListCars extends React.Component{
 	updateUserDocument(data) {
 		console.log(this.state.bookedCars);
 		let bookedCars = this.state.bookedCars;
-		
+
 		bookedCars.push(data);
 		axios({
 			method: 'put',
@@ -164,7 +166,7 @@ class ListCars extends React.Component{
 				bookings:  list
 			}
 		});
-		
+
 	}
 }
 
@@ -176,8 +178,6 @@ class ListCars extends React.Component{
 			}
 		});*/
 
-/*
-
-*/
 
 export default ListCars;
+

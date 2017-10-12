@@ -29,20 +29,20 @@ class ShowBookings extends React.Component {
 					<div>
 						<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
 					</div>
+
 				</div>
 			})
-				view = <div>
-					<h2>Mina bokningar</h2>
-					<ul>{carList}</ul>
-				</div>
+			view = <div>
+				<h2>Mina bokningar</h2>
+				<ul>{carList}</ul>
+			</div>
 		} else {
 			view = <div><h2>Mina bokningar</h2>
-				<span>Inga bokningar för närvarande</span><br/></div>
+			<span>Inga bokningar för närvarande</span><br/></div>
 		}
-		
 		return view;
 	}
-	
+
 	componentDidMount(){
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
@@ -54,20 +54,20 @@ class ShowBookings extends React.Component {
 		})
 		//this.anullBooking();
 	}
-	
+
 	renderCars(data){
 		this.setState({
 			bookedCars: data
 		});
 	}
-	
+
 	anullBooking(ev){
 		let carId = ev.target.getAttribute('data-id');
 		
 		let newBookedCars = this.state.bookedCars.filter(car => {
 			return car.carObj._id !== carId
 		});
-		
+
 		axios({
 			method: 'put',
 			url: `http://localhost:3000/users/${this.props.userId}`,
@@ -75,7 +75,9 @@ class ShowBookings extends React.Component {
 				cars: newBookedCars
 			}
 		});
+
 		console.log(newBookedCars);
+
 		this.setState({
 			bookedCars: newBookedCars
 		});

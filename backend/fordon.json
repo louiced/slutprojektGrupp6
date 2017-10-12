@@ -250,5 +250,18 @@
     "comments": [],
     "status": "available",
 	"bookings": []
-  }
+},
+{
+  "vehicleType": "personbil",
+  "requiredDriversLicense": "B",
+  "brand": "yifei",
+  "model": "v70",
+  "year": 1996,
+  "gearbox": "manuell",
+  "dailyFee": 298,
+  "fuel": "diesel",
+  "comments": [],
+  "status": "available",
+"bookings": []
+}
 ]

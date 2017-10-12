@@ -37,13 +37,13 @@ exports.read_a_vehicle = (req, res) => {
 //hitta och uppdatera ett vehicle-object utifrån id
 exports.update_a_vehicle = (req, res) => {
   Vehicles.findOneAndUpdate({_id: req.params.vehicleId}, req.body, {new: true}, (err, vehicle) => {
-	console.log('i Vehicle find');
-    console.log('params.id: ', req.params.vehicleId);
-    console.log('req.body: ', req.body);
-    console.log('vehicle: ', vehicle);
+	// console.log('i Vehicle find');
+  //   console.log('params.id: ', req.params.vehicleId);
+  //   console.log('req.body: ', req.body);
+  //   console.log('vehicle: ', vehicle);
     if (err)
       res.send(err);
-	
+
     res.json(vehicle);
   })
 }

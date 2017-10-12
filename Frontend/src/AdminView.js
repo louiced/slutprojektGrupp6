@@ -26,15 +26,12 @@ class AdminView extends React.Component{
         {
 					class: '',
 					id: 'tab4'
-				},
-        {
-          class: '',
-          id: 'tab5'
-        }
+				}
 			],
 			view: 'showCars'
     }
     this.switchTab = this.switchTab.bind(this);
+    this.updateView = this.updateView.bind(this);
     // this.switchCreateView = this.switchCreateView.bind(this);
     // this.switchUpdateView = this.switchUpdateView.bind(this);
     // this.switchDeleteView = this.switchDeleteView.bind(this);
@@ -54,6 +51,12 @@ class AdminView extends React.Component{
 //     view: 'deleteCars'
 //   })
 // }
+updateView(str,data){
+  this.setState({
+    view: str,
+    data: data
+  })
+}
 switchTab(ev){
   let id = ev.target.id;
   let newTabs = [];
@@ -80,9 +83,6 @@ switchTab(ev){
     case 'tab4':
       view = 'deleteCars'
       break;
-    case 'tab5':
-      view = 'update'
-      break;
   }
 
   this.setState({
@@ -106,13 +106,15 @@ switchTab(ev){
               view =  <div className="mainContent">{navBar} <CreateCars updateView={this.switchTab}/></div>;
               break;
             case  'updateCars':
-              view =  <div className="mainContent">{navBar} <UpdateCars changeView={this.switchTab}/></div>;
+              view =  <div className="mainContent">{navBar} <UpdateCars updateView={this.switchTab}/></div>;
+
               break;
             case  'deleteCars':
               view = <div className="mainContent">{navBar} <DeleteCars/></div>;
               break;
             case  'update':
-              view = <div className="mainContent">{navBar} <Update /></div>;
+              view = <div className="mainContent">{navBar} <Update data={this.state.data}/></div>;
+
               break;
           }
     return view;

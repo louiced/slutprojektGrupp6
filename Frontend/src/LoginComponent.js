@@ -11,8 +11,8 @@ class LoginComponent extends React.Component {
 			email: '',
 			pw: '',
 			view: 'Login',
-            isLoggedIn: false,
-            loggedInAs: null,
+      isLoggedIn: false,
+      loggedInAs: null,
 			errMsg: null,
 			errMsgCss: 'errMsgCss hidden'
 		};
@@ -59,6 +59,7 @@ class LoginComponent extends React.Component {
 		}
 	}
 	
+
 	handleEmailInput(ev){
 		let val = ev.target.value;
 		this.setState({
@@ -72,30 +73,27 @@ class LoginComponent extends React.Component {
 			pw: val
 		});
 	}
-    
-    
     //uppdaterar state så att loggedIn = true OM user matchar user i db
     updateLoginStatus(response){
       let allUsers = response.data;
+			console.log(allUsers)
       allUsers.forEach( (el) => {
         if(this.state.email === el.email && this.state.pw === el.password) {
-		  console.log('el mail: ', el.email, this.state.email);
+		  //console.log('el mail: ', el.email, this.state.email);
           this.setState({
             isLoggedIn: true,
             loggedInAs: el
           })
 		this.props.updateUserInfo(el);
 		}
+
       });
     }
-    
     //admin ? AdminView : UserView
     validateLogin(){
       console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
       console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
-      
-	  
-		
+
       if(this.state.isLoggedIn === true) {
 		localStorage.setItem('userEmail', this.state.email);
 		localStorage.setItem('userPw', this.state.pw);
@@ -120,12 +118,13 @@ class LoginComponent extends React.Component {
 		  })
 	  }
     }
-  
+
 	loginClick(ev){
 		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
 		//this.props.updateView('UserView');
 
       let self = this;      
+
       axios.get('http://localhost:3000/users')
       .then(function (response) {
         console.log(response);
