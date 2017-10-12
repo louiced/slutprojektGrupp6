@@ -1,0 +1,24 @@
+[
+	{
+		"name": {
+			"first": "Admin",
+			"last": "Olsson"
+		},
+		"email": "admin@olsson.se",
+		"password": "adminolsson",
+		"age": 40,
+		"driversLicense": "B",
+		"bookedCars": []
+	},
+	{
+		"name": {
+			"first": "Louice",
+			"last": "Danielsson"
+		},
+		"email": "louice.danielsson@gmail.com",
+		"password": "sg1",
+		"age": 29,
+		"driversLicense": "B",
+		"bookedCars": []
+	}
+]

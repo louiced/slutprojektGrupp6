@@ -6,67 +6,84 @@ class ListCars extends React.Component{
 	constructor(props){
 		super(props);
 		this.state = {
-			bookedCars: []
+			bookedCars: [],
+			view: "ListCars",
+			bookBool: false
 		};
 		this.bookCarClick = this.bookCarClick.bind(this);
 		this.updateUserDocument = this.updateUserDocument.bind(this);
 		this.updateStateCars = this.updateStateCars.bind(this);
+		this.confirmBooking = this.confirmBooking.bind(this);
+		this.noBooking = this.noBooking.bind(this);
+		this.bookMoreCars = this.bookMoreCars.bind(this);
+		this.showBookings = this.showBookings.bind(this);
 	}
 	render(){
-		console.log(this.props.unavailableCars);
 		let view;
-		if (this.props.data.length > 0 && this.props.unavailableCars.length > 0){
-			console.log("length > 0" );
-			let list = this.props.data.map(el => {
-			return <div className="carBox" key={el._id} data-id={el._id}>
-				<span>{el.brand}</span><br/>
-				<span>{el.model}</span><br/>
-				<span>{el.vehicleType}</span><br/>
-				<img className="carImg" src={el.imgLink} alt="#"/>
-				<button className="btn" onClick={this.bookCarClick}>Boka</button>
-			</div>
-			})
-			let unavList = this.props.unavailableCars.map(el => {
-			return <div className="carBox" key={el._id} data-id={el._id}>
-				<span>{el.brand}</span><br/>
-				<span>{el.model}</span><br/>
-				<span>{el.vehicleType}</span><br/>
-				<img className="carImg" src={el.imgLink} alt="#"/>
-				<button disabled className="btn">Uppbokad</button>
-			</div>
-			})
-		view = <div>
-					<ul>{list}</ul>
-					<ul>{unavList}</ul>
-				</div>								   
-		} else if(this.props.data.length > 0 && this.props.unavailableCars.length <= 0){
-			let list = this.props.data.map(el => {
-			return <div className="carBox" key={el._id} data-id={el._id}>
-				<span>{el.brand}</span><br/>
-				<span>{el.model}</span><br/>
-				<span>{el.vehicleType}</span><br/>
-				<img className="carImg" src={el.imgLink} alt="#"/>
-				<button className="btn" onClick={this.bookCarClick}>Boka</button>
-			</div>
-			})
-			view = <ul>{list}</ul>
+		if (this.state.view === 'ListCars'){
+			if (this.props.data.length > 0 && this.props.unavailableCars.length > 0){
+				let list = this.props.data.map(el => {
+				return <div className="carBox" key={el._id} data-id={el._id}>
+					<span>{el.brand}</span><br/>
+					<span>{el.model}</span><br/>
+					<span>{el.vehicleType}</span><br/>
+					<img className="carImg" src={el.imgLink} alt="#"/>
+					<button className="btn" onClick={this.confirmBooking}>Boka</button>
+				</div>
+				})
+				let unavList = this.props.unavailableCars.map(el => {
+				return <div className="carBox" key={el._id} data-id={el._id}>
+					<span>{el.brand}</span><br/>
+					<span>{el.model}</span><br/>
+					<span>{el.vehicleType}</span><br/>
+					<img className="carImg" src={el.imgLink} alt="#"/>
+					<button disabled className="btn">Uppbokad</button>
+				</div>
+				})
+			view = <div>
+						<ul>{list}</ul>
+						<ul>{unavList}</ul>
+					</div>								   
+			} else if(this.props.data.length > 0 && this.props.unavailableCars.length <= 0){
+				let list = this.props.data.map(el => {
+				return <div className="carBox" key={el._id} data-id={el._id}>
+					<span>{el.brand}</span><br/>
+					<span>{el.model}</span><br/>
+					<span>{el.vehicleType}</span><br/>
+					<img className="carImg" src={el.imgLink} alt="#"/>
+					<button className="btn" onClick={this.confirmBooking}>Boka</button>
+				</div>
+				})
+				view = <ul>{list}</ul>
+			}
+		} else if (this.state.view === 'ConfirmBooking'){
+			view = <div>
+					<p>Är du säker på att du vill boka den här bilen?</p>
+					<button className="btn" onClick={this.bookCarClick} data-id={this.state.currentId}>Ja</button>
+					<button className="btn" onClick={this.noBooking}>Nej</button>
+				</div>
+		} else if (this.state.view === 'Thanks'){
+			view = <div>
+					<p>Tack för din bokning!</p>
+					<button className="btn" onClick={this.bookMoreCars}>Gör fler bokningar</button>
+					<button className="btn" onClick={this.showBookings}>Visa mina bokningar</button>
+				</div>
 		}
+		//console.log(this.props.unavailableCars);
+		
+		
  		
 		return <div>{view}</div>
 		
 	}
 	
 	componentDidMount(){
-		console.log(this.props.returnDate.valueOf());
-		console.log(this.props.pickupDate.valueOf());
-		console.log(this.props.pickupDate.toLocaleString());
-		
 		
 		// Gets previous booked cars of loggedIn user
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
-			self.updateStateCars(res.data.cars); //List of booked cars for user
+			self.updateStateCars(res.data.bookedCars); //List of booked cars for user
 		})
 		.catch(err => {
 			console.log(err);
@@ -74,14 +91,19 @@ class ListCars extends React.Component{
 	}
 	
 	bookCarClick(ev){
-		let id = ev.target.parentElement.getAttribute('data-id');
+		
+		let id = ev.target.getAttribute('data-id');
 		let obj;
+		let pickupString = this.props.pickupDate.toLocaleString();
+		let returnString = this.props.returnDate.toLocaleString();
+		let dateString = `${pickupString} - ${returnString}`;
 		this.props.data.forEach(data => {
 			if (data._id === id){
 				obj = {
 					carObj: data,
 					pickupDate: this.props.pickupDate.valueOf(),
-					returnDate: this.props.returnDate.valueOf()
+					returnDate: this.props.returnDate.valueOf(),
+					dateString: dateString
 				};
 				this.updateUserDocument(obj);
 			}
@@ -114,7 +136,6 @@ class ListCars extends React.Component{
 	
 	// Updates userDB with previous bookings AND new booking
 	updateUserDocument(data) {
-		console.log(this.state.bookedCars);
 		let bookedCars = this.state.bookedCars;
 		
 		bookedCars.push(data);
@@ -122,7 +143,7 @@ class ListCars extends React.Component{
 			method: 'put',
 			url: `http://localhost:3000/users/${this.props.userId}`,
 			data: {
-				cars: bookedCars
+				bookedCars: bookedCars
 			}
 		});
 	}
@@ -141,7 +162,6 @@ class ListCars extends React.Component{
 			dateString: dateString
 		};
 		list.push(obj);
-		//console.log(list.length);
 		axios({
 			method: 'put',
 			url: `http://localhost:3000/vehicles/${id}`,
@@ -149,7 +169,31 @@ class ListCars extends React.Component{
 				bookings:  list
 			}
 		});
-		
+		this.setState({
+			view: 'Thanks'
+		});
+	}
+	
+	confirmBooking(ev){
+		let id = ev.target.parentElement.getAttribute('data-id');
+		this.setState({
+			view: 'ConfirmBooking',
+			currentId: id
+		});
+	}
+	
+	noBooking(ev){
+		this.setState({
+			view: 'ListCars'
+		});
+	}
+	
+	bookMoreCars(ev){
+		this.props.bookCar('bookCar');
+	}
+	
+	showBookings(ev){
+		this.props.showBookings();
 	}
 }
 

@@ -24,7 +24,7 @@ var userSchema = new Schema({
     required: true,
     type: String
   },
-  cars: []
+  bookedCars: []
 });
 
 
