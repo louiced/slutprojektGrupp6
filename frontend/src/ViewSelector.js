@@ -59,9 +59,9 @@ class ViewSelector extends React.Component{
 				</div>
 			break;
 
-			case 'UserView': view = <div>{logOutBox}<div className="mainContent"><UserView userId={this.state.userId}/></div></div>
+			case 'UserView': view = <div className="mainContent">{logOutBox}<UserView userId={this.state.userId}/></div>
 			break;
-			case 'AdminView': view = <div className="mainContent"><AdminView/></div>
+			case 'AdminView': view = <div className="mainContent">{logOutBox}<AdminView userId={this.state.userId}/></div>
 
 		}
 		return view;

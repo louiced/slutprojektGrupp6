@@ -93,7 +93,7 @@ class CreateCars extends React.Component{
     return <div className='form'>
       <div className="createForm1">
         <select required value={this.state.fordontype}  onChange={this.fordontype}>
-          <option disabled selected hidden>Please Choose fordontype</option>
+          <option disabled defaultValue hidden>Please Choose fordontype</option>
           <option value="personbil">personbil</option>
           <option value="lätt lastbil">lätt lastbil</option>
           <option value="Trehjuling">Trehjuling</option>

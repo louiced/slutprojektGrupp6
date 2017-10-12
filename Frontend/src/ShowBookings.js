@@ -17,12 +17,18 @@ class ShowBookings extends React.Component {
 			let key = 0;
 				let carList = this.state.bookedCars.map(car => {
 					console.log('carObj ', car.carObj)
-				return <div className="carBox" key={key++}>
-				<span>{car.carObj.brand}</span><br/>
-				<span>{car.carObj.model}</span><br/>
-				<span>{car.carObj.vehicleType}</span><br/>
-				<img className="carImg" src={car.carObj.imgLink} alt="#"/> 
-					<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
+				return <div className="carBox row" key={key++}>
+					<div>
+						<img className="carImg" src={car.carObj.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>datum</p>
+						<p>{car.carObj.brand} - {car.carObj.model}</p>
+						<p>{car.carObj.vehicleType}, körkort: {car.carObj.requiredDriversLicense}</p>
+					</div>
+					<div>
+						<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
+					</div>
 				</div>
 			})
 				view = <div>

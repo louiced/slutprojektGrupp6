@@ -8,7 +8,7 @@
 		"password": "adminolsson",
 		"age": 40,
 		"driversLicense": "B",
-		"cars": []
+		"bookedCars": []
 	},
 	{
 		"name": {
@@ -19,7 +19,7 @@
 		"password": "sg1",
 		"age": 29,
 		"driversLicense": "B",
-		"cars": []
+		"bookedCars": []
 	},
 	{
 		"name": {
@@ -30,7 +30,7 @@
 		"password": "",
 		"age": 27,
 		"driversLicense": "B",
-		"cars": []
+		"bookedCars": []
 	},
 	{
 		"name": {
@@ -41,6 +41,6 @@
 		"password": "",
 		"age": 27,
 		"driversLicense": "B",
-		"cars": []
+		"bookedCars": []
 	}
 ]
