@@ -16,8 +16,9 @@ class ShowBookings extends React.Component {
 		if (this.state.bookedCars.length > 0){ //
 			let key = 0;
 				let carList = this.state.bookedCars.map(car => {
+					console.log('carObj ', car.carObj)
 				return <div className="carBox" key={key++}>
-					<span>{car.carObj.brand}</span><br/>
+				<span>{car.carObj.brand}</span><br/>
 				<span>{car.carObj.model}</span><br/>
 				<span>{car.carObj.vehicleType}</span><br/>
 				<img className="carImg" src={car.carObj.imgLink} alt="#"/> 
