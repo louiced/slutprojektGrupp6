@@ -6,36 +6,36 @@ class ShowCars extends React.Component{
     super(props);
     this.state = {
       carsInfo: [],
-      maxRentFilter: 5000,
+      maxRentFilter: undefined,
 			fuelFilter: undefined,
 			driveLicFilter: undefined,
 			gearFilter: undefined
     }
-   this.filterCars = this.filterCars.bind(this);
+   //this.filterCars = this.filterCars.bind(this);
    this.findCars = this.findCars.bind(this);
    this.handlemaxRentFilter = this.handlemaxRentFilter.bind(this);
    this.handlefuelFilter = this.handlefuelFilter.bind(this);
    this.handledriveLicFilter = this.handledriveLicFilter.bind(this);
    this.handlegearFilter = this.handlegearFilter.bind(this);
   }
-  filterCars(data){
-		let newData = [];
-		for (let o in data){
-			let obj = data[o];
-			if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
-				if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
-					if(obj.dailyFee <= this.state.maxRentFilter){
-						if(obj.requiredDriversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
-							newData.push(obj);
-						}
-					}
-				}
-			}
-		}
-    this.setState({
-      carsInfo: newData
-    })
-  }
+  // filterCars(data){
+	// 	let newData = [];
+	// 	for (let o in data){
+	// 		let obj = data[o];
+	// 		if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
+	// 			if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
+	// 				if(obj.dailyFee <= this.state.maxRentFilter){
+	// 					if(obj.requiredDriversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
+	// 						newData.push(obj);
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+  //   this.setState({
+  //     carsInfo: newData
+  //   })
+  // }
   handlemaxRentFilter(ev){
     this.setState({
       maxRentFilter: ev.target.value
@@ -58,7 +58,7 @@ class ShowCars extends React.Component{
   }
   componentDidMount(){
     let self = this
-    axios.get('http://localhost:3000/vehicles')
+    axios.get('/vehicles')
     .then(function (response) {
       self.setState({
         carsInfo: response.data
@@ -70,9 +70,18 @@ class ShowCars extends React.Component{
   }
   findCars(){
     let self = this
-    axios.get('http://localhost:3000/vehicles')
+    axios.get('/vehicles',{
+      params: {
+        gear: this.state.gearFilter,
+        fuel: this.state.fuelFilter,
+        driveLicence: this.state.driveLicFilter,
+        maxFee: this.state.maxRentFilter
+      }
+    })
     .then(function (response) {
-      self.filterCars(response.data);
+      self.setState({
+        carsInfo: response.data
+      }, ()=>{})
     })
     .catch(function (error) {
       console.log(error);

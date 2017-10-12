@@ -7,11 +7,24 @@ var mongoose = require('mongoose'),
 //VEHICLES:
 //hittar alla vehicle-object
 exports.list_all_vehicles = (req, res) => {
-  Vehicles.find({}, (err, vehicle) => {
-    if (err)
-      res.send(err);
-    res.json(vehicle);
-  })
+ //db.vehicles.find({gearbox:'manuell', requiredDriversLicense: 'B'}).count()
+ var query = {}
+ if(req.query.gear) query.gearbox = req.query.gear;
+ if(req.query.fuel) query.fuel = req.query.fuel;
+ //query.requiredDriversLicense come from schema prop
+ if(req.query.driveLicence){
+   query.requiredDriversLicense = req.query.driveLicence
+ }
+ if(req.query.maxFee){
+   query.dailyFee = {$lte: req.query.maxFee}
+ }
+ console.log(query)
+ Vehicles.find(query, (err, vehicle) => {
+   if (err)
+     res.send(err);
+   res.json(vehicle);
+ })
+
 }
 
 //skapar ett nytt vehicle-object
