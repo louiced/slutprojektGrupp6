@@ -39,7 +39,6 @@ class LoginComponent extends React.Component {
 	}
 	handleEmailInput(ev){
 		let val = ev.target.value;
-		console.log(val);
 		this.setState({
 			email: val
 		});
@@ -72,6 +71,7 @@ class LoginComponent extends React.Component {
     validateLogin(){
       console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
       console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
+      console.log('validate, loggedInAs.name.first: ', this.state.loggedInAs.name.first);
       if(this.state.isLoggedIn === true) {
         if(this.state.email !== 'admin@olsson.se') {
           this.props.updateUserId(this.state.loggedInAs._id);
@@ -81,26 +81,27 @@ class LoginComponent extends React.Component {
           this.props.updateView('AdminView');
         }
       } else if (this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
-				this.setState({
-					errMsg: 'Epost och lösenord mastchade inget i databasen. Försök igen!',
-					errMsgCss: 'errMsgCss'
-				})
-			}
-		}
-		loginClick(ev){
-			// this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
-			// this.props.updateView('UserView');
-			let self = this;
-			axios.get('http://localhost:3000/users')
-			.then(function (response) {
-				console.log(response);
-				self.updateLoginStatus(response); //finns user/admin i db? -> loggedIn = true, annars oops and retry!
-				self.validateLogin();             //loggedInAs admin/user? -> render UserView/AdminView
-			})
-			.catch(function (error) {
-				console.log(error);
-			});
-		}
+		  this.setState({
+			  errMsg: 'Epost och lösenord mastchade inget i databasen. Försök igen!',
+			  errMsgCss: 'errMsgCss'
+		  })
+	  }
+    }
+
+	loginClick(ev){
+		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
+		//this.props.updateView('UserView');
+      let self = this;
+      axios.get('http://localhost:3000/users')
+      .then(function (response) {
+        console.log(response);
+        self.updateLoginStatus(response); //finns user/admin i db? -> loggedIn = true, annars oops and retry!
+        self.validateLogin();             //loggedInAs admin/user? -> render UserView/AdminView
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+    }
 }
 
 export default LoginComponent;

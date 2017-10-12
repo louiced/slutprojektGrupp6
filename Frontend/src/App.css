@@ -155,6 +155,10 @@ select, input {
 .hidden {
 	display: none;
 }
+/*blir röd om man skrivit in fel i registerComponent*/
+input.attention {
+	border: 1px solid red;
+}
 .list-group{
 	list-style: none;
 	width: auto;

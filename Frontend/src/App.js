@@ -9,6 +9,8 @@ class App extends Component {
 				<span className="brandTag font-effect-3d">OLSSONS</span>
 				<span className="brandTag2">BILAR</span>
 			</div>
+
+
 			<div className="App">
 				<ViewSelector updateUserInfo={this.updateUserInfo}/>
 			</div>
