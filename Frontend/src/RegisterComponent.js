@@ -48,7 +48,6 @@ class RegisterComponent extends React.Component {
 				</div>
 				break;
 		}
-		}
 		return view;
 	}
     componentDidMount() {

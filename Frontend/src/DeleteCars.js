@@ -35,7 +35,6 @@ class DeleteCars extends React.Component{
 
   render(){
     let carList = this.state.carsInfo.map(car=> {
-      if(car.comments.length !== 0){
         let content = car.comments.map(x=>{return <li >{x}</li>})
         return <li className="item" key={car._id} data-id={car._id} >
           <span className="label">Brand:</span> <span>{car.brand}</span>
@@ -47,30 +46,12 @@ class DeleteCars extends React.Component{
           <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
           <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
           <span className="label">Status: </span><span> {car.status}</span>
-          <span className="label">comments: </span><span> <ul className='li'>{content}</ul></span>
+          <span className="label">Comments: </span><span> <ul className='li'>{content}</ul></span>
           <br/>
           <img className='list-item'  src={car.imgLink} alt=""/>
           <br/>
           <button className='deleteButton' onClick={this.handleDelete}>Delete</button>
         </li>
-      }
-      else{
-        return <li className="item" key={car._id} data-id={car._id} >
-          <span className="label">Brand:</span> <span>{car.brand}</span>
-          <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
-          <span className="label">Model: </span><span> {car.model}</span>
-          <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
-          <span className="label">Year: </span><span> {car.year}</span>
-          <span className="label">Fuel: </span><span> {car.fuel}</span>
-          <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
-          <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
-          <span className="label">Status: </span><span> {car.status}</span>
-          <br/>
-          <img className='list-item'  src={car.imgLink} alt=""/>
-          <br/>
-          <button className='deleteButton' onClick={this.handleDelete}>Delete</button>
-        </li>
-      }
     })
     return (
       <ul className="list-group">

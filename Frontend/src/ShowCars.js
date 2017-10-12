@@ -80,7 +80,7 @@ class ShowCars extends React.Component{
   }
   render(){
     let carList = this.state.carsInfo.map(car=> {
-      if(car.comments.length !== 0){
+      // if(car.comments.length !== 0){
         let content = car.comments.map(x=>{return <li>{x}</li>})
       // let commentList = car.comments.map(x=>{
       //   console.log(x)
@@ -102,23 +102,23 @@ class ShowCars extends React.Component{
           <img className='list-item'  src={car.imgLink} alt=""/>
           <br/>
         </li>
-      }
-      else{
-        return <li className="item" key={car._id} data-id={car._id} >
-          <span className="label">Brand:</span> <span>{car.brand}</span>
-          <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
-          <span className="label">Model: </span><span> {car.model}</span>
-          <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
-          <span className="label">Year: </span><span> {car.year}</span>
-          <span className="label">Fuel: </span><span> {car.fuel}</span>
-          <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
-          <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
-          <span className="label">Status: </span><span> {car.status}</span>
-          <br/>
-          <img className='list-item'  src={car.imgLink} alt=""/>
-          <br/>
-        </li>
-      }
+      //}
+      // else{
+      //   return <li className="item" key={car._id} data-id={car._id} >
+      //     <span className="label">Brand:</span> <span>{car.brand}</span>
+      //     <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
+      //     <span className="label">Model: </span><span> {car.model}</span>
+      //     <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
+      //     <span className="label">Year: </span><span> {car.year}</span>
+      //     <span className="label">Fuel: </span><span> {car.fuel}</span>
+      //     <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
+      //     <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
+      //     <span className="label">Status: </span><span> {car.status}</span>
+      //     <br/>
+      //     <img className='list-item'  src={car.imgLink} alt=""/>
+      //     <br/>
+      //   </li>
+      // }
     })
     return <div>
       <div className="createForm2">
