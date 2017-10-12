@@ -55,6 +55,7 @@ class ListCars extends React.Component{
 				};
 			}
 		})
+		//new Date(1222333).valueOf return number so can compare, new Date(12232323).toLocaleString() can not compare date
 		let self = this;
 		axios.get(`http://localhost:3000/vehicles/${id}`)
 		.then(res => {

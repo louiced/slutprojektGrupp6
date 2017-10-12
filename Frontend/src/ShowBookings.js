@@ -14,24 +14,23 @@ class ShowBookings extends React.Component {
 	render(){
 		let view;
 		if (this.state.bookedCars.length > 0){
-				let carList = this.state.bookedCars.map(car => {
+			let carList = this.state.bookedCars.map(car => {
 				return <div className="carBox" key={car.carObj._id}>
 					<span>{car.carObj.brand}</span><br/>
-				<span>{car.carObj.model}</span><br/>
-				<span>{car.carObj.vehicleType}</span><br/>
-				<img className="carImg" src={car.carObj.imgLink} alt="#"/>
+					<span>{car.carObj.model}</span><br/>
+					<span>{car.carObj.vehicleType}</span><br/>
+					<img className="carImg" src={car.carObj.imgLink} alt="#"/>
 					<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
 				</div>
 			})
-				view = <div>
-					<h2>Mina bokningar</h2>
-					<ul>{carList}</ul>
-				</div>
+			view = <div>
+				<h2>Mina bokningar</h2>
+				<ul>{carList}</ul>
+			</div>
 		} else {
 			view = <div><h2>Mina bokningar</h2>
-				<span>Inga bokningar för närvarande</span><br/></div>
+			<span>Inga bokningar för närvarande</span><br/></div>
 		}
-
 		return view;
 	}
 

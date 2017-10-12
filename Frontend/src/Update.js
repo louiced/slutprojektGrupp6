@@ -97,8 +97,7 @@ class Update extends React.Component{
         dagshyra: this.state.dailyFee,
         status: this.state.status,
         comments: commentArray
-      },
-
+      }
     })
     .then(function (response) {
     })
@@ -107,7 +106,6 @@ class Update extends React.Component{
     });
   }
   render(){
-    
       return(
         <div>
           <div className="createForm1">
@@ -138,7 +136,6 @@ class Update extends React.Component{
           </div>
         </div>
       )
-
   }
 }
 

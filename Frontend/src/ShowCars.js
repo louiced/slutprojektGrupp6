@@ -25,7 +25,7 @@ class ShowCars extends React.Component{
 			if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
 				if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
 					if(obj.dailyFee <= this.state.maxRentFilter){
-						if(obj.driversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
+						if(obj.requiredDriversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
 							newData.push(obj);
 						}
 					}
