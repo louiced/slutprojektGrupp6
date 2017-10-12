@@ -92,10 +92,10 @@ switchTab(ev){
 }
   render(){
     let navBar = <ul className="navBar">
-          <li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Read Cars</span></li>
-          <li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Create Cars</span></li>
-          <li><span className={this.state.tabs[2].class} onClick={this.switchTab} id="tab3">Update Cars</span></li>
-          <li><span className={this.state.tabs[3].class} onClick={this.switchTab} id="tab4">Delete Cars</span></li>
+          <li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Läs Bil</span></li>
+          <li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Skapa Bil</span></li>
+          <li><span className={this.state.tabs[2].class} onClick={this.switchTab} id="tab3">Uppdatera Bil</span></li>
+          <li><span className={this.state.tabs[3].class} onClick={this.switchTab} id="tab4">Ta bort Bil</span></li>
         </ul>;
       let view;
           switch(this.state.view){

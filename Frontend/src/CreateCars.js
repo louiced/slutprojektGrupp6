@@ -95,6 +95,10 @@ class CreateCars extends React.Component{
   }
 
   render(){
+    // <option value="personbil">personalCar</option>
+    // <option value="lätt lastbil">Lätt lastbil</option>
+    // <option value="Trehjuling">Trehjuling</option>
+    // <option value="motorcykel">motorcykel</option>
     return <div className='form'>
       <div className="createForm1">
         <select className='selectField' value={this.state.vehicleType}  onChange={this.fordontype}>
