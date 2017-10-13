@@ -14,7 +14,7 @@ class DeleteCars extends React.Component{
     this.getInfo();
   }
   getInfo(){
-    axios.get('/vehicle')
+    axios.get('/vehicles')
       .then(function (response) {
         this.setState({
           carsInfo: response.data
