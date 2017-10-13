@@ -99,6 +99,7 @@ class BookCar extends React.Component {
 	
 	// Filters vehicles depending on users choices
 
+
 	filterCars(data){
 		let availableCars = [];
 		let unAvailableCars = [];
@@ -156,7 +157,6 @@ class BookCar extends React.Component {
 
 	
 	// Event handlers
-
 
 	handlePickupDate(date){
 		//let pickupDate = ev.target.value;

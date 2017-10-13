@@ -23,20 +23,43 @@ class LoginComponent extends React.Component {
 		this.validateLogin = this.validateLogin.bind(this);
 	}
 	render(){
-		console.log(this.state);
+		console.log(localStorage);
 		let view;
 		switch(this.state.view){
 			case 'Login':
-			view = <div>
-				<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
-				<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
-				<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
-				<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
-			</div>
-			break;
+				view = <div>
+						<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
+						<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
+						<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
+						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
+					</div>
+				break;
+			case 'localstorage':
+				view = <div>
+						<input type="text" placeholder="Epost" onChange={this.handleEmailInput} value={this.state.email}/>
+						<input type="password" placeholder="Lösenord" onChange={this.handlePwInput} value={this.state.pw}/>
+						<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
+						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
+					</div>
+				break;
 		}
 		return view;
 	}
+
+	componentDidMount() {
+		if(localStorage.length > 0) {
+			let mail = localStorage.getItem('userEmail');
+			let pw = localStorage.getItem('userPw');
+			
+			this.setState({
+				email: mail,
+				pw: pw,
+				view: 'localstorage'
+			})
+		}
+	}
+	
+
 	handleEmailInput(ev){
 		let val = ev.target.value;
 		this.setState({
@@ -63,16 +86,19 @@ class LoginComponent extends React.Component {
           })
 		this.props.updateUserInfo(el);
 		}
-		//console.log('state, loggedInAs: ', this.state.loggedInAs);
-		//console.log('el, loggedInAs: ', el);
+
       });
     }
     //admin ? AdminView : UserView
     validateLogin(){
       console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
       console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
-      console.log('validate, loggedInAs.name.first: ', this.state.loggedInAs.name.first);
+
       if(this.state.isLoggedIn === true) {
+		localStorage.setItem('userEmail', this.state.email);
+		localStorage.setItem('userPw', this.state.pw);
+		console.log(localStorage);
+		
         if(this.state.email !== 'admin@olsson.se') {
           this.props.updateUserId(this.state.loggedInAs._id);
           this.props.updateView('UserView');
@@ -80,20 +106,25 @@ class LoginComponent extends React.Component {
           console.log('adminview');
           this.props.updateView('AdminView');
         }
-      } else if (this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
+      } else if(this.state.email === '' || this.state.pw === '') {
 		  this.setState({
-			  errMsg: 'Epost och lösenord mastchade inget i databasen. Försök igen!',
+			  errMsg: 'Inga fält kan lämnas tomma.',
+			  errMsgCss: 'errMsgCss'
+		  })
+	  } else if(this.state.isLoggedIn === false || this.state.loggedInAs === null) { //render errMsg
+		  this.setState({
+			  errMsg: 'Epost och lösenord matschade inget i databasen. Försök igen!',
 			  errMsgCss: 'errMsgCss'
 		  })
 	  }
     }
 
-  
+
 	loginClick(ev){
-		this.props.updateUserId('59df829cc63624c0f441b08a'); //tillfälligt hack
-		this.props.updateView('UserView');
-		/*
-      let self = this;
+		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
+		//this.props.updateView('UserView');
+      let self = this; 
+		
       axios.get('http://localhost:3000/users')
       .then(function (response) {
         console.log(response);
@@ -103,7 +134,7 @@ class LoginComponent extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-	  */
+		
     }
 }
 

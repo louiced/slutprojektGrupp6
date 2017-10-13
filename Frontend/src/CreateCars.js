@@ -101,6 +101,7 @@ class CreateCars extends React.Component{
     // <option value="motorcykel">motorcykel</option>
     return <div className='form'>
       <div className="createForm1">
+
         <select className='selectField' value={this.state.vehicleType}  onChange={this.fordontype}>
           <option value='' disabled defaultValue hidden>Välj Fordonstyp</option>
           <option value="personbil">Personbil</option>

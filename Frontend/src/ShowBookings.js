@@ -20,19 +20,23 @@ class ShowBookings extends React.Component {
 	}
 	render(){
 		let view;
-
-		//console.log(this.state.bookedCars);
 		switch(this.state.view){
 			case 'ShowBookings':
 				if (this.state.bookedCars.length > 0){ //
 			let key = 0;
 				let carList = this.state.bookedCars.map(car => {
-				return <div className="carBox" key={key++}>
-					<span>{car.carObj.brand}</span><br/>
-				<span>{car.carObj.model}</span><br/>
-				<span>{car.carObj.vehicleType}</span><br/>
-				<img className="carImg" src={car.carObj.imgLink} alt="#"/> 
-					<button data-id={car.carObj._id} data-datestring={car.dateString} onClick={this.confirmAnullment} className="btn">Avboka</button>
+				return <div className="carBox row" key={key++}>
+					<div>
+						<img className="carImg" src={car.carObj.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>datum</p>
+						<p>{car.carObj.brand} - {car.carObj.model}</p>
+						<p>{car.carObj.vehicleType}, körkort: {car.carObj.requiredDriversLicense}</p>
+					</div>
+					<div>
+						<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
+					</div>
 				</div>
 			})
 			view = <div>
@@ -109,6 +113,7 @@ class ShowBookings extends React.Component {
 		let pickedCar = this.state.carBookings.find(car => {
 			return car._id === carId
 		});
+		
 		let newBookingsForCarDoc = pickedCar.bookings.filter(book => {
 			return book.dateString !== dateString
 		})

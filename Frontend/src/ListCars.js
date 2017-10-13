@@ -22,35 +22,50 @@ class ListCars extends React.Component{
 		if (this.state.view === 'ListCars'){
 			if (this.props.data.length > 0 && this.props.unavailableCars.length > 0){
 				let list = this.props.data.map(el => {
-				return <div className="carBox" key={el._id} data-id={el._id}>
-					<span>{el.brand}</span><br/>
-					<span>{el.model}</span><br/>
-					<span>{el.vehicleType}</span><br/>
-					<img className="carImg" src={el.imgLink} alt="#"/>
-					<button className="btn" onClick={this.confirmBooking}>Boka</button>
+				return <div className="carBox row" key={el._id} data-id={el._id}>
+					<div>
+						<img className="carImg" src={el.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>{el.brand} - {el.model}</p>
+						<p>{el.vehicleType}</p>
+					</div>
+					<div>
+						<button className="btn" onClick={this.confirmBooking}>Boka</button>
+					</div>
 				</div>
 				})
 				let unavList = this.props.unavailableCars.map(el => {
-				return <div className="carBox" key={el._id} data-id={el._id}>
-					<span>{el.brand}</span><br/>
-					<span>{el.model}</span><br/>
-					<span>{el.vehicleType}</span><br/>
-					<img className="carImg" src={el.imgLink} alt="#"/>
-					<button disabled className="btn">Uppbokad</button>
+				return <div className="carBox row" key={el._id} data-id={el._id}>
+					<div>
+						<img className="carImg" src={el.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>{el.brand} - {el.model}</p>
+						<p>{el.vehicleType}</p>
+					</div>
+					<div>
+						<button className="btn" disabled>Avboka</button>
+					</div>
 				</div>
 				})
-			view = <div>
+				view = <div>
 						<ul>{list}</ul>
 						<ul>{unavList}</ul>
 					</div>								   
 			} else if(this.props.data.length > 0 && this.props.unavailableCars.length <= 0){
 				let list = this.props.data.map(el => {
-				return <div className="carBox" key={el._id} data-id={el._id}>
-					<span>{el.brand}</span><br/>
-					<span>{el.model}</span><br/>
-					<span>{el.vehicleType}</span><br/>
-					<img className="carImg" src={el.imgLink} alt="#"/>
-					<button className="btn" onClick={this.confirmBooking}>Boka</button>
+				return <div className="carBox row" key={el._id} data-id={el._id}>
+					<div>
+						<img className="carImg" src={el.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>{el.brand} - {el.model}</p>
+						<p>{el.vehicleType}</p>
+					</div>
+					<div>
+						<button className="btn" onClick={this.confirmBooking}>Boka</button>
+					</div>
 				</div>
 				})
 				view = <ul>{list}</ul>
@@ -69,19 +84,17 @@ class ListCars extends React.Component{
 				</div>
 		}
 
-		//console.log(this.props.unavailableCars);
-		
+
 		
  		
 		return <div>{view}</div>
-		
+
 
 	}
 
 	componentDidMount(){
-		console.log(this.props.userId);
 		// Gets previous booked cars of loggedIn user
-
+		
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
@@ -121,8 +134,6 @@ class ListCars extends React.Component{
 			console.log(err);
 		})
 	}
-
-	
 	// Updates state with previous bookings of specific (clicked) car
 	updateStateBookings(list, id){ 
 
@@ -135,6 +146,7 @@ class ListCars extends React.Component{
 	
 	// Updates state with previous bookings for specific user
 
+
 	updateStateCars(list){
 		this.setState({
 			bookedCars: list
@@ -143,6 +155,7 @@ class ListCars extends React.Component{
 
 	
 	// Updates userDB with previous bookings AND new booking
+
 
 	updateUserDocument(data) {
 		let bookedCars = this.state.bookedCars;
@@ -159,6 +172,7 @@ class ListCars extends React.Component{
 	
 	
 	// Updates VehicleDB with previous bookings AND new booking
+
 
 	updateVehicleDocument(id){
 		let list = this.state.previousCarBookings;
@@ -179,6 +193,7 @@ class ListCars extends React.Component{
 				bookings:  list
 			}
 		});
+
 		this.setState({
 			view: 'Thanks'
 		});
@@ -204,9 +219,9 @@ class ListCars extends React.Component{
 	
 	showBookings(ev){
 		this.props.showBookings();
-
 	}
 }
+
 
 export default ListCars;
 
