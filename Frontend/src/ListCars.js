@@ -94,7 +94,7 @@ class ListCars extends React.Component{
 
 	componentDidMount(){
 		// Gets previous booked cars of loggedIn user
-		
+		console.log(this.props.userId);
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
@@ -128,6 +128,7 @@ class ListCars extends React.Component{
 		let self = this;
 		axios.get(`http://localhost:3000/vehicles/${id}`)
 		.then(res => {
+			console.log(res.data);
 			self.updateStateBookings(res.data.bookings, id);
 		})
 		.catch(err => {
