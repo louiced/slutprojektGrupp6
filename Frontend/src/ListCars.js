@@ -23,35 +23,50 @@ class ListCars extends React.Component{
 		if (this.state.view === 'ListCars'){
 			if (this.props.data.length > 0 && this.props.unavailableCars.length > 0){
 				let list = this.props.data.map(el => {
-				return <div className="carBox" key={el._id} data-id={el._id}>
-					<span>{el.brand}</span><br/>
-					<span>{el.model}</span><br/>
-					<span>{el.vehicleType}</span><br/>
-					<img className="carImg" src={el.imgLink} alt="#"/>
-					<button className="btn" onClick={this.confirmBooking}>Boka</button>
+				return <div className="carBox row" key={el._id} >
+					<div>
+						<img className="carImg" src={el.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>{el.brand} - {el.model}</p>
+						<p>{el.vehicleType}</p>
+					</div>
+					<div data-id={el._id}>
+						<button className="btn" onClick={this.confirmBooking}>Boka</button>
+					</div>
 				</div>
 				})
 				let unavList = this.props.unavailableCars.map(el => {
-				return <div className="carBox" key={el._id} data-id={el._id}>
-					<span>{el.brand}</span><br/>
-					<span>{el.model}</span><br/>
-					<span>{el.vehicleType}</span><br/>
-					<img className="carImg" src={el.imgLink} alt="#"/>
-					<button disabled className="btn">Uppbokad</button>
+				return <div className="carBox row" key={el._id} data-id={el._id}>
+					<div>
+						<img className="carImg" src={el.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>{el.brand} - {el.model}</p>
+						<p>{el.vehicleType}</p>
+					</div>
+					<div>
+						<button className="btn" disabled>Avboka</button>
+					</div>
 				</div>
 				})
-			view = <div>
+				view = <div>
 						<ul>{list}</ul>
 						<ul>{unavList}</ul>
-					</div>								   
+					</div>
 			} else if(this.props.data.length > 0 && this.props.unavailableCars.length <= 0){
 				let list = this.props.data.map(el => {
-				return <div className="carBox" key={el._id} data-id={el._id}>
-					<span>{el.brand}</span><br/>
-					<span>{el.model}</span><br/>
-					<span>{el.vehicleType}</span><br/>
-					<img className="carImg" src={el.imgLink} alt="#"/>
-					<button className="btn" onClick={this.confirmBooking}>Boka</button>
+				return <div className="carBox row" key={el._id} >
+					<div>
+						<img className="carImg" src={el.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>{el.brand} - {el.model}</p>
+						<p>{el.vehicleType}</p>
+					</div>
+					<div data-id={el._id}>
+						<button className="btn" onClick={this.confirmBooking}>Boka</button>
+					</div>
 				</div>
 				})
 				view = <ul>{list}</ul>
@@ -69,35 +84,33 @@ class ListCars extends React.Component{
 					<button className="btn" onClick={this.showBookings}>Visa mina bokningar</button>
 				</div>
 		}
-		//console.log(this.props.unavailableCars);
-		
-		
- 		
 		return <div>{view}</div>
-		
+
 	}
-	
+
 	componentDidMount(){
-		
+
 		// Gets previous booked cars of loggedIn user
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
-			console.log(res.data);
 			self.updateStateCars(res.data.bookedCars); //List of booked cars for user
 		})
 		.catch(err => {
 			console.log(err);
 		})
 	}
-	
+
+	// When user confirms booking
 	bookCarClick(ev){
-		
+
 		let id = ev.target.getAttribute('data-id');
 		let obj;
 		let pickupString = this.props.pickupDate.toLocaleString();
 		let returnString = this.props.returnDate.toLocaleString();
 		let dateString = `${pickupString} - ${returnString}`;
+		
+		// Find clicked car and build object
 		this.props.data.forEach(data => {
 			if (data._id === id){
 				obj = {
@@ -109,6 +122,7 @@ class ListCars extends React.Component{
 				this.updateUserDocument(obj);
 			}
 		})
+		//new Date(1222333).valueOf return number so can compare, new Date(12232323).toLocaleString() can not compare date
 		let self = this;
 		axios.get(`http://localhost:3000/vehicles/${id}`)
 		.then(res => {
@@ -117,28 +131,27 @@ class ListCars extends React.Component{
 		.catch(err => {
 			console.log(err);
 		})
-		
 	}
-	
+
 	// Updates state with previous bookings of specific (clicked) car
-	updateStateBookings(list, id){ 
+	updateStateBookings(list, id){
+
 		this.setState({
 			previousCarBookings: list
 		});
 		this.updateVehicleDocument(id);
 	}
-	
+
 	// Updates state with previous bookings for specific user
 	updateStateCars(list){
 		this.setState({
 			bookedCars: list
 		});
 	}
-	
+
 	// Updates userDB with previous bookings AND new booking
 	updateUserDocument(data) {
 		let bookedCars = this.state.bookedCars;
-		
 		bookedCars.push(data);
 		axios({
 			method: 'put',
@@ -148,21 +161,22 @@ class ListCars extends React.Component{
 			}
 		});
 	}
-	
-	
+
+
 	// Updates VehicleDB with previous bookings AND new booking
 	updateVehicleDocument(id){
 		let list = this.state.previousCarBookings;
 		let pickupString = this.props.pickupDate.toLocaleString();
 		let returnString = this.props.returnDate.toLocaleString();
 		let dateString = `${pickupString} - ${returnString}`;
-		//console.log("dateString", dateString);
 		let obj = {
 			pickupDate: this.props.pickupDate.valueOf(),
 			returnDate: this.props.returnDate.valueOf(),
 			dateString: dateString
 		};
 		list.push(obj);
+		
+		// Put to DB
 		axios({
 			method: 'put',
 			url: `http://localhost:3000/vehicles/${id}`,
@@ -170,11 +184,14 @@ class ListCars extends React.Component{
 				bookings:  list
 			}
 		});
+
+		// Render thanks-view
 		this.setState({
 			view: 'Thanks'
 		});
 	}
-	
+
+	// Asks user to confirm booking
 	confirmBooking(ev){
 		let id = ev.target.parentElement.getAttribute('data-id');
 		this.setState({
@@ -182,32 +199,24 @@ class ListCars extends React.Component{
 			currentId: id
 		});
 	}
-	
+
+	// User chooses NOT to book car
 	noBooking(ev){
 		this.setState({
 			view: 'ListCars'
 		});
 	}
-	
+
+	// Renders new search-for-car page
 	bookMoreCars(ev){
 		this.props.bookCar('bookCar');
 	}
-	
+
+	// Renders MyBookings
 	showBookings(ev){
 		this.props.showBookings();
 	}
 }
 
-/*axios({
-			method: 'put',
-			url: `http://localhost:3000/vehicles/59dccaf4d556aa9aef8ea0e1`,
-			data: {
-				bookings: list
-			}
-		});*/
-
-/*
-
-*/
 
 export default ListCars;

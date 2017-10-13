@@ -5,13 +5,60 @@ class ShowCars extends React.Component{
   constructor(props){
     super(props);
     this.state = {
-      carsInfo: []
+      carsInfo: [],
+      maxRentFilter: undefined,
+			fuelFilter: undefined,
+			driveLicFilter: undefined,
+			gearFilter: undefined
     }
-
+   //this.filterCars = this.filterCars.bind(this);
+   this.findCars = this.findCars.bind(this);
+   this.handlemaxRentFilter = this.handlemaxRentFilter.bind(this);
+   this.handlefuelFilter = this.handlefuelFilter.bind(this);
+   this.handledriveLicFilter = this.handledriveLicFilter.bind(this);
+   this.handlegearFilter = this.handlegearFilter.bind(this);
+  }
+  // filterCars(data){
+	// 	let newData = [];
+	// 	for (let o in data){
+	// 		let obj = data[o];
+	// 		if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
+	// 			if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
+	// 				if(obj.dailyFee <= this.state.maxRentFilter){
+	// 					if(obj.requiredDriversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
+	// 						newData.push(obj);
+	// 					}
+	// 				}
+	// 			}
+	// 		}
+	// 	}
+  //   this.setState({
+  //     carsInfo: newData
+  //   })
+  // }
+  handlemaxRentFilter(ev){
+    this.setState({
+      maxRentFilter: ev.target.value
+    })
+  }
+  handlefuelFilter(ev){
+    this.setState({
+      fuelFilter: ev.target.value
+    })
+  }
+  handledriveLicFilter(ev){
+    this.setState({
+      driveLicFilter: ev.target.value
+    })
+  }
+  handlegearFilter(ev){
+    this.setState({
+      gearFilter: ev.target.value
+    })
   }
   componentDidMount(){
     let self = this
-    axios.get('http://localhost:3000/vehicles')
+    axios.get('/vehicle')
     .then(function (response) {
       self.setState({
         carsInfo: response.data
@@ -21,33 +68,79 @@ class ShowCars extends React.Component{
       console.log(error);
     });
   }
-
+  findCars(){
+    let self = this
+    axios.get('/vehicle',{
+      params: {
+        gearbox: this.state.gearFilter,
+        fuel: this.state.fuelFilter,
+        requiredDriversLicense: this.state.driveLicFilter,
+        dailyFee: this.state.maxRentFilter
+      }
+    })
+    .then(function (response) {
+      self.setState({
+        carsInfo: response.data
+      }, ()=>{})
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
+  }
   render(){
     let carList = this.state.carsInfo.map(car=> {
-        return <li className="item" key={car._id} >
-          <span className="label">brand:</span> <span>{car.brand}</span>
-          <span className="label">fordonstyp:</span> <span> {car.fordonstyp}</span>
-          <span className="label">gearbox:</span> <span>{car.gearbox}</span>
-          <span className="label">model: </span><span> {car.model}</span>
-          <span className="label">dailyFee: </span><span> {car.dailyFee}</span>
-          <span className="label">year: </span><span> {car.year}</span>
-          <span className="label">fuel: </span><span> {car.fuel}</span>
-          <span className="label">status: </span><span> {car.status}</span>
-          <span className="label">requiredDrivingLicense: </span><span> {car.requiredDrivingLicense}</span>
-          <span className="label">vehicleType: </span><span> {car.vehicleType}</span>
+      // if(car.comments.length !== 0){
+        let content = car.comments.map(x=>{return <li>{x}</li>})
+      // let commentList = car.comments.map(x=>{
+      //   console.log(x)
+        // let r = Object.keys(x) //new array with all keys in comments array
+        // r.forEach(y=>{x[y]})
+        // return <li>{}</li>
+        return <li className="item" key={car._id} data-id={car._id} >
+          <span className="label">Märke:</span> <span>{car.brand}</span>
+          <span className="label">Växellåda:</span> <span>{car.gearbox}</span>
+          <span className="label">Modell: </span><span> {car.model}</span>
+          <span className="label">Dagshyra: </span><span> {car.dailyFee}</span>
+          <span className="label">År: </span><span> {car.year}</span>
+          <span className="label">Bränsle: </span><span> {car.fuel}</span>
+          <span className="label">Obligatoriskt körkort: </span><span> {car.requiredDriversLicense}</span>
+          <span className="label">Fordonstyp: </span><span> {car.vehicleType}</span>
+          <span className="label">Status: </span><span> {car.status}</span>
+          <span className="label">Kommentarer: </span><span> <ul className='li'>{content}</ul></span>
           <br/>
           <img className='list-item'  src={car.imgLink} alt=""/>
           <br/>
         </li>
-      })
-
-
-
-    return (
-      <ul className="list-group">
-       {carList}
-      </ul>
-    )
+      //}
+      // else{
+      //   return <li className="item" key={car._id} data-id={car._id} >
+      //     <span className="label">Brand:</span> <span>{car.brand}</span>
+      //     <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
+      //     <span className="label">Model: </span><span> {car.model}</span>
+      //     <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
+      //     <span className="label">Year: </span><span> {car.year}</span>
+      //     <span className="label">Fuel: </span><span> {car.fuel}</span>
+      //     <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
+      //     <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
+      //     <span className="label">Status: </span><span> {car.status}</span>
+      //     <br/>
+      //     <img className='list-item'  src={car.imgLink} alt=""/>
+      //     <br/>
+      //   </li>
+      // }
+    })
+    return <div>
+      <div className="createForm2">
+        <input type="text" value={this.state.maxRentFilter} onChange={this.handlemaxRentFilter} placeholder={this.state.maxRentFilter}/>
+        <input type="text" value={this.state.fuelFilter} onChange={this.handlefuelFilter} placeholder='Bränsle'/>
+     </div>
+     <div className="createForm2">
+       <input type="text" value={this.state.gearFilter} onChange={this.handlegearFilter} placeholder='VäxelBox'/>
+       <input type="text" value={this.state.driveLicFilter} onChange={this.handledriveLicFilter} placeholder='Körkort'/>
+     </div>
+     <button className='deleteButton' onClick={this.findCars}>Filtrera</button>
+      <ul className='li'>{carList}</ul>
+    </div>
   }
 }
 

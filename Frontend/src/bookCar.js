@@ -62,16 +62,14 @@ class BookCar extends React.Component {
 					<option value="A" >A</option>
 					<option value="B">B</option>
 				</select>
-					</span> 
+					</span>
 				<span>Bränsle: <select name="fuel" onChange={this.handleFuelChange}>
-
 					<option value="" defaultValue></option>
 					<option value="95" >Bensin 95</option>
 					<option value="diesel">Diesel</option>
 				</select>
 					</span>
 				<span>Maxhyra per dag: <input type="number" name="quantity" min="0" max="5000" defaultValue="5000" onChange={this.handleMaxRentChange}/>
-
 				</span>
 			</div>
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
@@ -88,9 +86,8 @@ class BookCar extends React.Component {
 	// Gets all vehicles from DB
 	findCars(ev){
 		let self = this;
-		axios.get('http://localhost:3000/vehicles')
+		axios.get('/vehicles')
 		.then(res => {
-			//console.log(res.data);
 			self.filterCars(res.data);
 		})
 		.catch(err => {
@@ -105,6 +102,8 @@ class BookCar extends React.Component {
 		let unAvailableCars = [];
 		let myPickupDate = this.state.pickupDate.valueOf();
 		let myReturnDate = this.state.returnDate.valueOf();
+		
+		// Filter 
 		for (let o in data){
 			let obj = data[o];
 			
@@ -133,11 +132,13 @@ class BookCar extends React.Component {
 						}
 					}
 				}
-			} 
+			}
 		}
 		this.renderCars(availableCars, unAvailableCars);
 	}
 	
+	
+	// Updates state and renders available and unavailable cars
 	renderCars(availableCars, unAvailableCars){
 		this.setState({
 			availableCars,
@@ -146,6 +147,7 @@ class BookCar extends React.Component {
 		});
 	}
 	
+	// Updates state with new view and new "now"-moment
 	updateView(str){
 		this.setState({
 			view: str,
@@ -156,44 +158,45 @@ class BookCar extends React.Component {
 
 	
 	// Event handlers
-
 	handlePickupDate(date){
-		//let pickupDate = ev.target.value;
-		//console.log(pickupDate);
 		this.setState({
 			pickupDate: date,
 			returnDate: date
 		});
 	}
-	
+
 	handleReturnDate(date){
-		//let returnDate = ev.target.value;
 		this.setState({
 			returnDate: date
 		});
 	}
-	
+
 	handleGearChange(ev){
 		this.setState({
 			gearFilter: ev.target.value
 		});
 	}
-	
+
 	handleDriveLicChange(ev){
 		this.setState({
 			driveLicFilter: ev.target.value
 		});
 	}
-	
+
 	handleFuelChange(ev){
 		this.setState({
 			fuelFilter: ev.target.value
 		});
 	}
-	
+
 	handleMaxRentChange(ev){
 		this.setState({
 			maxRentFilter: ev.target.value
+		});
+	}
+	handleDateChange(date) {
+		this.setState({
+			startDate: date
 		});
 	}
 }
