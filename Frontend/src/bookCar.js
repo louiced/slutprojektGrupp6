@@ -39,6 +39,7 @@ class BookCar extends React.Component {
 		this.handleDriveLicChange = this.handleDriveLicChange.bind(this);
 		this.handleFuelChange = this.handleFuelChange.bind(this);
 		this.handleMaxRentChange = this.handleMaxRentChange.bind(this);
+		this.updateView = this.updateView.bind(this);
 	}
 	render(){
 		let view;
@@ -74,7 +75,7 @@ class BookCar extends React.Component {
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
 		</div>
 				break;
-			case 'listCars': view = <ListCars data={this.state.availableCars} unavailableCars={this.state.unAvailableCars} userId={this.props.userId} pickupDate={this.state.pickupDate} returnDate={this.state.returnDate}/>
+			case 'listCars': view = <ListCars data={this.state.availableCars} unavailableCars={this.state.unAvailableCars} userId={this.props.userId} pickupDate={this.state.pickupDate} returnDate={this.state.returnDate} bookCar={this.updateView} showBookings={this.props.showBookings}/>
 				break;
 			default: view = <div>Default</div>
 							  }
@@ -108,7 +109,7 @@ class BookCar extends React.Component {
 			if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
 				if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
 					if(obj.dailyFee <= this.state.maxRentFilter){
-						if(obj.driversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
+						if(obj.requiredDriversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
 							let avail = false;
 							if(!obj.bookings.length > 0){
 								avail = true;
@@ -116,18 +117,16 @@ class BookCar extends React.Component {
 							obj.bookings.forEach(booking => {
 								if (myPickupDate < booking.pickupDate && myReturnDate < booking.pickupDate){
 									avail = true;
-								} else if (myPickupDate > booking.returnDate && myPickupDate > booking.returnDate){
+								} else if (myPickupDate > (booking.returnDate + 43200000) && myReturnDate > (booking.returnDate + 43200000)){
 									avail = true;
 								} else {
 									avail = false;
 								}
 							})
 							if (avail){
-								console.log('true ', obj);
 								availableCars.push(obj);
 							} else {
 								unAvailableCars.push(obj);
-								console.log('false ', obj);
 							}
 						}
 					}
@@ -144,6 +143,14 @@ class BookCar extends React.Component {
 			view: 'listCars'
 		});
 	}
+	
+	updateView(str){
+		this.setState({
+			view: str,
+			pickupDate: moment(),
+			returnDate: moment()
+		});
+	}
 
 	
 	// Event handlers
@@ -151,7 +158,8 @@ class BookCar extends React.Component {
 		//let pickupDate = ev.target.value;
 		//console.log(pickupDate);
 		this.setState({
-			pickupDate: date
+			pickupDate: date,
+			returnDate: date
 		});
 	}
 

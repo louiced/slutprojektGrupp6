@@ -21,6 +21,8 @@ class UserView extends React.Component {
 			view: 'bookCar'
 		};
 		this.switchTab = this.switchTab.bind(this);
+		this.showBookings = this.showBookings.bind(this);
+		this.bookCar = this.bookCar.bind(this);
 	}
 	render(){
 		let view;
@@ -29,7 +31,7 @@ class UserView extends React.Component {
 					<li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Mina bokningar</span></li>
 				</ul>
 		switch (this.state.view){
-			case 'bookCar': view = <div>{navBar}<BookCar userId={this.props.userId}/></div>
+			case 'bookCar': view = <div>{navBar}<BookCar userId={this.props.userId} showBookings={this.showBookings}/></div>
 				break;
 			case 'showBookings': view = <div>{navBar}<ShowBookings userId={this.props.userId}/></div>
 				break;
@@ -54,6 +56,18 @@ class UserView extends React.Component {
 		this.setState({
 			tabs: newTabs,
 			view: view
+		});
+	}
+	showBookings(){
+		this.setState({
+			view: 'showBookings'
+		});
+	}
+	
+	bookCar(){
+		console.log('körs');
+		this.setState({
+			view: 'bookCar'
 		});
 	}
 }

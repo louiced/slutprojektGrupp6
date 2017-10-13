@@ -123,6 +123,7 @@ class LoginComponent extends React.Component {
 		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
 		//this.props.updateView('UserView');
 
+
       let self = this;      
 
       axios.get('http://localhost:3000/users')
