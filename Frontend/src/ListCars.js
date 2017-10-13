@@ -78,11 +78,12 @@ class ListCars extends React.Component{
 	}
 	
 	componentDidMount(){
-		
+		console.log(this.props.userId);
 		// Gets previous booked cars of loggedIn user
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
+			console.log(res.data);
 			self.updateStateCars(res.data.bookedCars); //List of booked cars for user
 		})
 		.catch(err => {

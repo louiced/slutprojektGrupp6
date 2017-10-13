@@ -95,10 +95,10 @@ class LoginComponent extends React.Component {
     }
   
 	loginClick(ev){
-		this.props.updateUserId('59df5d3ac63624c0f441a77c'); //tillfälligt hack
-		this.props.updateView('UserView');
+		//this.props.updateUserId('59df829cc63624c0f441b08a'); //tillfälligt hack
+		//this.props.updateView('UserView');
 
-/*
+
       let self = this;      
       axios.get('http://localhost:3000/users')
       .then(function (response) {
@@ -109,7 +109,7 @@ class LoginComponent extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-	  */
+	  
     }
 }
 
