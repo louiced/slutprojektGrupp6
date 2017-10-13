@@ -13,7 +13,7 @@ exports.list_all_vehicles = (req, res) => {
       res.send(err);
     res.json(vehicle);
   })
-<<<<<<< HEAD
+
 }
 exports.list_vehicles = (req, res) => {
   var query = {};
@@ -33,8 +33,7 @@ exports.list_vehicles = (req, res) => {
    res.send(err);
    res.json(vehicle);
  })
-=======
->>>>>>> 606867821226e879fa4483007b2e4c7a15790d1e
+
 }
 
 //skapar ett nytt vehicle-object
@@ -66,7 +65,7 @@ exports.update_a_vehicle = (req, res) => {
     console.log('vehicle: ', vehicle);
     if (err)
       res.send(err);
-	
+
     res.json(vehicle);
   })
 }
