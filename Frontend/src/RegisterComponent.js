@@ -68,38 +68,32 @@ class RegisterComponent extends React.Component {
         console.log(error);
       });
     }
-
-
-	getIdAndSend(mail){
-	  let self = this;
-	  axios.get('http://localhost:3000/users')
-      .then(function (response) {
-        console.log(response);
-        console.log(response.data);
-        let found = response.data.find( (obj) =>{
-			return obj.email === mail
-		});
-
-		self.props.updateUserId(found._id);
-		self.props.updateUserInfo(found);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
-	}
-
-  	renderThanks() {
-		this.setState({
-			view: 'Thanks'
-		})
-		console.log('render thanks körs');
-		console.log(this.state.view);
-		let self = this;
-		setTimeout(function() {
-			self.props.updateView('UserView');
-		}, 3000);
-	}
-    validateInput(obj){
+		getIdAndSend(mail){
+			let self = this;
+			axios.get('http://localhost:3000/users')
+			.then(function (response) {
+				let found = response.data.find( (obj) =>{
+					return obj.email === mail
+				});
+				self.props.updateUserId(found._id);
+				self.props.updateUserInfo(found);
+			})
+			.catch(function (error) {
+				console.log(error);
+			});
+		}
+		renderThanks() {
+			this.setState({
+				view: 'Thanks'
+			})
+			console.log('render thanks körs');
+			console.log(this.state.view);
+			let self = this;
+			setTimeout(function() {
+				self.props.updateView('UserView');
+			}, 3000);
+		}
+		validateInput(obj){
       for(let key in obj) {
         if(obj.hasOwnProperty('name')) {
           //tomma fält eller undefined:
@@ -200,20 +194,12 @@ class RegisterComponent extends React.Component {
       let exists = this.state.allUsers.find( (el) => {
         return el.email === this.state.email;
       });
-
-      console.log('exists? ', exists);
-
       if(exists === undefined) {
-        console.log('returning false for userexists');
         return false;
       } else {
-        console.log('returning true for userexists');
         return true;
       }
-
-
     }
-
     post(obj) {
       axios({
           method: 'post',
@@ -279,27 +265,23 @@ class RegisterComponent extends React.Component {
         age: Number(this.state.age),
         driversLicense: this.state.driversLicense
       }
-      //console.log('obj: ', obj);
-      let validated = this.validateInput(obj); //kontrollera att obj har giltiga värden, isf return true
-      if(validated === true) { //om allt stämmer, kontrollera om anv redan finns, om inte: gör en post, gå till UserView
-        let ifExists = this.userExists();
-        console.log('ifExists: ', ifExists);  //undefined?!
 
-        if(ifExists === false) {
-          this.post(obj);
-		  this.renderThanks(); //visa tack för registrering, visar sen UserView
-		  this.getIdAndSend(obj.email);
-
-        } else {
-			//visa felmeddelande
-          console.log('post did not succeed, user already exists');
-          this.props.updateView('registerNewCC');
-        }
-
-      } else {                                 //TODO: rendera felmeddelande
-        console.log('post did not succeed, validation error');
-        this.props.updateView('registerNewCC');
-      }
+			let validated = this.validateInput(obj); //kontrollera att obj har giltiga värden, isf return true
+			if(validated === true) { //om allt stämmer, kontrollera om anv redan finns, om inte: gör en post, gå till UserView
+				let ifExists = this.userExists();
+				if(ifExists === false) {
+					this.post(obj);
+					this.renderThanks(); //visa tack för registrering, visar sen UserView
+					this.getIdAndSend(obj.email);
+				} else {
+					//visa felmeddelande
+					console.log('post did not succeed, user already exists');
+					this.props.updateView('registerNewCC');
+				}
+			} else {                                 //TODO: rendera felmeddelande
+				console.log('post did not succeed, validation error');
+				this.props.updateView('registerNewCC');
+			}
 	}
 }
 export default RegisterComponent;

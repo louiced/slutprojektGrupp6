@@ -4,7 +4,6 @@ import axios from 'axios';
 class Update extends React.Component{
   constructor(props){
     super(props);
-    if(this.props.data.comments!==null && this.props.data.comments!== undefined){
       this.state = {
         vehicleType: this.props.data.vehicleType,
         id: this.props.data._id,
@@ -17,19 +16,6 @@ class Update extends React.Component{
         commentArray: [],
         status: 'available'
       }
-    }
-    else{
-      this.state = {
-        vehicleType: this.props.data.vehicleType,
-        brand: this.props.data.brand,
-        model: this.props.data.model,
-        year: this.props.data.year,
-        gearbox: this.props.data.gearbox,
-        dailyFee: this.props.data.dailyFee,
-        status: 'available'
-      }
-    }
-
     this.createCar = this.createCar.bind(this);
     this.fordontype = this.fordontype.bind(this);
     this.handleBrand = this.handleBrand.bind(this);
@@ -56,11 +42,13 @@ class Update extends React.Component{
       model: ev.target.value
     },()=>{})
   }
+  //handleModel input
   handleGearbox(ev){
     this.setState({
       gearbox: ev.target.value
     },()=>{})
   }
+  //handleGearbox input
   handleStatus(ev){
     this.setState({
       status: ev.target.value
@@ -82,9 +70,10 @@ class Update extends React.Component{
     },()=>{})
   }
   createCar(){
-
     let commentArray = this.state.commentArray;
-    commentArray.push(this.state.comments)
+    commentArray.push(this.state.comments);
+    //after user have writted comments, send comments to array
+    //below will be update request with new info to update
     axios({
       method: 'put',
       url: `http://localhost:3000/vehicles/${this.state.id}`,
@@ -111,10 +100,10 @@ class Update extends React.Component{
           <div className="createForm1">
             <select required value={this.state.vehicleType}  onChange={this.fordontype}>
               <option disabled defaultValue hidden>{this.props.data.vehicleType}</option>
-              <option value="personbil">personbil</option>
-              <option value="lätt lastbil">lätt lastbil</option>
+              <option value="personbil">Personbil</option>
+              <option value="lätt lastbil">Lätt lastbil</option>
               <option value="Trehjuling">Trehjuling</option>
-              <option value="motorcykel">motorcykel</option>
+              <option value="motorcykel">Motorcykel</option>
               <option value="ATV">ATV</option>
             </select>
              <input type="text" value={this.state.brand} onChange={this.handleBrand} placeholder={this.props.data.brand}/>
@@ -128,11 +117,11 @@ class Update extends React.Component{
           <div className="createForm2">
             <select required value={this.state.status}  onChange={this.handleStatus}>
               <option disabled defaultValue hidden>{this.props.data.status}</option>
-              <option value="available">available</option>
-              <option value="unavailable">unavailable</option>
+              <option value="available">Tillgänligt</option>
+              <option value="unavailable">Otillgänligt</option>
             </select>
-            <textarea type="text" value={this.state.comments} onChange={this.handleComment} placeholder={this.props.data.comments.damages}/>
-            <button className='addButton' onClick={this.createCar}>Add</button>
+            <textarea type="text" value={this.state.comments} onChange={this.handleComment} placeholder={this.props.data.comments}/>
+            <button className='addButton' onClick={this.createCar}>Lägg till</button>
           </div>
         </div>
       )

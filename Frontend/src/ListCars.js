@@ -110,7 +110,6 @@ class ListCars extends React.Component{
 		.catch(err => {
 			console.log(err);
 		})
-
 	}
 	
 	// Updates state with previous bookings of specific (clicked) car
@@ -133,7 +132,6 @@ class ListCars extends React.Component{
 	updateUserDocument(data) {
 		console.log(this.state.bookedCars);
 		let bookedCars = this.state.bookedCars;
-
 		bookedCars.push(data);
 		axios({
 			method: 'put',
