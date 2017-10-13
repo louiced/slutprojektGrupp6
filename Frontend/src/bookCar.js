@@ -89,7 +89,7 @@ class BookCar extends React.Component {
 
 	findCars(ev){
 		let self = this;
-		axios.get('http://localhost:3000/vehicles')
+		axios.get('/vehicles')
 		.then(res => {
 			//console.log(res.data);
 			self.filterCars(res.data);

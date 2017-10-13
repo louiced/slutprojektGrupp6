@@ -74,7 +74,7 @@ class CreateCars extends React.Component{
     commentArray.push(this.state.comments)
     axios({
       method: 'post',
-      url: 'http://localhost:3000/vehicles',
+      url: '/vehicles',
       data: {
         vehicleType: this.state.vehicleType,
         brand: this.state.brand,
