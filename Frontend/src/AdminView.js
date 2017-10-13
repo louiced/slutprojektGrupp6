@@ -100,19 +100,21 @@ switchTab(ev){
       let view;
           switch(this.state.view){
             case 'showCars':
-              view = <div>{navBar} <ShowCars/></div>;
+              view = <div className="mainContent">{navBar} <ShowCars/></div>;
               break;
             case  'createCars':
-              view =  <div>{navBar} <CreateCars updateView={this.switchTab}/></div>;
+              view =  <div className="mainContent">{navBar} <CreateCars updateView={this.switchTab}/></div>;
               break;
             case  'updateCars':
-              view =  <div>{navBar} <UpdateCars updateView={this.updateView} /></div>;
+              view =  <div className="mainContent">{navBar} <UpdateCars updateView={this.switchTab}/></div>;
+
               break;
             case  'deleteCars':
-              view = <div>{navBar} <DeleteCars/></div>;
+              view = <div className="mainContent">{navBar} <DeleteCars/></div>;
               break;
             case  'update':
-              view = <div>{navBar} <Update data={this.state.data}/></div>;
+              view = <div className="mainContent">{navBar} <Update data={this.state.data}/></div>;
+
               break;
           }
     return view;

@@ -64,13 +64,17 @@ html {
 	cursor: pointer;
 }
 
+.btn:disabled {
+	background-color: grey;
+}
+
 .btn:hover {
 	background-color: rgba(	204, 0, 0, .5);
 }
 
 /*inloggad som... och knapp logga ut*/
 .userInfo {
-	position: absolute;
+	position: fixed;
 	bottom: 0;
 	right: 0;
 	font-size: 12px;
@@ -82,13 +86,6 @@ html {
 	border: 1px solid white;
 	background-color: rgba(250, 250, 250, .7);
 }
-
-/*.logOutBtn {
-	position: absolute;
-	bottom: 0;
-	right: 0;
-	font-size: 12px;
-}*/
 
 .navBar {
 	display: flex;
@@ -139,13 +136,37 @@ select, input {
 	padding: 5px;
 	border-radius: 5px;
 }
-.carBox {
-	border: 1px solid black;
-	background-color: white;
+
+ul {
+	margin: 0;
+	padding: 0;
+}
+.col {
+	display: flex;
+	flex-direction: column;
+}
+.row {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-around;
+	align-items: center;
 }
 
+.carBox {
+	border-bottom: 1px solid black;
+}
+.carBox div {
+	width: 30%;
+}
+/*.carInfo {
+	padding: 0px 25px;
+	border-left: 1px solid lightgray;
+	border-right: 1px solid lightgray;
+}*/
+
 .carImg {
-	width: 100px;
+	width: 150px;
+	height: auto;
 }
 
 .errMsgCss {
@@ -172,19 +193,23 @@ input.attention {
 .list-item{
 	width: 45%;
 }
-.form{
+.form {
+	width: 80%;
 	margin-top: 4%;
 	display: flex;
 	flex-direction: column;
 }
 .createForm1{
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 }
 .createForm2{
 	display: flex;
-	justify-content: space-around;
+	justify-content: space-between;
 	margin-top: 1%;
+}
+.form input, .form select {
+	width: 100px;
 }
 .addButton{
 	width: 56px;
@@ -204,19 +229,44 @@ input.attention {
 	width: 68px;
 	border-radius: 5px;
 }
-.carBox {
-	border: 1px solid black;
-	background-color: white;
+
+/*lite mindre skärmar*/
+@media (max-width: 1099px) {
+	.userInfo {
+		padding: 5px;
+		width: 90px;
+	}
+	.userInfo button {
+		padding: 10px;
+		font-size: 10px;
+	}
 }
-.carImg {
-	width: 100px;
+
+/*medelskärmar*/
+
+
+
+/*för små skärmar*/
+@media (max-width: 730px) {
+	.userInfo {
+		position: relative;
+		padding: 0;
+		background-color: rgba(0, 0, 0, 0);
+		border: none;
+		flex-direction: row-reverse;
+		width: 300px;
+	}
+	.userInfo button {
+		margin: 0;
+		padding: 10px;
+		font-size: 10px;
+		background-color: rgba(	204, 0, 0, 1);
+	}
+	/*.userInfo p {
+		display: none;
+	}*/
 }
-.errMsgCss {
-	color: red;
-}
-.hidden {
-	display: none;
-}
+
 .selectField{
 	width: 125px
 }

@@ -42,6 +42,7 @@ class UpdateCars extends React.Component{
 //this.props.updateView('update',x)
   render(){
     let carList = this.state.carsInfo.map(car=> {
+
       // if(car.comments.length !== 0){
         let content = car.comments.map(x=>{return <li >{x}</li>});
         return <li className="item" key={car._id} data-id={car._id} >

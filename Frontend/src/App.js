@@ -12,7 +12,7 @@ class App extends Component {
 
 
 			<div className="App">
-				<ViewSelector updateUserInfo={this.updateUserInfo}/>
+				<ViewSelector/>
 			</div>
 		</div>
     );
