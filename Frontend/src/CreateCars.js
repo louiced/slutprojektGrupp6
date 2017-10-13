@@ -30,8 +30,8 @@ class CreateCars extends React.Component{
     this.setState({
       vehicleType: ev.target.value
     },()=>{})
-
   }
+  //setState efter man skrivit nåt i fältet
   handleBrand(ev){
     this.setState({
       brand: ev.target.value
@@ -68,6 +68,7 @@ class CreateCars extends React.Component{
       year: ev.target.value
     },()=>{})
   }
+  //skapa ny bil med API
   createCar(){
     let commentArray = this.state.commentArray;
     commentArray.push(this.state.comments)
@@ -92,7 +93,7 @@ class CreateCars extends React.Component{
       console.log(error);
     });
   }
-
+//rendera sidan
   render(){
     return <div className='form'>
       <div className="createForm1">
