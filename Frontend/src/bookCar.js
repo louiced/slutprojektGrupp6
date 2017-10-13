@@ -198,24 +198,8 @@ class BookCar extends React.Component {
 	}
 }
 
-/*<form>
-			<span>Boka från: </span><input type="date" name="bookDate" min={new Date()} onChange={this.handlePickupDate}/>
-		</form>
-			<form>
-			<span>Till och med:  </span><input type="date" name="bookDate" min={new Date()} onChange={this.handleReturnDate}/>
-		</form>*/
 
 export default BookCar;
 
-/*
-class ShowCarList {
-	componentDidMount(){
-		// Make GET request
-		// Map list of cars
-		// Filter?
-	}
-}
 
-&& obj.dailyFee <= this.state.maxRentFilter && obj.driversLicense === this.state.driveLicFilter
-*/
 

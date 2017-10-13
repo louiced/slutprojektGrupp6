@@ -60,7 +60,17 @@ class UserView extends React.Component {
 	}
 	showBookings(){
 		this.setState({
-			view: 'showBookings'
+			view: 'showBookings',
+			tabs: [
+				{
+					class: '',
+					id: 'tab1'
+				},
+				{
+					class: 'active',
+					id: 'tab2'
+				}
+			]
 		});
 	}
 	
