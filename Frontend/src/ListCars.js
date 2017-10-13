@@ -7,8 +7,7 @@ class ListCars extends React.Component{
 		super(props);
 		this.state = {
 			bookedCars: [],
-			view: "ListCars",
-			bookBool: false
+			view: "ListCars"
 		};
 		this.bookCarClick = this.bookCarClick.bind(this);
 		this.updateUserDocument = this.updateUserDocument.bind(this);
@@ -86,14 +85,17 @@ class ListCars extends React.Component{
 		}
 		return <div>{view}</div>
 
+
 	}
 
 	componentDidMount(){
 
 		// Gets previous booked cars of loggedIn user
+		console.log(this.props.userId);
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
+			console.log(res.data);
 			self.updateStateCars(res.data.bookedCars); //List of booked cars for user
 		})
 		.catch(err => {
@@ -126,6 +128,7 @@ class ListCars extends React.Component{
 		let self = this;
 		axios.get(`http://localhost:3000/vehicles/${id}`)
 		.then(res => {
+			console.log(res.data);
 			self.updateStateBookings(res.data.bookings, id);
 		})
 		.catch(err => {
@@ -135,7 +138,6 @@ class ListCars extends React.Component{
 
 	// Updates state with previous bookings of specific (clicked) car
 	updateStateBookings(list, id){
-
 		this.setState({
 			previousCarBookings: list
 		});
@@ -161,7 +163,6 @@ class ListCars extends React.Component{
 			}
 		});
 	}
-
 
 	// Updates VehicleDB with previous bookings AND new booking
 	updateVehicleDocument(id){

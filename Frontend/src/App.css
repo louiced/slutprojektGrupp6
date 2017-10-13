@@ -158,11 +158,6 @@ ul {
 .carBox div {
 	width: 30%;
 }
-/*.carInfo {
-	padding: 0px 25px;
-	border-left: 1px solid lightgray;
-	border-right: 1px solid lightgray;
-}*/
 
 .carImg {
 	width: 150px;
@@ -230,6 +225,7 @@ input.attention {
 	border-radius: 5px;
 }
 
+
 /*lite mindre skärmar*/
 @media (max-width: 1099px) {
 	.userInfo {
@@ -277,3 +273,5 @@ input.attention {
 .addMargin{
 	margin-bottom: 15px;
 }
+
+

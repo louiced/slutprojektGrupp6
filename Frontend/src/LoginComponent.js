@@ -114,10 +114,8 @@ class LoginComponent extends React.Component {
 	loginClick(ev){
 		this.props.updateUserId('59e0ae387b00987a78f9977f'); //tillfälligt hack
 		this.props.updateView('UserView');
-
-/*
-      let self = this;
-
+      let self = this; 
+		/*
       axios.get('http://localhost:3000/users')
       .then(function (response) {
         console.log(response);
@@ -128,6 +126,7 @@ class LoginComponent extends React.Component {
         console.log(error);
       });
 	  */
+
     }
 	
 }

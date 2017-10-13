@@ -94,9 +94,11 @@ class BookCar extends React.Component {
 			console.log(err);
 		})
 	}
-	
+
 	
 	// Filters vehicles depending on users choices
+
+
 	filterCars(data){
 		let availableCars = [];
 		let unAvailableCars = [];
@@ -136,6 +138,7 @@ class BookCar extends React.Component {
 		}
 		this.renderCars(availableCars, unAvailableCars);
 	}
+
 	
 	
 	// Updates state and renders available and unavailable cars
@@ -158,6 +161,7 @@ class BookCar extends React.Component {
 
 	
 	// Event handlers
+
 	handlePickupDate(date){
 		this.setState({
 			pickupDate: date,
@@ -203,6 +207,4 @@ class BookCar extends React.Component {
 
 
 export default BookCar;
-
-
 

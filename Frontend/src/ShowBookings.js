@@ -58,6 +58,7 @@ class ShowBookings extends React.Component {
 					break;
 			case 'AnullmentConfirm': 
 				view = <div><p>Avbokningen är bekräftad</p></div>
+
 		}
 		return view;
 	}
@@ -95,7 +96,7 @@ class ShowBookings extends React.Component {
 			carBookings: data
 		});
 	}
-	
+
 	// Performs an anullment of choosen booking
 	anullBooking(ev){
 		let carId = ev.target.getAttribute('data-id');
@@ -109,6 +110,7 @@ class ShowBookings extends React.Component {
 				newBookedCars.push(car);
 			}
 		});
+
 		let pickedCar = this.state.carBookings.find(car => {
 			return car._id === carId
 		});
@@ -142,6 +144,7 @@ class ShowBookings extends React.Component {
 				bookedCars: data
 			}
 		});
+
 	}
 	
 	
