@@ -32,31 +32,15 @@ class AdminView extends React.Component{
     }
     this.switchTab = this.switchTab.bind(this);
     this.updateView = this.updateView.bind(this);
-    // this.switchCreateView = this.switchCreateView.bind(this);
-    // this.switchUpdateView = this.switchUpdateView.bind(this);
-    // this.switchDeleteView = this.switchDeleteView.bind(this);
 }
-// switchCreateView(){
-//   this.setState({
-//     view: 'createCars'
-//   })
-// }
-// switchUpdateView(){
-//   this.setState({
-//     view: 'updateCars'
-//   })
-// }
-// switchDeleteView(){
-//   this.setState({
-//     view: 'deleteCars'
-//   })
-// }
+//uppdatera view med view och data
 updateView(str,data){
   this.setState({
     view: str,
     data: data
   })
 }
+//den funktionen ska setState med nya id och view
 switchTab(ev){
   let id = ev.target.id;
   let newTabs = [];
@@ -84,12 +68,13 @@ switchTab(ev){
       view = 'deleteCars'
       break;
   }
-//setState with newtab signal and view
+//setState with newtab signal och view
   this.setState({
     tabs: newTabs,
     view: view
   });
 }
+//rendera sidan
   render(){
     let navBar = <ul className="navBar">
           <li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Läs Bil</span></li>
@@ -119,7 +104,6 @@ switchTab(ev){
           }
     return view;
   }
-
 }
 
 export default AdminView;
