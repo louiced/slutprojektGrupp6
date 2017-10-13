@@ -84,7 +84,7 @@ switchTab(ev){
       view = 'deleteCars'
       break;
   }
-
+//setState with newtab signal and view
   this.setState({
     tabs: newTabs,
     view: view
