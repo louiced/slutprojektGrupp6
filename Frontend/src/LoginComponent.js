@@ -25,7 +25,7 @@ class LoginComponent extends React.Component {
 	render(){
 		console.log(localStorage);
 		let view;
-		switch(this.state.view){
+		switch(this.state.view){ //Visar anting Login eller registerNew
 			case 'Login':
 				view = <div>
 						<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
@@ -75,8 +75,8 @@ class LoginComponent extends React.Component {
     //uppdaterar state så att loggedIn = true OM user matchar user i db
     updateLoginStatus(response){
       let allUsers = response.data;
-			console.log(allUsers)
-      allUsers.forEach( (el) => {
+		//allUser = hela db.users
+		allUsers.forEach( (el) => {
         if(this.state.email === el.email && this.state.pw === el.password) {
 		  //console.log('el mail: ', el.email, this.state.email);
           this.setState({
@@ -119,10 +119,6 @@ class LoginComponent extends React.Component {
     }
 
 	loginClick(ev){
-		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
-		//this.props.updateView('UserView');
-
-
       let self = this;
 
       axios.get('http://localhost:3000/users')

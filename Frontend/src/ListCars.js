@@ -28,8 +28,14 @@ class ListCars extends React.Component{
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
 					<div className="carInfo">
-						<p>{el.brand} - {el.model}</p>
-						<p>{el.vehicleType}</p>
+						<p><span>{el.brand}</span> {el.model}</p>
+						<p>Fordonstyp: {el.vehicleType}</p>
+						<p>Modell: </p>
+						<p>Årsmodell: {el.year}</p>
+						<p>Växellåda: {el.gearbox}</p>
+						<p>Bränsle: {el.fuel}</p>
+						<p>Körkort: {el.requiredDriversLicense}</p>
+						<p>Hyra: {el.dailyFee} per dygn</p>
 					</div>
 					<div data-id={el._id}>
 						<button className="btn" onClick={this.confirmBooking}>Boka</button>
@@ -42,8 +48,14 @@ class ListCars extends React.Component{
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
 					<div className="carInfo">
-						<p>{el.brand} - {el.model}</p>
-						<p>{el.vehicleType}</p>
+						<p><span>{el.brand}</span> {el.model}</p>
+						<p>Fordonstyp: {el.vehicleType}</p>
+						<p>Modell: </p>
+						<p>Årsmodell: {el.year}</p>
+						<p>Växellåda: {el.gearbox}</p>
+						<p>Bränsle: {el.fuel}</p>
+						<p>Körkort: {el.requiredDriversLicense}</p>
+						<p>Hyra: {el.dailyFee} per dygn</p>
 					</div>
 					<div>
 						<button className="btn" disabled>Avboka</button>
@@ -61,8 +73,15 @@ class ListCars extends React.Component{
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
 					<div className="carInfo">
-						<p>{el.brand} - {el.model}</p>
-						<p>{el.vehicleType}</p>
+						<p><span>{el.brand}</span> {el.model}</p>
+						<p>Fordonstyp: {el.vehicleType}</p>
+						<p>Modell: </p>
+						<p>Årsmodell: {el.year}</p>
+						<p>Växellåda: {el.gearbox}</p>
+						<p>Bränsle: {el.fuel}</p>
+						<p>Körkort: {el.requiredDriversLicense}</p>
+						<p>Hyra: {el.dailyFee} per dygn</p>
+						
 					</div>
 					<div data-id={el._id}>
 						<button className="btn" onClick={this.confirmBooking}>Boka</button>

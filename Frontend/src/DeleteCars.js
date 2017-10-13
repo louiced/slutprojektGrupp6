@@ -41,7 +41,29 @@ class DeleteCars extends React.Component{
   render(){
     let carList = this.state.carsInfo.map(car=> {
         let content = car.comments.map(x=>{return <li >{x}</li>})
-        return <li className="item" key={car._id} data-id={car._id} >
+        
+		return <div className="listCarBox row">
+			<div>
+				<p>Fordonstyp: {car.vehicleType}</p>
+				<p>Märke: {car.brand}</p>
+				<p>Modell: {car.model}</p>
+				<p>År: {car.year}</p>
+				<p>Växellåda: {car.gearbox}</p>
+				<p>Körkort: {car.requiredDriversLicense}</p>
+				<p>Bränsle: {car.fuel}</p>
+				<p>Dagshyra: {car.dailyFee}</p>
+				<p>Status: {car.status}</p>
+				<h4>Kommentarer:</h4>
+				<ul>{content}</ul>
+			</div>
+			<div>
+				<img className='list-item carImg'  src={car.imgLink} alt=""/>
+			</div>
+			<div>
+				<button className='btn' onClick={this.handleDelete}>Ta bort</button>
+			</div>
+		</div>								   
+		/*return <li className="item" key={car._id} data-id={car._id} >
           <span className="label">Märke:</span> <span>{car.brand}</span>
           <span className="label">Växellåda:</span> <span>{car.gearbox}</span>
           <span className="label">Modell: </span><span> {car.model}</span>
@@ -56,7 +78,7 @@ class DeleteCars extends React.Component{
           <img className='list-item'  src={car.imgLink} alt=""/>
           <br/>
           <button className='deleteButton' onClick={this.handleDelete}>Ta bort</button>
-        </li>
+        </li>*/
     })
     return (
       <ul className="list-group">

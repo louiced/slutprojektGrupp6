@@ -96,8 +96,8 @@ class RegisterComponent extends React.Component {
 		validateInput(obj){
       for(let key in obj) {
         if(obj.hasOwnProperty('name')) {
-          //tomma fält eller undefined:
-          if(obj.name.first === '' ||
+			//kontrollera först om några fält lämnats tomma, isf return false
+			if(obj.name.first === '' ||
              obj.name.last === '' ||
              obj.name.first === undefined ||
              obj.name.last === undefined ||
@@ -109,84 +109,84 @@ class RegisterComponent extends React.Component {
              obj.age === undefined ||
              obj.driversLicense === '' ||
              obj.driversLicense === undefined) {
-							 console.log('inga fält får lämnas tomma');
-							 console.log('returning false');
-							 this.setState({
-								 errMsg: 'Inga fält får lämnas tomma.',
-								 errMsgCss: 'errMsgCss'
-							 });
-							 return false;
-						 } else {
-							 //felaktigt format email:
-							 if(obj.email.indexOf('@') === -1) {
-								 this.setState({
-									 errMsg: 'felaktig emailadress',
-									 errMsgCss: 'errMsgCss',
-									 emailInputCss: 'attention'
-								 });
-								 console.log('felaktig emailadress');
-								 return false;
-							 } else {
-								 this.setState({
-									 emailInputCss: ''
-								 })
-							 }
-							 //felaktigt format age:
-							 if(isNaN(obj.age)) {
-								 console.log('ålder måste vara en siffra');
-								 this.setState({
-									 errMsg: 'Ålder måste vara en siffra',
-									 errMsgCss: 'errMsgCss',
-									 ageInputCss: 'attention'
-								 });
-								 return false;
-							 } else {
-								 this.setState({
-									 ageInputCss: '',
-								 })
-							 }
-
-							 if(typeof(obj.name.first)!== 'string') {
-								 this.setState({
-									 errMsg: 'Namn får bara vara bokstäver',
-									 errMsgCss: 'errMsgCss',
-									 nameInputCss: 'attention'
-								 });
-								 return false;
-							 } else {
-								 this.setState({
-									 nameFirstInputCss: '',
-								 })
-							 }
-							 if(typeof(obj.name.last)!== 'string') {
-								 this.setState({
-									 errMsg: 'Namn får bara vara bokstäver',
-									 errMsgCss: 'errMsgCss',
-									 nameInputCss: 'attention'
-								 });
-								 return false;
-							 } else {
-								 this.setState({
-									 nameLastInputCss: '',
-								 })
-							 }
-							 if(typeof(obj.driversLicense)!== 'string') {
-								 this.setState({
-									 errMsg: 'Körkort får bara ha bokstäver eller siffror',
-									 errMsgCss: 'errMsgCss',
-									 nameInputCss: 'attention'
-								 });
-								 return false;
-							 } else {
-								 this.setState({
-									 driversLicenseInputCss: '',
-								 })
-							 }
-							 console.log('returning true for validation');
-							 return true;
-						 }
-					 }
+				console.log('inga fält får lämnas tomma');
+				console.log('returning false');
+				this.setState({
+					 errMsg: 'Inga fält får lämnas tomma.',
+					 errMsgCss: 'errMsgCss'
+				 });
+				 return false;
+			 } else {
+				 //felaktigt format email returns false:
+				 if(obj.email.indexOf('@') === -1) {
+					 this.setState({
+						 errMsg: 'felaktig emailadress',
+						 errMsgCss: 'errMsgCss',
+						 emailInputCss: 'attention'
+					 });
+					 console.log('felaktig emailadress');
+					 return false;
+				 } else {
+					 this.setState({
+						 emailInputCss: ''
+					 })
 				 }
+				 //felaktigt format age returns false:
+				 if(isNaN(obj.age)) {
+					 console.log('ålder måste vara en siffra');
+					 this.setState({
+						 errMsg: 'Ålder måste vara en siffra',
+						 errMsgCss: 'errMsgCss',
+						 ageInputCss: 'attention'
+					 });
+					 return false;
+				 } else {
+					 this.setState({
+						 ageInputCss: '',
+					 })
+				 }
+
+				 if(typeof(obj.name.first)!== 'string') {
+					 this.setState({
+						 errMsg: 'Namn får bara vara bokstäver',
+						 errMsgCss: 'errMsgCss',
+						 nameInputCss: 'attention'
+					 });
+					 return false;
+				 } else {
+					 this.setState({
+						 nameFirstInputCss: '',
+					 })
+				 }
+				 if(typeof(obj.name.last)!== 'string') {
+					 this.setState({
+						 errMsg: 'Namn får bara vara bokstäver',
+						 errMsgCss: 'errMsgCss',
+						 nameInputCss: 'attention'
+					 });
+					 return false;
+				 } else {
+					 this.setState({
+						 nameLastInputCss: '',
+					 })
+				 }
+				 if(typeof(obj.driversLicense)!== 'string') {
+					 this.setState({
+						 errMsg: 'Körkort får bara ha bokstäver eller siffror',
+						 errMsgCss: 'errMsgCss',
+						 nameInputCss: 'attention'
+					 });
+					 return false;
+				 } else {
+					 this.setState({
+						 driversLicenseInputCss: '',
+					 })
+				 }
+				 console.log('returning true for validation');
+				 return true;
+			 }
+		 }
+	 }
 }
     userExists() {
       //jmf state.email och response.email
@@ -249,12 +249,6 @@ class RegisterComponent extends React.Component {
 		});
 	}
 	registerClick(ev){
-
-      /*console.log('state: ', this.state);
-      console.log('age: ', this.state.age);
-      console.log('typeof: ', typeof(this.state.age));
-      console.log('mail', this.state.email);*/
-
       let obj = {
         name: {
           first: this.state.firstName,
@@ -274,11 +268,11 @@ class RegisterComponent extends React.Component {
 					this.renderThanks(); //visa tack för registrering, visar sen UserView
 					this.getIdAndSend(obj.email);
 				} else {
-					//visa felmeddelande
+					//om anv finns, exists===true, stanna på registerNewCC
 					console.log('post did not succeed, user already exists');
 					this.props.updateView('registerNewCC');
 				}
-			} else {                                 //TODO: rendera felmeddelande
+			} else {
 				console.log('post did not succeed, validation error');
 				this.props.updateView('registerNewCC');
 			}
