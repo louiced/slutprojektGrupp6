@@ -6,7 +6,15 @@ var mongoose = require('mongoose'),
 
 //VEHICLES:
 //hittar alla vehicle-object
+
 exports.list_all_vehicles = (req, res) => {
+  Vehicles.find({}, (err, vehicle) => {
+    if (err)
+      res.send(err);
+    res.json(vehicle);
+  })
+}
+exports.list_vehicles = (req, res) => {
   var query = {};
   if(req.query.gearbox) query.gearbox = req.query.gearbox;
   if(req.query.fuel) query.fuel = req.query.fuel;
@@ -21,7 +29,7 @@ exports.list_all_vehicles = (req, res) => {
  // console.log(query)
  Vehicles.find(query, (err, vehicle) => {
    if (err)
-     res.send(err);
+   res.send(err);
    res.json(vehicle);
  })
 }

@@ -6,6 +6,9 @@ module.exports = (app) => {
     .get(olssonApi.list_all_vehicles) //visa alla fordon för admin och kund
     .post(olssonApi.create_a_vehicle); //lägg till nytt fordon
 
+ app.route('/vehicle')
+      .get(olssonApi.list_vehicles);
+
   app.route('/vehicles/:vehicleId')
     .get(olssonApi.read_a_vehicle)  //
     .put(olssonApi.update_a_vehicle)  //Lägg till ny information för fordon (admin), även vid uthyrning - uthyrd: true

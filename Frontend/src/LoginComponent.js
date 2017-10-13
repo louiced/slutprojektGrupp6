@@ -50,7 +50,6 @@ class LoginComponent extends React.Component {
 		if(localStorage.length > 0) {
 			let mail = localStorage.getItem('userEmail');
 			let pw = localStorage.getItem('userPw');
-			
 			this.setState({
 				email: mail,
 				pw: pw,
@@ -58,7 +57,7 @@ class LoginComponent extends React.Component {
 			})
 		}
 	}
-	
+
 
 	handleEmailInput(ev){
 		let val = ev.target.value;
@@ -98,7 +97,7 @@ class LoginComponent extends React.Component {
 		localStorage.setItem('userEmail', this.state.email);
 		localStorage.setItem('userPw', this.state.pw);
 		console.log(localStorage);
-		
+
         if(this.state.email !== 'admin@olsson.se') {
           this.props.updateUserId(this.state.loggedInAs._id);
           this.props.updateView('UserView');
@@ -124,7 +123,7 @@ class LoginComponent extends React.Component {
 		//this.props.updateView('UserView');
 
 
-      let self = this;      
+      let self = this;
 
       axios.get('http://localhost:3000/users')
       .then(function (response) {
