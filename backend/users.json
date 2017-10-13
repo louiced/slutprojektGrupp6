@@ -26,8 +26,8 @@
 			"first": "Yifei",
 			"last": "Wang"
 		},
-		"email": "",
-		"password": "",
+		"email": "yifei.wang@gmail.com",
+		"password": "sg2",
 		"age": 27,
 		"driversLicense": "B",
 		"bookedCars": []
@@ -37,8 +37,8 @@
 			"first": "Martin",
 			"last": "Larsson"
 		},
-		"email": "",
-		"password": "",
+		"email": "martin.larson@gmail.com",
+		"password": "sg3",
 		"age": 27,
 		"driversLicense": "B",
 		"bookedCars": []

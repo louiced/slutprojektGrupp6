@@ -27,9 +27,8 @@ class ListCars extends React.Component{
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
 					<div className="carInfo">
-						<p><span>{el.brand}</span> {el.model}</p>
+						<h4>{el.brand} - {el.model}</h4>
 						<p>Fordonstyp: {el.vehicleType}</p>
-						<p>Modell: </p>
 						<p>Årsmodell: {el.year}</p>
 						<p>Växellåda: {el.gearbox}</p>
 						<p>Bränsle: {el.fuel}</p>
@@ -47,9 +46,8 @@ class ListCars extends React.Component{
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
 					<div className="carInfo">
-						<p><span>{el.brand}</span> {el.model}</p>
+						<h4>{el.brand} - {el.model}</h4>
 						<p>Fordonstyp: {el.vehicleType}</p>
-						<p>Modell: </p>
 						<p>Årsmodell: {el.year}</p>
 						<p>Växellåda: {el.gearbox}</p>
 						<p>Bränsle: {el.fuel}</p>
@@ -57,7 +55,7 @@ class ListCars extends React.Component{
 						<p>Hyra: {el.dailyFee} per dygn</p>
 					</div>
 					<div>
-						<button className="btn" disabled>Avboka</button>
+						<button className="btn unav" disabled>Ej tillgänglig</button>
 					</div>
 				</div>
 				})
@@ -72,9 +70,8 @@ class ListCars extends React.Component{
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
 					<div className="carInfo">
-						<p><span>{el.brand}</span> {el.model}</p>
+						<h4>{el.brand} - {el.model}</h4>
 						<p>Fordonstyp: {el.vehicleType}</p>
-						<p>Modell: </p>
 						<p>Årsmodell: {el.year}</p>
 						<p>Växellåda: {el.gearbox}</p>
 						<p>Bränsle: {el.fuel}</p>

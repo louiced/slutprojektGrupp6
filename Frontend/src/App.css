@@ -67,6 +67,10 @@ html {
 .btn:disabled {
 	background-color: grey;
 }
+button.unav:hover {
+	background-color: grey;
+	cursor: default;
+}
 
 .btn:hover {
 	background-color: rgba(	204, 0, 0, .5);
@@ -136,7 +140,9 @@ select, input {
 	padding: 5px;
 	border-radius: 5px;
 }
-
+h4 {
+	margin-bottom: 5px;
+}
 ul {
 	margin: 0;
 	padding: 0;
@@ -293,20 +299,10 @@ select {
 		margin: 0;
 		padding: 10px;
 		font-size: 10px;
-		background-color: rgba(	204, 0, 0, 1);
+		background-color: rgba(0, 0, 0, .8);
 	}
-	/*.userInfo p {
-		display: none;
-	}*/
 }
 
-/*.selectField{
-	width: 125px
-}*/
-/*.status{
-	margin-left: -18px;
-	margin-top: 10px;
-}*/
 .addMargin{
 	margin-bottom: 15px;
 }

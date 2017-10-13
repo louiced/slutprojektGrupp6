@@ -76,6 +76,7 @@ class Update extends React.Component{
   }
   createCar(){
     let commentArray = this.state.commentArray;
+	  let self = this;
     commentArray.push(this.state.comments);
     //efter user har skrivit kommentarer, skick kommentarer till array
     //nedan uppdatera request with nya info
@@ -94,6 +95,7 @@ class Update extends React.Component{
       }
     })
     .then(function (response) {
+		self.props.updateView('updateCars');
     })
     .catch(function (error) {
       console.log(error);
@@ -127,7 +129,7 @@ class Update extends React.Component{
               <option value="unavailable">Otillgänligt</option>
             </select>
             <textarea type="text" value={this.state.comments} onChange={this.handleComment} placeholder={this.props.data.comments}/>
-            <button className='addButton' onClick={this.createCar}>Lägg till</button>
+            <button className='btn' onClick={this.createCar}>Uppdatera</button>
           </div>
         </div>
       )

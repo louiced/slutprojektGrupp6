@@ -35,8 +35,8 @@ class LoginComponent extends React.Component {
 				break;
 			case 'localstorage':
 				view = <div>
-						<input type="text" placeholder="Epost" onChange={this.handleEmailInput} value={this.state.email}/>
-						<input type="password" placeholder="Lösenord" onChange={this.handlePwInput} value={this.state.pw}/>
+						<input type="text" placeholder="Epost" value={this.state.email} onChange={this.handleEmailInput}/>
+						<input type="password" placeholder="Lösenord" value={this.state.pw} onChange={this.handlePwInput}/>
 						<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
 						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
 					</div>

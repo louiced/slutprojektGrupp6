@@ -76,9 +76,8 @@ class ShowCars extends React.Component{
       let content = car.comments.map(x=>{return <li key={x}>{x}</li>})
       return <div key={key++} className="listCarBox row">
         <div>
-          <p>Fordonstyp: {car.vehicleType}</p>
-          <p>Märke: {car.brand}</p>
-				<p>Modell: {car.model}</p>
+          <h4>{car.brand} - {car.model}</h4>
+			<p>Fordonstyp: {car.vehicleType}</p>
 				<p>År: {car.year}</p>
 				<p>Växellåda: {car.gearbox}</p>
 				<p>Körkort: {car.requiredDriversLicense}</p>
@@ -99,7 +98,7 @@ class ShowCars extends React.Component{
         <input type="text" value={this.state.fuelFilter} onChange={this.handlefuelFilter} placeholder='Bränsle'/>
      </div>
      <div className="createForm2">
-       <input type="text" value={this.state.gearFilter} onChange={this.handlegearFilter} placeholder='VäxelBox'/>
+       <input type="text" value={this.state.gearFilter} onChange={this.handlegearFilter} placeholder='Växellåda'/>
        <input type="text" value={this.state.driveLicFilter} onChange={this.handledriveLicFilter} placeholder='Körkort'/>
      </div>
      <button className='btn' onClick={this.findCars}>Filtrera</button>
