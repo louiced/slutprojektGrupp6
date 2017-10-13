@@ -106,7 +106,7 @@ switchTab(ev){
               view =  <div className="mainContent">{navBar} <CreateCars updateView={this.switchTab}/></div>;
               break;
             case  'updateCars':
-              view =  <div className="mainContent">{navBar} <UpdateCars updateView={this.switchTab}/></div>;
+              view =  <div className="mainContent">{navBar} <UpdateCars updateView={this.updateView}/></div>;
 
               break;
             case  'deleteCars':

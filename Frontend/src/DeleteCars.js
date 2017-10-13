@@ -31,7 +31,6 @@ class DeleteCars extends React.Component{
       url: `/vehicles/${ev.target.parentElement.getAttribute('data-id')}`
     })
     .then(function (response) {
-      debugger
      this.getInfo();
     }.bind(this))
     .catch(function (error) {
