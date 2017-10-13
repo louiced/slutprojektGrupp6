@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
-import BookCar from './BookCar.js';
+import BookCar from './bookCar.js';
 import LoginComponent from './LoginComponent.js';
 import RegisterComponent from './RegisterComponent.js';
 import UserView from './UserView.js';
@@ -23,7 +23,6 @@ class ViewSelector extends React.Component{
 			view: 'Login',
 			loggedInAs: null
 		}
-		this.ccLoginClick = this.ccLoginClick.bind(this);
 		this.switchTab = this.switchTab.bind(this);
 		this.updateView = this.updateView.bind(this);
 		this.updateUserId = this.updateUserId.bind(this);
@@ -38,9 +37,7 @@ class ViewSelector extends React.Component{
 				<button className="btn" onClick={this.logOutClick}>LOGGA UT</button>
 				<p>Inloggad som {this.state.loggedInAs.name.first} {this.state.loggedInAs.name.last}</p>
 			</div>
-		} else {
-			//logOutBox = <div>LOGUTBOXJÄVEL</div>
-		}
+		} 
 
 		let navBar = <ul className="navBar">
 					<li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Logga in</span></li>
@@ -67,14 +64,8 @@ class ViewSelector extends React.Component{
 		return view;
 	}
 
-	ccLoginClick(ev){
-		this.setState({
-			view: 'bookCar'
-		});
-	}
-
+	// Switch between login and register tabs
 	switchTab(ev){
-		console.log(ev.target.id);
 		let id = ev.target.id;
 		let newTabs = [];
 		let view;
@@ -94,18 +85,21 @@ class ViewSelector extends React.Component{
 		});
 	}
 
+	// Updates view
 	updateView(str){
 		this.setState({
 			view: str
 		});
 	}
 
+	// Updates userId in state for other components to use
 	updateUserId(str){
 		this.setState({
 			userId: str
 		});
 	}
 
+	// Logs user out
 	logOutClick(ev){
 		localStorage.removeItem('userEmail');
 		localStorage.removeItem('userPw');
@@ -114,6 +108,7 @@ class ViewSelector extends React.Component{
 		});
 	}
 
+	// Updates state with complete user object
 	updateUserInfo(user) {
 		this.setState({
 			loggedInAs: user
@@ -122,14 +117,3 @@ class ViewSelector extends React.Component{
 }
 
 export default ViewSelector;
-
-
-/*
-
-				<div className="btnBox">
-				<button className="btn" onClick={this.ccLoginClick}>LOGGA IN SOM KUND</button>
-				<button className="btn">LOGGA IN SOM ADMIN</button>
-				<button className="logOutBtn btn" onClick={this.logOut}>Logga ut</button>
-			</div>
-
-			<button className="logOutBtn btn" onClick={this.logOut}>Logga ut</button>*/

@@ -23,9 +23,8 @@ class LoginComponent extends React.Component {
 		this.validateLogin = this.validateLogin.bind(this);
 	}
 	render(){
-		console.log(localStorage);
 		let view;
-		switch(this.state.view){
+		switch(this.state.view){ //Visar anting Login eller registerNew
 			case 'Login':
 				view = <div>
 						<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
@@ -75,10 +74,9 @@ class LoginComponent extends React.Component {
     //uppdaterar state så att loggedIn = true OM user matchar user i db
     updateLoginStatus(response){
       let allUsers = response.data;
-			console.log(allUsers)
-      allUsers.forEach( (el) => {
+		//allUser = hela db.users
+		allUsers.forEach( (el) => {
         if(this.state.email === el.email && this.state.pw === el.password) {
-		  //console.log('el mail: ', el.email, this.state.email);
           this.setState({
             isLoggedIn: true,
             loggedInAs: el
@@ -90,19 +88,15 @@ class LoginComponent extends React.Component {
     }
     //admin ? AdminView : UserView
     validateLogin(){
-      console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
-      console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
 
       if(this.state.isLoggedIn === true) {
 		localStorage.setItem('userEmail', this.state.email);
 		localStorage.setItem('userPw', this.state.pw);
-		console.log(localStorage);
 
         if(this.state.email !== 'admin@olsson.se') {
           this.props.updateUserId(this.state.loggedInAs._id);
           this.props.updateView('UserView');
         } else {
-          console.log('adminview');
           this.props.updateView('AdminView');
         }
       } else if(this.state.email === '' || this.state.pw === '') {
@@ -119,10 +113,6 @@ class LoginComponent extends React.Component {
     }
 
 	loginClick(ev){
-		//this.props.updateUserId('59db86564ea876260441ec21'); //tillfälligt hack
-		//this.props.updateView('UserView');
-
-
       let self = this;
 
       axios.get('http://localhost:3000/users')
@@ -134,7 +124,9 @@ class LoginComponent extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
+
     }
+	
 }
 
 export default LoginComponent;

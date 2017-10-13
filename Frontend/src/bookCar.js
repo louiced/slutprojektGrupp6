@@ -88,21 +88,24 @@ class BookCar extends React.Component {
 		let self = this;
 		axios.get('/vehicles')
 		.then(res => {
-			//console.log(res.data);
 			self.filterCars(res.data);
 		})
 		.catch(err => {
 			console.log(err);
 		})
 	}
-	
+
 	
 	// Filters vehicles depending on users choices
+
+
 	filterCars(data){
 		let availableCars = [];
 		let unAvailableCars = [];
 		let myPickupDate = this.state.pickupDate.valueOf();
 		let myReturnDate = this.state.returnDate.valueOf();
+		
+		// Filter 
 		for (let o in data){
 			let obj = data[o];
 			
@@ -135,7 +138,10 @@ class BookCar extends React.Component {
 		}
 		this.renderCars(availableCars, unAvailableCars);
 	}
+
 	
+	
+	// Updates state and renders available and unavailable cars
 	renderCars(availableCars, unAvailableCars){
 		this.setState({
 			availableCars,
@@ -144,6 +150,7 @@ class BookCar extends React.Component {
 		});
 	}
 	
+	// Updates state with new view and new "now"-moment
 	updateView(str){
 		this.setState({
 			view: str,
@@ -154,9 +161,8 @@ class BookCar extends React.Component {
 
 	
 	// Event handlers
+
 	handlePickupDate(date){
-		//let pickupDate = ev.target.value;
-		//console.log(pickupDate);
 		this.setState({
 			pickupDate: date,
 			returnDate: date
@@ -164,7 +170,6 @@ class BookCar extends React.Component {
 	}
 
 	handleReturnDate(date){
-		//let returnDate = ev.target.value;
 		this.setState({
 			returnDate: date
 		});
@@ -200,22 +205,6 @@ class BookCar extends React.Component {
 	}
 }
 
-/*<form>
-			<span>Boka från: </span><input type="date" name="bookDate" min={new Date()} onChange={this.handlePickupDate}/>
-		</form>
-			<form>
-			<span>Till och med:  </span><input type="date" name="bookDate" min={new Date()} onChange={this.handleReturnDate}/>
-		</form>*/
 
 export default BookCar;
-/*
-class ShowCarList {
-	componentDidMount(){
-		// Make GET request
-		// Map list of cars
-		// Filter?
-	}
-}
 
-&& obj.dailyFee <= this.state.maxRentFilter && obj.driversLicense === this.state.driveLicFilter
-*/

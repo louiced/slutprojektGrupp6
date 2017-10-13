@@ -20,24 +20,24 @@ class ShowBookings extends React.Component {
 	}
 	render(){
 		let view;
-		//console.log(this.state.bookedCars);
 		switch(this.state.view){
 			case 'ShowBookings':
 				if (this.state.bookedCars.length > 0){ //
+
 			let key = 0;
 				let carList = this.state.bookedCars.map(car => {
-					console.log('carObj ', car.carObj)
 				return <div className="carBox row" key={key++}>
 					<div>
 						<img className="carImg" src={car.carObj.imgLink} alt="#"/>
 					</div>
 					<div className="carInfo">
-						<p>datum</p>
-						<p>{car.carObj.brand} - {car.carObj.model}</p>
-						<p>{car.carObj.vehicleType}, körkort: {car.carObj.requiredDriversLicense}</p>
+						<span style={{fontWeight: 'bold'}}>{car.carObj.brand}</span><span> {car.carObj.model}</span>
+						<p style={{fontWeight: 'bold'}}>Hämtas </p><p> {new Date(Number(car.pickupDate)).toLocaleDateString()}</p>
+						<p style={{fontWeight: 'bold'}}>Lämnas tillbaka </p><p> {new Date(Number(car.returnDate)).toLocaleDateString()}</p>
+						
 					</div>
 					<div>
-						<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
+						<button data-id={car.carObj._id} data-datestring={car.dateString} onClick={this.confirmAnullment} className="btn">Avboka</button>
 					</div>
 				</div>
 			})
@@ -59,15 +59,16 @@ class ShowBookings extends React.Component {
 					break;
 			case 'AnullmentConfirm': 
 				view = <div><p>Avbokningen är bekräftad</p></div>
+
 		}
 		return view;
 	}
 
+	// Gets previous bookings for loggedin user and gets vehicleDocument
 	componentDidMount(){
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
-			console.log(res.data.bookedCars);
 			self.renderCars(res.data.bookedCars);
 		})
 		.catch(err => {
@@ -83,32 +84,34 @@ class ShowBookings extends React.Component {
 		})
 	}
 
+	// Renders list of users booked cars
 	renderCars(data){
 		this.setState({
 			bookedCars: data
 		});
 	}
 
+	// Saves carbookings to state
 	renderVehicles(data){
 		this.setState({
 			carBookings: data
 		});
 	}
-	
+
+	// Performs an anullment of choosen booking
 	anullBooking(ev){
 		let carId = ev.target.getAttribute('data-id');
 		let dateString = ev.target.getAttribute('data-datestring');
-		// 
-		//console.log(carTime);
 		let newBookedCars = [];
 		let newBookingsForCar = [];
 		
+		// Finds clicked booking
 		this.state.bookedCars.forEach(car => {
 			if (car.dateString !== dateString){
 				newBookedCars.push(car);
 			}
 		});
-		console.log("newBookedCars", newBookedCars);
+
 		let pickedCar = this.state.carBookings.find(car => {
 			return car._id === carId
 		});
@@ -116,15 +119,16 @@ class ShowBookings extends React.Component {
 		let newBookingsForCarDoc = pickedCar.bookings.filter(book => {
 			return book.dateString !== dateString
 		})
-		console.log("pickedCar ", pickedCar);
 		this.updateUserDocument(newBookedCars);
 		this.updateVehicleDocument(newBookingsForCarDoc, carId);
 		
-		console.log(newBookedCars);
+		// Updates state and confirms that anullment has been made
 		this.setState({
 			bookedCars: newBookedCars,
 			view: 'AnullmentConfirm'
 		});
+		
+		// Goes back to MyBooking, 3s
 		setTimeout( () => {
 			this.setState({
 				view: 'ShowBookings'
@@ -132,6 +136,7 @@ class ShowBookings extends React.Component {
 		}, 3000);
 	}
 	
+	// Put to DB, User
 	updateUserDocument(data){
 		axios({
 			method: 'put',
@@ -140,8 +145,11 @@ class ShowBookings extends React.Component {
 				bookedCars: data
 			}
 		});
+
 	}
 	
+	
+	// Put to DB, Vehicle
 	updateVehicleDocument(data, id){
 		axios({
 			method: 'put',
@@ -152,6 +160,7 @@ class ShowBookings extends React.Component {
 		});
 	}
 	
+	// Asks user to confirm anullment
 	confirmAnullment(ev){
 		this.setState({
 			view: 'ConfirmAnull',
@@ -160,6 +169,7 @@ class ShowBookings extends React.Component {
 		});
 	}
 	
+	// User chooses NOT to proceed
 	noAnullment(){
 		this.setState({
 			view: 'ShowBookings'

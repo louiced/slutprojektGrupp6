@@ -118,14 +118,14 @@ class CreateCars extends React.Component{
         <input type="text" value={this.state.gearbox} onChange={this.handleGearbox} placeholder='Växellåda'/>
         <input type="text" value={this.state.dailyFee} onChange={this.handleDailyFee} placeholder='Dagshyra'/>
       </div>
-      <div className="createForm2 addMargin">
-        <select className='selectField status' required value={this.state.status}  onChange={this.handleStatus}>
+      <div className="createForm2">
+        <select className='selectField' required value={this.state.status}  onChange={this.handleStatus}>
           <option value='' disabled defaultValue hidden>Välj Status</option>
           <option value="available">Tillgängligt</option>
           <option value="unavailable">Otillgängligt</option>
         </select>
         <textarea type="text" value={this.state.comments} onChange={this.handleComment} placeholder='Kommentarer'/>
-        <button className='addButton' onClick={this.createCar}>Lägg till</button>
+        <button className='btn' onClick={this.createCar}>Lägg till</button>
       </div>
     </div>
   }

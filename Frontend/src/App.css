@@ -151,18 +151,46 @@ ul {
 	justify-content: space-around;
 	align-items: center;
 }
-
+.listCarBox {
+	border-bottom: 1px solid black;
+	padding: 20px 0px;
+}
+.listCarBox div {
+	width: 45%;
+}
+.listCarBox div:first-child {
+	text-align: left;
+}
+.listCarBox div:first-child p {
+	padding: 2px;
+	margin: 0;
+}
+.listCarBox div:first-child ul {
+	list-style: none;
+}
 .carBox {
 	border-bottom: 1px solid black;
+	padding: 20px 0px;
 }
 .carBox div {
 	width: 30%;
 }
-/*.carInfo {
-	padding: 0px 25px;
-	border-left: 1px solid lightgray;
-	border-right: 1px solid lightgray;
-}*/
+.carBox div:nth-child(2) {
+	text-align: left;
+}
+.carBox div:nth-child(2) p {
+	padding: 2px;
+	margin: 0;
+}
+span.bolder {
+	font-weight: bold;
+}
+.red {
+	color: red;
+}
+carInfo p:first-child {
+	color: yellow !important;
+}
 
 .carImg {
 	width: 150px;
@@ -190,9 +218,10 @@ input.attention {
 .li{
 	list-style: none;
 }
+/*
 .list-item{
 	width: 45%;
-}
+}*/
 .form {
 	width: 80%;
 	margin-top: 4%;
@@ -210,6 +239,9 @@ input.attention {
 }
 .form input, .form select {
 	width: 100px;
+}
+select {	
+	height: 2.5em;
 }
 .addButton{
 	width: 56px;
@@ -229,6 +261,7 @@ input.attention {
 	width: 68px;
 	border-radius: 5px;
 }
+
 
 /*lite mindre skärmar*/
 @media (max-width: 1099px) {
@@ -267,13 +300,15 @@ input.attention {
 	}*/
 }
 
-.selectField{
+/*.selectField{
 	width: 125px
-}
-.status{
+}*/
+/*.status{
 	margin-left: -18px;
 	margin-top: 10px;
-}
+}*/
 .addMargin{
 	margin-bottom: 15px;
 }
+
+
