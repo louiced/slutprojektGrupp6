@@ -10,32 +10,31 @@ class DeleteCars extends React.Component{
     this.handleDelete = this.handleDelete.bind(this);
     this.getInfo = this.getInfo.bind(this);
   }
+  //första när laddar sidan, ska anropa getInfo function
   componentDidMount(){
     this.getInfo();
   }
   getInfo(){
     axios.get('/vehicles')
-      .then(function (response) {
-        this.setState({
-          carsInfo: response.data
-        }, ()=>{})
-      }.bind(this))
-      .catch(function (error) {
-        console.log(error);
-      });
+    .then(function (response) {
+      this.setState({
+        carsInfo: response.data
+      }, ()=>{})
+    }.bind(this))
+    .catch(function (error) {
+      console.log(error);
+    });
   }
+  //med delete Api för att ta bort specifik bil
   handleDelete(ev){
-    // let self = this;
     axios({
       method: 'delete',
       url: `/vehicles/${ev.target.getAttribute('data-id')}`
     })
     .then(function (response) {
-      console.log(response)
-     this.getInfo();
+      this.getInfo();
     }.bind(this))
     .catch(function (error) {
-      console.log(error);
     });
   }
 
@@ -67,7 +66,7 @@ class DeleteCars extends React.Component{
     })
     return (
       <ul className="list-group">
-       {carList}
+        {carList}
       </ul>
     )
   }

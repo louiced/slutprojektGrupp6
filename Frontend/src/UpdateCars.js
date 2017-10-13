@@ -26,11 +26,10 @@ class UpdateCars extends React.Component{
       console.log(error);
     });
   }
-  //
+  //render sidan med olika property av bilar
 render(){
   let key = 0;
   let carList = this.state.carsInfo.map(car=> {
-    // if(car.comments.length !== 0){
     let content = car.comments.map(x=>{return <li key={x} >{x}</li>});
     return <div key={key++} className="listCarBox row">
       <div>

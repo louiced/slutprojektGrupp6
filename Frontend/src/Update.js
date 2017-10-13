@@ -26,49 +26,49 @@ class Update extends React.Component{
     this.handleComment = this.handleComment.bind(this);
     this.handleYear = this.handleYear.bind(this);
   }
-// after man wrote in vehicle input, setState with new value in input field
+
   fordontype(ev){
     this.setState({
       vehicleType: ev.target.value
     },()=>{})
   }
-  // after man wrote in brand input, setState with new value in input field
+  // efter man skrev in vehicleType input, setState med ny value i input fälte
   handleBrand(ev){
     this.setState({
       brand: ev.target.value
     },()=>{})
   }
-  // after man wrote in model input, setState with new value in input field
+  // efter man skrev in brand input, setState med ny value i input fälte
   handleModel(ev){
     this.setState({
       model: ev.target.value
     },()=>{})
   }
-   // after man wrote in gearbox input, setState with new value in input field
+   // efter man skrev in modell input, setState med ny value i input fälte
   handleGearbox(ev){
     this.setState({
       gearbox: ev.target.value
     },()=>{})
   }
-  // after man wrote in status input, setState with new value in input field
+  // efter man skrev in gearbox input, setState med ny value i input fälte
   handleStatus(ev){
     this.setState({
       status: ev.target.value
     },()=>{})
   }
-  // after man wrote in dailyFee input, setState with new value in input field
+  // efter man skrev in status input, setState med ny value i input fälte
   handleDailyFee(ev){
     this.setState({
       dailyFee: ev.target.value
     },()=>{})
   }
-  // after man wrote in dailyFee input, setState with new value in input field
+  // efter man skrev in dailyFee input, setState med ny value i input fälte
   handleComment(ev){
     this.setState({
       comments: ev.target.value
     },()=>{})
   }
-  // after man wrote in year input, setState with new value in input field
+  // efter man skrev in comments input, setState med ny value i input fälte
   handleYear(ev){
     this.setState({
       year: ev.target.value
@@ -77,8 +77,8 @@ class Update extends React.Component{
   createCar(){
     let commentArray = this.state.commentArray;
     commentArray.push(this.state.comments);
-    //after user have writted comments, send comments to array
-    //below will be update request with new info to update
+    //efter user har skrivit kommentarer, skick kommentarer till array
+    //nedan uppdatera request with nya info
     axios({
       method: 'put',
       url: `/vehicles/${this.state.id}`,
@@ -99,7 +99,7 @@ class Update extends React.Component{
       console.log(error);
     });
   }
-  //render page
+  //rendera sidan
   render(){
       return(
         <div>
