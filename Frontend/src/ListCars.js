@@ -7,8 +7,7 @@ class ListCars extends React.Component{
 		super(props);
 		this.state = {
 			bookedCars: [],
-			view: "ListCars",
-			bookBool: false
+			view: "ListCars"
 		};
 		this.bookCarClick = this.bookCarClick.bind(this);
 		this.updateUserDocument = this.updateUserDocument.bind(this);
@@ -104,17 +103,19 @@ class ListCars extends React.Component{
 				</div>
 		}
 
-
 		return <div>{view}</div>
+
 
 	}
 
 	componentDidMount(){
 
 		// Gets previous booked cars of loggedIn user
+		console.log(this.props.userId);
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
+			console.log(res.data);
 			self.updateStateCars(res.data.bookedCars); //List of booked cars for user
 		})
 		.catch(err => {
@@ -122,6 +123,7 @@ class ListCars extends React.Component{
 		})
 	}
 
+	// When user confirms booking
 	bookCarClick(ev){
 
 		let id = ev.target.getAttribute('data-id');
@@ -129,6 +131,8 @@ class ListCars extends React.Component{
 		let pickupString = this.props.pickupDate.toLocaleString();
 		let returnString = this.props.returnDate.toLocaleString();
 		let dateString = `${pickupString} - ${returnString}`;
+		
+		// Find clicked car and build object
 		this.props.data.forEach(data => {
 			if (data._id === id){
 				obj = {
@@ -144,6 +148,7 @@ class ListCars extends React.Component{
 		let self = this;
 		axios.get(`http://localhost:3000/vehicles/${id}`)
 		.then(res => {
+			console.log(res.data);
 			self.updateStateBookings(res.data.bookings, id);
 		})
 		.catch(err => {
@@ -153,7 +158,6 @@ class ListCars extends React.Component{
 
 	// Updates state with previous bookings of specific (clicked) car
 	updateStateBookings(list, id){
-
 		this.setState({
 			previousCarBookings: list
 		});
@@ -180,20 +184,20 @@ class ListCars extends React.Component{
 		});
 	}
 
-
 	// Updates VehicleDB with previous bookings AND new booking
 	updateVehicleDocument(id){
 		let list = this.state.previousCarBookings;
 		let pickupString = this.props.pickupDate.toLocaleString();
 		let returnString = this.props.returnDate.toLocaleString();
 		let dateString = `${pickupString} - ${returnString}`;
-		//console.log("dateString", dateString);
 		let obj = {
 			pickupDate: this.props.pickupDate.valueOf(),
 			returnDate: this.props.returnDate.valueOf(),
 			dateString: dateString
 		};
 		list.push(obj);
+		
+		// Put to DB
 		axios({
 			method: 'put',
 			url: `http://localhost:3000/vehicles/${id}`,
@@ -202,11 +206,13 @@ class ListCars extends React.Component{
 			}
 		});
 
+		// Render thanks-view
 		this.setState({
 			view: 'Thanks'
 		});
 	}
 
+	// Asks user to confirm booking
 	confirmBooking(ev){
 		let id = ev.target.parentElement.getAttribute('data-id');
 		this.setState({
@@ -215,16 +221,19 @@ class ListCars extends React.Component{
 		});
 	}
 
+	// User chooses NOT to book car
 	noBooking(ev){
 		this.setState({
 			view: 'ListCars'
 		});
 	}
 
+	// Renders new search-for-car page
 	bookMoreCars(ev){
 		this.props.bookCar('bookCar');
 	}
 
+	// Renders MyBookings
 	showBookings(ev){
 		this.props.showBookings();
 	}

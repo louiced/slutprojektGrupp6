@@ -58,8 +58,6 @@ class RegisterComponent extends React.Component {
       let self = this;
       axios.get('http://localhost:3000/users')
       .then(function (response) {
-        console.log(response);
-        console.log(response.data);
         self.setState({
           allUsers: response.data
         })
@@ -86,8 +84,6 @@ class RegisterComponent extends React.Component {
 			this.setState({
 				view: 'Thanks'
 			})
-			console.log('render thanks körs');
-			console.log(this.state.view);
 			let self = this;
 			setTimeout(function() {
 				self.props.updateView('UserView');
@@ -109,8 +105,7 @@ class RegisterComponent extends React.Component {
              obj.age === undefined ||
              obj.driversLicense === '' ||
              obj.driversLicense === undefined) {
-				console.log('inga fält får lämnas tomma');
-				console.log('returning false');
+				
 				this.setState({
 					 errMsg: 'Inga fält får lämnas tomma.',
 					 errMsgCss: 'errMsgCss'
@@ -145,6 +140,7 @@ class RegisterComponent extends React.Component {
 						 ageInputCss: '',
 					 })
 				 }
+
 
 				 if(typeof(obj.name.first)!== 'string') {
 					 this.setState({
@@ -190,7 +186,6 @@ class RegisterComponent extends React.Component {
 }
     userExists() {
       //jmf state.email och response.email
-      console.log(this.state.allUsers);
       let exists = this.state.allUsers.find( (el) => {
         return el.email === this.state.email;
       });

@@ -22,7 +22,6 @@ class UserView extends React.Component {
 		};
 		this.switchTab = this.switchTab.bind(this);
 		this.showBookings = this.showBookings.bind(this);
-		this.bookCar = this.bookCar.bind(this);
 	}
 	render(){
 		let view;
@@ -39,6 +38,8 @@ class UserView extends React.Component {
 		return view;
 	}
 
+	
+	// Switches between BookCar and ShowBookings
 	switchTab(ev){
 		let id = ev.target.id;
 		let newTabs = [];
@@ -58,16 +59,21 @@ class UserView extends React.Component {
 			view: view
 		});
 	}
+	
+	// Switches to ShowBookings (props)
 	showBookings(){
 		this.setState({
-			view: 'showBookings'
-		});
-	}
-	
-	bookCar(){
-		console.log('körs');
-		this.setState({
-			view: 'bookCar'
+			view: 'showBookings',
+			tabs: [
+				{
+					class: '',
+					id: 'tab1'
+				},
+				{
+					class: 'active',
+					id: 'tab2'
+				}
+			]
 		});
 	}
 }

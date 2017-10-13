@@ -262,6 +262,7 @@ select {
 	border-radius: 5px;
 }
 
+
 /*lite mindre skärmar*/
 @media (max-width: 1099px) {
 	.userInfo {
@@ -309,3 +310,5 @@ select {
 .addMargin{
 	margin-bottom: 15px;
 }
+
+
