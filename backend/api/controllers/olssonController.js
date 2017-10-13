@@ -64,7 +64,7 @@ exports.update_a_vehicle = (req, res) => {
     console.log('vehicle: ', vehicle);
     if (err)
       res.send(err);
-	
+
     res.json(vehicle);
   })
 }

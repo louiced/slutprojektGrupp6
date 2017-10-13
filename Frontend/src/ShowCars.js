@@ -18,24 +18,7 @@ class ShowCars extends React.Component{
    this.handledriveLicFilter = this.handledriveLicFilter.bind(this);
    this.handlegearFilter = this.handlegearFilter.bind(this);
   }
-  // filterCars(data){
-	// 	let newData = [];
-	// 	for (let o in data){
-	// 		let obj = data[o];
-	// 		if(obj.gearbox === this.state.gearFilter || this.state.gearFilter === undefined){
-	// 			if(obj.fuel === this.state.fuelFilter || this.state.fuelFilter === undefined){
-	// 				if(obj.dailyFee <= this.state.maxRentFilter){
-	// 					if(obj.requiredDriversLicense === this.state.driveLicFilter || this.state.driveLicFilter === undefined){
-	// 						newData.push(obj);
-	// 					}
-	// 				}
-	// 			}
-	// 		}
-	// 	}
-  //   this.setState({
-  //     carsInfo: newData
-  //   })
-  // }
+  
   handlemaxRentFilter(ev){
     this.setState({
       maxRentFilter: ev.target.value
@@ -58,7 +41,7 @@ class ShowCars extends React.Component{
   }
   componentDidMount(){
     let self = this
-    axios.get('/vehicle')
+    axios.get('/vehicles')
     .then(function (response) {
       self.setState({
         carsInfo: response.data
@@ -88,35 +71,13 @@ class ShowCars extends React.Component{
     });
   }
   render(){
+    let key = 0;
     let carList = this.state.carsInfo.map(car=> {
-      // if(car.comments.length !== 0){
-        let content = car.comments.map(x=>{return <li>{x}</li>})
-      // let commentList = car.comments.map(x=>{
-      //   console.log(x)
-        // let r = Object.keys(x) //new array with all keys in comments array
-        // r.forEach(y=>{x[y]})
-        // return <li>{}</li>
-        /*return <li className="item" key={car._id} data-id={car._id} >
-          <span className="label">Märke:</span> <span>{car.brand}</span>
-          <span className="label">Växellåda:</span> <span>{car.gearbox}</span>
-          <span className="label">Modell: </span><span> {car.model}</span>
-          <span className="label">Dagshyra: </span><span> {car.dailyFee}</span>
-          <span className="label">År: </span><span> {car.year}</span>
-          <span className="label">Bränsle: </span><span> {car.fuel}</span>
-          <span className="label">Obligatoriskt körkort: </span><span> {car.requiredDriversLicense}</span>
-          <span className="label">Fordonstyp: </span><span> {car.vehicleType}</span>
-          <span className="label">Status: </span><span> {car.status}</span>
-          <span className="label">Kommentarer: </span><span> <ul className='li'>{content}</ul></span>
-          <br/>
-          <img className='list-item carImg'  src={car.imgLink} alt=""/>
-          <br/>
-        </li>*/
-		
-		
-		return <div className="listCarBox row">
-			<div>
-				<p>Fordonstyp: {car.vehicleType}</p>
-				<p>Märke: {car.brand}</p>
+      let content = car.comments.map(x=>{return <li key={x}>{x}</li>})
+      return <div key={key++} className="listCarBox row">
+        <div>
+          <p>Fordonstyp: {car.vehicleType}</p>
+          <p>Märke: {car.brand}</p>
 				<p>Modell: {car.model}</p>
 				<p>År: {car.year}</p>
 				<p>Växellåda: {car.gearbox}</p>
@@ -131,24 +92,6 @@ class ShowCars extends React.Component{
 				<img className='list-item carImg'  src={car.imgLink} alt=""/>
 			</div>
 		</div>
-		
-      //}
-      // else{
-      //   return <li className="item" key={car._id} data-id={car._id} >
-      //     <span className="label">Brand:</span> <span>{car.brand}</span>
-      //     <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
-      //     <span className="label">Model: </span><span> {car.model}</span>
-      //     <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
-      //     <span className="label">Year: </span><span> {car.year}</span>
-      //     <span className="label">Fuel: </span><span> {car.fuel}</span>
-      //     <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
-      //     <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
-      //     <span className="label">Status: </span><span> {car.status}</span>
-      //     <br/>
-      //     <img className='list-item'  src={car.imgLink} alt=""/>
-      //     <br/>
-      //   </li>
-      // }
     })
     return <div>
       <div className="createForm2">

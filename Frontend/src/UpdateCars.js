@@ -12,8 +12,8 @@ class UpdateCars extends React.Component{
     this.state = {
       carsInfo: []
     }
-    // this.clickUpdateCar = this.clickUpdateCar.bind(this);
   }
+  //först ladda sidan visa alla bilarnas info
   componentDidMount(){
     let self = this
     axios.get('/vehicles')
@@ -26,28 +26,14 @@ class UpdateCars extends React.Component{
       console.log(error);
     });
   }
-// clickUpdateCar(ev){
-//
-//   this.props.updateView('update');
-//   let id = ev.target.parentElement.getAttribute('data-id');
-//   // for(let n=0;n<this.state.carsInfo.length;n++){
-//   //   console.log(this.state.carsInfo)
-//   // }
-//   this.state.carsInfo.forEach(x=>{
-//     if(x._id === id){
-//       this.props.updateView('update',x)
-//     }
-//   })
-// }
-//this.props.updateView('update',x)
-  render(){
-    let carList = this.state.carsInfo.map(car=> {
-
-      // if(car.comments.length !== 0){
-        let content = car.comments.map(x=>{return <li >{x}</li>});
-		
-		return <div className="listCarBox row">
-			<div>
+  //
+render(){
+  let key = 0;
+  let carList = this.state.carsInfo.map(car=> {
+    // if(car.comments.length !== 0){
+    let content = car.comments.map(x=>{return <li key={x} >{x}</li>});
+    return <div key={key++} className="listCarBox row">
+      <div>
 				<p>Fordonstyp: {car.vehicleType}</p>
 				<p>Märke: {car.brand}</p>
 				<p>Modell: {car.model}</p>
@@ -67,42 +53,6 @@ class UpdateCars extends React.Component{
 				 <button className='btn'  onClick={()=>this.props.updateView('update',car)}>Uppdatera</button>
 			</div>
 		</div>
-        /*return <li className="item" key={car._id} data-id={car._id} >
-          <span className="label">Märke:</span> <span>{car.brand}</span>
-          <span className="label">Växellåda:</span> <span>{car.gearbox}</span>
-          <span className="label">Modell: </span><span> {car.model}</span>
-          <span className="label">Dagshyra: </span><span> {car.dailyFee}</span>
-          <span className="label">År: </span><span> {car.year}</span>
-          <span className="label">Bränsle: </span><span> {car.fuel}</span>
-          <span className="label">Obligatoriskt körkort: </span><span> {car.requiredDriversLicense}</span>
-          <span className="label">Fordonstyp: </span><span> {car.vehicleType}</span>
-          <span className="label">Status: </span><span> {car.status}</span>
-          <span className="label">Kommentarer: </span><span> <ul className='li'>{content}</ul></span>
-          <br/>
-          <img className='list-item'  src={car.imgLink} alt=""/>
-          <br/>
-          <button className='deleteButton'  onClick={()=>this.props.updateView('update',car)}>Uppdatera</button>
-        </li>*/
-      // }
-      // else{
-      //    let content = car.comments.map(x=>{return <li >{x}</li>});
-      //   return <li className="item" key={car._id} data-id={car._id} >
-      //     <span className="label">Brand:</span> <span>{car.brand}</span>
-      //     <span className="label">Gearbox:</span> <span>{car.gearbox}</span>
-      //     <span className="label">Model: </span><span> {car.model}</span>
-      //     <span className="label">DailyFee: </span><span> {car.dailyFee}</span>
-      //     <span className="label">Year: </span><span> {car.year}</span>
-      //     <span className="label">Fuel: </span><span> {car.fuel}</span>
-      //     <span className="label">RequiredDriversLicense: </span><span> {car.requiredDriversLicense}</span>
-      //     <span className="label">VehicleType: </span><span> {car.vehicleType}</span>
-      //     <span className="label">Status: </span><span> {car.status}</span>
-      //     <span className="label">Comments: </span><span> <ul className='li'>{content}</ul></span>
-      //     <br/>
-      //     <img className='list-item'  src={car.imgLink} alt=""/>
-      //     <br/>
-      //     <button className='deleteButton'  onClick={()=>this.props.updateView('update',car)}>Update</button>
-      //   </li>
-      // }
     })
     return <ul>{carList}</ul>
   }
