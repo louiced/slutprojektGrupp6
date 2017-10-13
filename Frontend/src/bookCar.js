@@ -62,16 +62,14 @@ class BookCar extends React.Component {
 					<option value="A" >A</option>
 					<option value="B">B</option>
 				</select>
-					</span> 
+					</span>
 				<span>Bränsle: <select name="fuel" onChange={this.handleFuelChange}>
-
 					<option value="" defaultValue></option>
 					<option value="95" >Bensin 95</option>
 					<option value="diesel">Diesel</option>
 				</select>
 					</span>
 				<span>Maxhyra per dag: <input type="number" name="quantity" min="0" max="5000" defaultValue="5000" onChange={this.handleMaxRentChange}/>
-
 				</span>
 			</div>
 			<button className="btn" onClick={this.findCars} >Hitta bilar</button>
@@ -88,7 +86,7 @@ class BookCar extends React.Component {
 	// Gets all vehicles from DB
 	findCars(ev){
 		let self = this;
-		axios.get('http://localhost:3000/vehicles')
+		axios.get('/vehicles')
 		.then(res => {
 			//console.log(res.data);
 			self.filterCars(res.data);
@@ -97,9 +95,10 @@ class BookCar extends React.Component {
 			console.log(err);
 		})
 	}
-	
+
 	
 	// Filters vehicles depending on users choices
+
 	filterCars(data){
 		let availableCars = [];
 		let unAvailableCars = [];
@@ -133,10 +132,11 @@ class BookCar extends React.Component {
 						}
 					}
 				}
-			} 
+			}
 		}
 		this.renderCars(availableCars, unAvailableCars);
 	}
+
 	
 	renderCars(availableCars, unAvailableCars){
 		this.setState({
@@ -157,6 +157,7 @@ class BookCar extends React.Component {
 	
 	// Event handlers
 
+
 	handlePickupDate(date){
 		//let pickupDate = ev.target.value;
 		//console.log(pickupDate);
@@ -165,57 +166,43 @@ class BookCar extends React.Component {
 			returnDate: date
 		});
 	}
-	
+
 	handleReturnDate(date){
 		//let returnDate = ev.target.value;
 		this.setState({
 			returnDate: date
 		});
 	}
-	
+
 	handleGearChange(ev){
 		this.setState({
 			gearFilter: ev.target.value
 		});
 	}
-	
+
 	handleDriveLicChange(ev){
 		this.setState({
 			driveLicFilter: ev.target.value
 		});
 	}
-	
+
 	handleFuelChange(ev){
 		this.setState({
 			fuelFilter: ev.target.value
 		});
 	}
-	
+
 	handleMaxRentChange(ev){
 		this.setState({
 			maxRentFilter: ev.target.value
 		});
 	}
-}
-
-/*<form>
-			<span>Boka från: </span><input type="date" name="bookDate" min={new Date()} onChange={this.handlePickupDate}/>
-		</form>
-			<form>
-			<span>Till och med:  </span><input type="date" name="bookDate" min={new Date()} onChange={this.handleReturnDate}/>
-		</form>*/
-
-export default BookCar;
-
-/*
-class ShowCarList {
-	componentDidMount(){
-		// Make GET request
-		// Map list of cars
-		// Filter?
+	handleDateChange(date) {
+		this.setState({
+			startDate: date
+		});
 	}
 }
 
-&& obj.dailyFee <= this.state.maxRentFilter && obj.driversLicense === this.state.driveLicFilter
-*/
 
+export default BookCar;

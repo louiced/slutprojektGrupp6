@@ -79,9 +79,7 @@
     "gearbox": null,
     "imgLink": "https://upload.wikimedia.org/wikipedia/commons/6/6a/Mercedes-Benz_Atego_white_strasbourg.JPG",
     "fuel": null,
-    "comments": [{
-        "damages": "Större reva på högersida skåp."
-    }],
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -121,7 +119,7 @@
     "year": 2001,
     "gearbox": null,
     "dailyFee": 498,
-    "imgLink": '#',
+    "imgLink": "#",
     "fuel": null,
     "comments": [],
     "status": "available",
@@ -149,7 +147,7 @@
     "year": 2008,
     "gearbox": "manuell",
     "dailyFee": 598,
-    "imgLink": '#',
+    "imgLink": "#",
     "fuel": null,
     "comments": [],
     "status": "available",
@@ -163,7 +161,7 @@
     "year": 2003,
     "gearbox": "automat",
     "dailyFee": 198,
-    "imgLink": '#',
+    "imgLink": "#",
     "fuel": "95",
     "comments": [],
     "status": "available",
@@ -234,9 +232,7 @@
     "gearbox": null,
     "dailyFee": 225,
     "fuel": "diesel",
-    "comments": [{
-        "damages": "Backen är väldigt trög att få i."
-    }],
+    "comments": [],
     "status": "available",
 	"bookings": []
   },
@@ -252,5 +248,18 @@
     "comments": [],
     "status": "available",
 	"bookings": []
-  }
+},
+{
+  "vehicleType": "personbil",
+  "requiredDriversLicense": "B",
+  "brand": "yifei",
+  "model": "v70",
+  "year": 1996,
+  "gearbox": "manuell",
+  "dailyFee": 298,
+  "fuel": "diesel",
+  "comments": [],
+  "status": "available",
+"bookings": []
+}
 ]

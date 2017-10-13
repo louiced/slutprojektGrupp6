@@ -20,6 +20,7 @@ class ShowBookings extends React.Component {
 	}
 	render(){
 		let view;
+
 		//console.log(this.state.bookedCars);
 		switch(this.state.view){
 			case 'ShowBookings':
@@ -34,10 +35,10 @@ class ShowBookings extends React.Component {
 					<button data-id={car.carObj._id} data-datestring={car.dateString} onClick={this.confirmAnullment} className="btn">Avboka</button>
 				</div>
 			})
-				view = <div>
-					<h2>Mina bokningar</h2>
-					<ul>{carList}</ul>
-				</div>
+			view = <div>
+				<h2>Mina bokningar</h2>
+				<ul>{carList}</ul>
+			</div>
 		} else {
 			view = <div><h2>Mina bokningar</h2>
 				<p>Inga bokningar för närvarande</p><br/></div>
@@ -52,11 +53,11 @@ class ShowBookings extends React.Component {
 					break;
 			case 'AnullmentConfirm': 
 				view = <div><p>Avbokningen är bekräftad</p></div>
+
 		}
-		
 		return view;
 	}
-	
+
 	componentDidMount(){
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
@@ -76,18 +77,20 @@ class ShowBookings extends React.Component {
 			console.log(err);
 		})
 	}
-	
+
 	renderCars(data){
 		this.setState({
 			bookedCars: data
 		});
 	}
+
 	renderVehicles(data){
 		this.setState({
 			carBookings: data
 		});
 	}
 	
+
 	anullBooking(ev){
 		let carId = ev.target.getAttribute('data-id');
 		let dateString = ev.target.getAttribute('data-datestring');
@@ -101,6 +104,7 @@ class ShowBookings extends React.Component {
 				newBookedCars.push(car);
 			}
 		});
+
 		console.log("newBookedCars", newBookedCars);
 		let pickedCar = this.state.carBookings.find(car => {
 			return car._id === carId
@@ -132,6 +136,7 @@ class ShowBookings extends React.Component {
 				bookedCars: data
 			}
 		});
+
 	}
 	
 	updateVehicleDocument(data, id){

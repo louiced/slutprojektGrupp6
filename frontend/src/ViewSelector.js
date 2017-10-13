@@ -40,9 +40,9 @@ class ViewSelector extends React.Component{
 				<p>Inloggad som {this.state.loggedInAs.name.first} {this.state.loggedInAs.name.last}</p>
 			</div>
 		} else {
-			logOutBox = <div>LOGUTBOXJÄVEL</div>
+			//logOutBox = <div>LOGUTBOXJÄVEL</div>
 		}
-		
+
 		let navBar = <ul className="navBar">
 					<li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Logga in</span></li>
 					<li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Registrera</span></li>
@@ -55,17 +55,14 @@ class ViewSelector extends React.Component{
 				break;
 			case 'registerNewCC': view = <div className="mainContent">
 			{navBar}
-					<RegisterComponent updateView={this.updateView}/>
+					<RegisterComponent updateView={this.updateView} updateUserId={this.updateUserId} updateUserInfo={this.updateUserInfo}/>
 				</div>
 			break;
-
 			case 'UserView': view = <div>{logOutBox}<div className="mainContent"><UserView userId={this.state.userId}/></div></div>
 			break;
 			case 'AdminView': view = <div className="mainContent"><AdminView/></div>
-
 		}
 		return view;
-
 	}
 
 	ccLoginClick(ev){
@@ -105,19 +102,19 @@ class ViewSelector extends React.Component{
 			view: str
 		});
 	}
-	
+
 	updateUserId(str){
 		this.setState({
 			userId: str
 		});
 	}
-	
+
 	logOutClick(ev){
 		this.setState({
 			view: 'Login'
 		});
 	}
-	
+
 	updateUserInfo(user) {
 		this.setState({
 			loggedInAs: user

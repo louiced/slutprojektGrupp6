@@ -11,8 +11,8 @@ class LoginComponent extends React.Component {
 			email: '',
 			pw: '',
 			view: 'Login',
-            isLoggedIn: false,
-            loggedInAs: null,
+      isLoggedIn: false,
+      loggedInAs: null,
 			errMsg: null,
 			errMsgCss: 'errMsgCss hidden'
 		};
@@ -23,24 +23,22 @@ class LoginComponent extends React.Component {
 		this.validateLogin = this.validateLogin.bind(this);
 	}
 	render(){
-      console.log(this.state);
+		console.log(this.state);
 		let view;
 		switch(this.state.view){
 			case 'Login':
-				view = <div>
-						<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
-						<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
-						<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
-						<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
-					</div>
-				break;
+			view = <div>
+				<input type="text" placeholder="Epost" onChange={this.handleEmailInput}/>
+				<input type="password" placeholder="Lösenord" onChange={this.handlePwInput}/>
+				<button className="btn" onClick={this.loginClick}>LOGGA IN</button>
+				<p className={this.state.errMsgCss}>{this.state.errMsg}</p>
+			</div>
+			break;
 		}
 		return view;
 	}
-
 	handleEmailInput(ev){
 		let val = ev.target.value;
-		console.log(val);
 		this.setState({
 			email: val
 		});
@@ -48,36 +46,32 @@ class LoginComponent extends React.Component {
 
 	handlePwInput(ev){
 		let val = ev.target.value;
-		console.log(val);
 		this.setState({
 			pw: val
 		});
 	}
-    
-    
     //uppdaterar state så att loggedIn = true OM user matchar user i db
     updateLoginStatus(response){
       let allUsers = response.data;
+			console.log(allUsers)
       allUsers.forEach( (el) => {
         if(this.state.email === el.email && this.state.pw === el.password) {
-		  console.log('el mail: ', el.email, this.state.email);
+		  //console.log('el mail: ', el.email, this.state.email);
           this.setState({
             isLoggedIn: true,
             loggedInAs: el
           })
 		this.props.updateUserInfo(el);
 		}
-		
-		console.log('state, loggedInAs: ', this.state.loggedInAs);
-		console.log('el, loggedInAs: ', el);
+		//console.log('state, loggedInAs: ', this.state.loggedInAs);
+		//console.log('el, loggedInAs: ', el);
       });
     }
-    
     //admin ? AdminView : UserView
     validateLogin(){
       console.log('validate isLoggedIn: ', this.state.isLoggedIn); //if false, render errMsg!
       console.log('validate, loggedInAs: ', this.state.loggedInAs); //bör returnera EN user som matchar det som matats in, annars default null
-      
+      console.log('validate, loggedInAs.name.first: ', this.state.loggedInAs.name.first);
       if(this.state.isLoggedIn === true) {
         if(this.state.email !== 'admin@olsson.se') {
           this.props.updateUserId(this.state.loggedInAs._id);
@@ -93,13 +87,13 @@ class LoginComponent extends React.Component {
 		  })
 	  }
     }
+
   
 	loginClick(ev){
-		//this.props.updateUserId('59df829cc63624c0f441b08a'); //tillfälligt hack
-		//this.props.updateView('UserView');
-
-
-      let self = this;      
+		this.props.updateUserId('59df829cc63624c0f441b08a'); //tillfälligt hack
+		this.props.updateView('UserView');
+		/*
+      let self = this;
       axios.get('http://localhost:3000/users')
       .then(function (response) {
         console.log(response);
@@ -109,7 +103,7 @@ class LoginComponent extends React.Component {
       .catch(function (error) {
         console.log(error);
       });
-	  
+	  */
     }
 }
 

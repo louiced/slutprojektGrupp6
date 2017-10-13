@@ -7,8 +7,7 @@ class ListCars extends React.Component{
 		super(props);
 		this.state = {
 			bookedCars: [],
-			view: "ListCars",
-			bookBool: false
+			view: "ListCars"
 		};
 		this.bookCarClick = this.bookCarClick.bind(this);
 		this.updateUserDocument = this.updateUserDocument.bind(this);
@@ -69,17 +68,20 @@ class ListCars extends React.Component{
 					<button className="btn" onClick={this.showBookings}>Visa mina bokningar</button>
 				</div>
 		}
+
 		//console.log(this.props.unavailableCars);
 		
 		
  		
 		return <div>{view}</div>
 		
+
 	}
-	
+
 	componentDidMount(){
 		console.log(this.props.userId);
 		// Gets previous booked cars of loggedIn user
+
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
 		.then(res => {
@@ -90,7 +92,7 @@ class ListCars extends React.Component{
 			console.log(err);
 		})
 	}
-	
+
 	bookCarClick(ev){
 		
 		let id = ev.target.getAttribute('data-id');
@@ -109,6 +111,7 @@ class ListCars extends React.Component{
 				this.updateUserDocument(obj);
 			}
 		})
+		//new Date(1222333).valueOf return number so can compare, new Date(12232323).toLocaleString() can not compare date
 		let self = this;
 		axios.get(`http://localhost:3000/vehicles/${id}`)
 		.then(res => {
@@ -117,28 +120,32 @@ class ListCars extends React.Component{
 		.catch(err => {
 			console.log(err);
 		})
-		
 	}
+
 	
 	// Updates state with previous bookings of specific (clicked) car
 	updateStateBookings(list, id){ 
+
 		this.setState({
 			previousCarBookings: list
 		});
 		this.updateVehicleDocument(id);
 	}
+
 	
 	// Updates state with previous bookings for specific user
+
 	updateStateCars(list){
 		this.setState({
 			bookedCars: list
 		});
 	}
+
 	
 	// Updates userDB with previous bookings AND new booking
+
 	updateUserDocument(data) {
 		let bookedCars = this.state.bookedCars;
-		
 		bookedCars.push(data);
 		axios({
 			method: 'put',
@@ -148,9 +155,11 @@ class ListCars extends React.Component{
 			}
 		});
 	}
+
 	
 	
 	// Updates VehicleDB with previous bookings AND new booking
+
 	updateVehicleDocument(id){
 		let list = this.state.previousCarBookings;
 		let pickupString = this.props.pickupDate.toLocaleString();
@@ -195,19 +204,9 @@ class ListCars extends React.Component{
 	
 	showBookings(ev){
 		this.props.showBookings();
+
 	}
 }
 
-/*axios({
-			method: 'put',
-			url: `http://localhost:3000/vehicles/59dccaf4d556aa9aef8ea0e1`,
-			data: {
-				bookings: list
-			}
-		});*/
-
-/*
-
-*/
-
 export default ListCars;
+

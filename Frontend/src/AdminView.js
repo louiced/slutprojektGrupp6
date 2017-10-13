@@ -26,15 +26,12 @@ class AdminView extends React.Component{
         {
 					class: '',
 					id: 'tab4'
-				},
-        {
-          class: '',
-          id: 'tab5'
-        }
+				}
 			],
 			view: 'showCars'
     }
     this.switchTab = this.switchTab.bind(this);
+    this.updateView = this.updateView.bind(this);
     // this.switchCreateView = this.switchCreateView.bind(this);
     // this.switchUpdateView = this.switchUpdateView.bind(this);
     // this.switchDeleteView = this.switchDeleteView.bind(this);
@@ -54,6 +51,12 @@ class AdminView extends React.Component{
 //     view: 'deleteCars'
 //   })
 // }
+updateView(str,data){
+  this.setState({
+    view: str,
+    data: data
+  })
+}
 switchTab(ev){
   let id = ev.target.id;
   let newTabs = [];
@@ -80,9 +83,6 @@ switchTab(ev){
     case 'tab4':
       view = 'deleteCars'
       break;
-    case 'tab5':
-      view = 'update'
-      break;
   }
 
   this.setState({
@@ -92,10 +92,10 @@ switchTab(ev){
 }
   render(){
     let navBar = <ul className="navBar">
-          <li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Read Cars</span></li>
-          <li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Create Cars</span></li>
-          <li><span className={this.state.tabs[2].class} onClick={this.switchTab} id="tab3">Update Cars</span></li>
-          <li><span className={this.state.tabs[3].class} onClick={this.switchTab} id="tab4">Delete Cars</span></li>
+          <li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Läs Bil</span></li>
+          <li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Skapa Bil</span></li>
+          <li><span className={this.state.tabs[2].class} onClick={this.switchTab} id="tab3">Uppdatera Bil</span></li>
+          <li><span className={this.state.tabs[3].class} onClick={this.switchTab} id="tab4">Ta bort Bil</span></li>
         </ul>;
       let view;
           switch(this.state.view){
@@ -106,13 +106,13 @@ switchTab(ev){
               view =  <div>{navBar} <CreateCars updateView={this.switchTab}/></div>;
               break;
             case  'updateCars':
-              view =  <div>{navBar} <UpdateCars changeView={this.switchTab}/></div>;
+              view =  <div>{navBar} <UpdateCars updateView={this.updateView} /></div>;
               break;
             case  'deleteCars':
               view = <div>{navBar} <DeleteCars/></div>;
               break;
             case  'update':
-              view = <div>{navBar} <Update /></div>;
+              view = <div>{navBar} <Update data={this.state.data}/></div>;
               break;
           }
     return view;

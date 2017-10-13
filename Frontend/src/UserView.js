@@ -38,7 +38,7 @@ class UserView extends React.Component {
 			}
 		return view;
 	}
-	
+
 	switchTab(ev){
 		let id = ev.target.id;
 		let newTabs = [];

@@ -143,7 +143,6 @@ select, input {
 	padding: 5px;
 	border-radius: 5px;
 }
-
 .carBox {
 	border: 1px solid black;
 	background-color: white;
@@ -160,14 +159,19 @@ select, input {
 .hidden {
 	display: none;
 }
-
-
+/*blir röd om man skrivit in fel i registerComponent*/
+input.attention {
+	border: 1px solid red;
+}
 .list-group{
 	list-style: none;
 	width: auto;
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
+}
+.li{
+	list-style: none;
 }
 .list-item{
 	width: 45%;
@@ -201,9 +205,31 @@ select, input {
 }
 .deleteButton{
 	background-color:rgba(204, 0, 0, .7);
-	width: 56px;
+	width: 68px;
 	border-radius: 5px;
 }
 
-
+.carBox {
+	border: 1px solid black;
+	background-color: white;
+}
+.carImg {
+	width: 100px;
+}
+.errMsgCss {
+	color: red;
+}
+.hidden {
+	display: none;
+}
+.selectField{
+	width: 125px
+}
+.status{
+	margin-left: -18px;
+	margin-top: 10px;
+}
+.addMargin{
+	margin-bottom: 15px;
+}
 
