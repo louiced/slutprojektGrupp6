@@ -37,7 +37,7 @@ class ShowBookings extends React.Component {
 						<p>{car.carObj.vehicleType}, körkort: {car.carObj.requiredDriversLicense}</p>
 					</div>
 					<div>
-						<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
+						<button data-id={car.carObj._id} data-datestring={car.dateString} onClick={this.confirmAnullment} className="btn">Avboka</button>
 					</div>
 				</div>
 			})
