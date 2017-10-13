@@ -1,6 +1,6 @@
 import React from 'react';
 import './App.css';
-import BookCar from './BookCar.js';
+import BookCar from './bookCar.js';
 import ShowBookings from './ShowBookings.js';
 
 

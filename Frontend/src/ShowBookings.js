@@ -24,20 +24,27 @@ class ShowBookings extends React.Component {
 		switch(this.state.view){
 			case 'ShowBookings':
 				if (this.state.bookedCars.length > 0){ //
-			let key = 0;
-				let carList = this.state.bookedCars.map(car => {
-				return <div className="carBox" key={key++}>
-					<span>{car.carObj.brand}</span><br/>
-				<span>{car.carObj.model}</span><br/>
-				<span>{car.carObj.vehicleType}</span><br/>
-				<img className="carImg" src={car.carObj.imgLink} alt="#"/> 
-					<button data-id={car.carObj._id} data-datestring={car.dateString} onClick={this.confirmAnullment} className="btn">Avboka</button>
+			       let key = 0;
+			   	   let carList = this.state.bookedCars.map(car => {
+					console.log('carObj ', car.carObj)
+				return <div className="carBox row" key={key++}>
+					<div>
+						<img className="carImg" src={car.carObj.imgLink} alt="#"/>
+					</div>
+					<div className="carInfo">
+						<p>datum</p>
+						<p>{car.carObj.brand} - {car.carObj.model}</p>
+						<p>{car.carObj.vehicleType}, körkort: {car.carObj.requiredDriversLicense}</p>
+					</div>
+					<div>
+						<button data-id={car.carObj._id} onClick={this.anullBooking} className="btn">Avboka</button>
+					</div>
 				</div>
 			})
-				view = <div>
-					<h2>Mina bokningar</h2>
-					<ul>{carList}</ul>
-				</div>
+			view = <div>
+				<h2>Mina bokningar</h2>
+				<ul>{carList}</ul>
+			</div>
 		} else {
 			view = <div><h2>Mina bokningar</h2>
 				<p>Inga bokningar för närvarande</p><br/></div>
@@ -53,10 +60,9 @@ class ShowBookings extends React.Component {
 			case 'AnullmentConfirm': 
 				view = <div><p>Avbokningen är bekräftad</p></div>
 		}
-		
 		return view;
 	}
-	
+
 	componentDidMount(){
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
@@ -76,12 +82,13 @@ class ShowBookings extends React.Component {
 			console.log(err);
 		})
 	}
-	
+
 	renderCars(data){
 		this.setState({
 			bookedCars: data
 		});
 	}
+
 	renderVehicles(data){
 		this.setState({
 			carBookings: data
@@ -105,6 +112,7 @@ class ShowBookings extends React.Component {
 		let pickedCar = this.state.carBookings.find(car => {
 			return car._id === carId
 		});
+		
 		let newBookingsForCarDoc = pickedCar.bookings.filter(book => {
 			return book.dateString !== dateString
 		})

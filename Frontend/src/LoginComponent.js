@@ -95,7 +95,7 @@ class LoginComponent extends React.Component {
     }
   
 	loginClick(ev){
-		this.props.updateUserId('59df5d3ac63624c0f441a77c'); //tillfälligt hack
+		this.props.updateUserId('59dbb9e62236820cf80c3342'); //tillfälligt hack
 		this.props.updateView('UserView');
 
 /*
