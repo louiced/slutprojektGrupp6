@@ -26,44 +26,49 @@ class Update extends React.Component{
     this.handleComment = this.handleComment.bind(this);
     this.handleYear = this.handleYear.bind(this);
   }
-
+// after man wrote in vehicle input, setState with new value in input field
   fordontype(ev){
     this.setState({
       vehicleType: ev.target.value
     },()=>{})
   }
+  // after man wrote in brand input, setState with new value in input field
   handleBrand(ev){
     this.setState({
       brand: ev.target.value
     },()=>{})
   }
+  // after man wrote in model input, setState with new value in input field
   handleModel(ev){
     this.setState({
       model: ev.target.value
     },()=>{})
   }
-  //handleModel input
+   // after man wrote in gearbox input, setState with new value in input field
   handleGearbox(ev){
     this.setState({
       gearbox: ev.target.value
     },()=>{})
   }
-  //handleGearbox input
+  // after man wrote in status input, setState with new value in input field
   handleStatus(ev){
     this.setState({
       status: ev.target.value
     },()=>{})
   }
+  // after man wrote in dailyFee input, setState with new value in input field
   handleDailyFee(ev){
     this.setState({
       dailyFee: ev.target.value
     },()=>{})
   }
+  // after man wrote in dailyFee input, setState with new value in input field
   handleComment(ev){
     this.setState({
       comments: ev.target.value
     },()=>{})
   }
+  // after man wrote in year input, setState with new value in input field
   handleYear(ev){
     this.setState({
       year: ev.target.value
@@ -94,6 +99,7 @@ class Update extends React.Component{
       console.log(error);
     });
   }
+  //render page
   render(){
       return(
         <div>

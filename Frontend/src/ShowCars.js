@@ -72,10 +72,10 @@ class ShowCars extends React.Component{
     let self = this
     axios.get('/vehicles',{
       params: {
-        gear: this.state.gearFilter,
+        gearbox: this.state.gearFilter,
         fuel: this.state.fuelFilter,
-        driveLicence: this.state.driveLicFilter,
-        maxFee: this.state.maxRentFilter
+        requiredDriversLicense: this.state.driveLicFilter,
+        dailyFee: this.state.maxRentFilter
       }
     })
     .then(function (response) {

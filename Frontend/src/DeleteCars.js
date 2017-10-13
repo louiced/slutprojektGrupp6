@@ -7,27 +7,32 @@ class DeleteCars extends React.Component{
     this.state = {
       carsInfo: []
     }
-  this.handleDelete = this.handleDelete.bind(this)
+    this.handleDelete = this.handleDelete.bind(this);
+    this.getInfo = this.getInfo.bind(this);
   }
   componentDidMount(){
-    let self = this
-    axios.get('http://localhost:3000/vehicles')
-    .then(function (response) {
-      self.setState({
-        carsInfo: response.data
-      }, ()=>{})
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    this.getInfo();
+  }
+  getInfo(){
+    axios.get('/vehicles')
+      .then(function (response) {
+        this.setState({
+          carsInfo: response.data
+        }, ()=>{})
+      }.bind(this))
+      .catch(function (error) {
+        console.log(error);
+      });
   }
   handleDelete(ev){
+    // let self = this;
     axios({
       method: 'delete',
-      url: `http://localhost:3000/vehicles/${ev.target.parentElement.getAttribute('data-id')}`
+      url: `/vehicles/${ev.target.parentElement.getAttribute('data-id')}`
     })
     .then(function (response) {
-    })
+     this.getInfo();
+    }.bind(this))
     .catch(function (error) {
       console.log(error);
     });
