@@ -264,6 +264,10 @@ class RegisterComponent extends React.Component {
 					this.getIdAndSend(obj.email);
 				} else {
 					//om anv finns, exists===true, stanna på registerNewCC
+					this.setState({
+						 errMsg: 'Användaren existerar redan, gå till logga in eller välj en annan email.',
+						 errMsgCss: 'errMsgCss',
+					 });
 					console.log('post did not succeed, user already exists');
 					this.props.updateView('registerNewCC');
 				}
