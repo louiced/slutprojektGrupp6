@@ -11,8 +11,8 @@ class LoginComponent extends React.Component {
 			email: '',
 			pw: '',
 			view: 'Login',
-      isLoggedIn: false,
-      loggedInAs: null,
+      		isLoggedIn: false,
+      		loggedInAs: null,
 			errMsg: null,
 			errMsgCss: 'errMsgCss hidden'
 		};
