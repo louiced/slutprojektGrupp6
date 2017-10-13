@@ -24,7 +24,7 @@ class ListCars extends React.Component{
 			if (this.props.data.length > 0 && this.props.unavailableCars.length > 0){
 				console.log("length > 0" );
 				let list = this.props.data.map(el => {
-				return <div className="carBox row" key={el._id} data-id={el._id}>
+				return <div className="carBox row" key={el._id} >
 					<div>
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
@@ -32,7 +32,7 @@ class ListCars extends React.Component{
 						<p>{el.brand} - {el.model}</p>
 						<p>{el.vehicleType}</p>
 					</div>
-					<div>
+					<div data-id={el._id}>
 						<button className="btn" onClick={this.confirmBooking}>Boka</button>
 					</div>
 				</div>
@@ -54,10 +54,10 @@ class ListCars extends React.Component{
 				view = <div>
 						<ul>{list}</ul>
 						<ul>{unavList}</ul>
-					</div>								   
+					</div>
 			} else if(this.props.data.length > 0 && this.props.unavailableCars.length <= 0){
 				let list = this.props.data.map(el => {
-				return <div className="carBox row" key={el._id} data-id={el._id}>
+				return <div className="carBox row" key={el._id} >
 					<div>
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
@@ -65,7 +65,7 @@ class ListCars extends React.Component{
 						<p>{el.brand} - {el.model}</p>
 						<p>{el.vehicleType}</p>
 					</div>
-					<div>
+					<div data-id={el._id}>
 						<button className="btn" onClick={this.confirmBooking}>Boka</button>
 					</div>
 				</div>
@@ -86,17 +86,17 @@ class ListCars extends React.Component{
 				</div>
 		}
 
-		
+
 		//console.log(this.props.unavailableCars);
-		
-		
- 		
+
+
+
 		return <div>{view}</div>
 
 	}
 
 	componentDidMount(){
-		
+
 		// Gets previous booked cars of loggedIn user
 		let self = this;
 		axios.get(`http://localhost:3000/users/${this.props.userId}`)
@@ -109,7 +109,7 @@ class ListCars extends React.Component{
 	}
 
 	bookCarClick(ev){
-		
+
 		let id = ev.target.getAttribute('data-id');
 		let obj;
 		let pickupString = this.props.pickupDate.toLocaleString();
@@ -136,23 +136,23 @@ class ListCars extends React.Component{
 			console.log(err);
 		})
 	}
-	
+
 	// Updates state with previous bookings of specific (clicked) car
-	updateStateBookings(list, id){ 
+	updateStateBookings(list, id){
 
 		this.setState({
 			previousCarBookings: list
 		});
 		this.updateVehicleDocument(id);
 	}
-	
+
 	// Updates state with previous bookings for specific user
 	updateStateCars(list){
 		this.setState({
 			bookedCars: list
 		});
 	}
-	
+
 	// Updates userDB with previous bookings AND new booking
 	updateUserDocument(data) {
 		let bookedCars = this.state.bookedCars;
@@ -165,8 +165,8 @@ class ListCars extends React.Component{
 			}
 		});
 	}
-	
-	
+
+
 	// Updates VehicleDB with previous bookings AND new booking
 	updateVehicleDocument(id){
 		let list = this.state.previousCarBookings;
@@ -192,7 +192,7 @@ class ListCars extends React.Component{
 			view: 'Thanks'
 		});
 	}
-	
+
 	confirmBooking(ev){
 		let id = ev.target.parentElement.getAttribute('data-id');
 		this.setState({
@@ -200,17 +200,17 @@ class ListCars extends React.Component{
 			currentId: id
 		});
 	}
-	
+
 	noBooking(ev){
 		this.setState({
 			view: 'ListCars'
 		});
 	}
-	
+
 	bookMoreCars(ev){
 		this.props.bookCar('bookCar');
 	}
-	
+
 	showBookings(ev){
 		this.props.showBookings();
 	}
@@ -218,4 +218,3 @@ class ListCars extends React.Component{
 
 
 export default ListCars;
-

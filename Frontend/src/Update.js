@@ -81,7 +81,7 @@ class Update extends React.Component{
     //below will be update request with new info to update
     axios({
       method: 'put',
-      url: `http://localhost:3000/vehicles/${this.state.id}`,
+      url: `/vehicles/${this.state.id}`,
       data: {
         vehicleType: this.state.vehicleType,
         brand: this.state.brand,

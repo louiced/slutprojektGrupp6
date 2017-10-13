@@ -16,7 +16,7 @@ class UpdateCars extends React.Component{
   }
   componentDidMount(){
     let self = this
-    axios.get('/vehicles')
+    axios.get('/vehicle')
     .then(function (response) {
       self.setState({
         carsInfo: response.data
