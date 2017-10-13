@@ -20,11 +20,10 @@ class ListCars extends React.Component{
 	}
 	render(){
 		let view;
-		console.log(this.props.data);
 		if (this.state.view === 'ListCars'){
 			if (this.props.data.length > 0 && this.props.unavailableCars.length > 0){
 				let list = this.props.data.map(el => {
-				return <div className="carBox row" key={el._id}>
+				return <div className="carBox row" key={el._id} data-id={el._id}>
 					<div>
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
@@ -32,7 +31,7 @@ class ListCars extends React.Component{
 						<p>{el.brand} - {el.model}</p>
 						<p>{el.vehicleType}</p>
 					</div>
-					<div data-id={el._id}>
+					<div>
 						<button className="btn" onClick={this.confirmBooking}>Boka</button>
 					</div>
 				</div>
@@ -57,7 +56,7 @@ class ListCars extends React.Component{
 					</div>								   
 			} else if(this.props.data.length > 0 && this.props.unavailableCars.length <= 0){
 				let list = this.props.data.map(el => {
-				return <div className="carBox row" key={el._id} >
+				return <div className="carBox row" key={el._id} data-id={el._id}>
 					<div>
 						<img className="carImg" src={el.imgLink} alt="#"/>
 					</div>
@@ -65,7 +64,7 @@ class ListCars extends React.Component{
 						<p>{el.brand} - {el.model}</p>
 						<p>{el.vehicleType}</p>
 					</div>
-					<div data-id={el._id}>
+					<div>
 						<button className="btn" onClick={this.confirmBooking}>Boka</button>
 					</div>
 				</div>
@@ -123,7 +122,6 @@ class ListCars extends React.Component{
 		})
 		//new Date(1222333).valueOf return number so can compare, new Date(12232323).toLocaleString() can not compare date
 		let self = this;
-		console.log(this.state.currentId);
 		axios.get(`http://localhost:3000/vehicles/${id}`)
 		.then(res => {
 			self.updateStateBookings(res.data.bookings, id);
@@ -144,7 +142,6 @@ class ListCars extends React.Component{
 	
 	// Updates state with previous bookings for specific user
 	updateStateCars(list){
-		console.log(list);
 		this.setState({
 			bookedCars: list
 		});
@@ -192,7 +189,6 @@ class ListCars extends React.Component{
 	
 	confirmBooking(ev){
 		let id = ev.target.parentElement.getAttribute('data-id');
-		console.log(id);
 		this.setState({
 			view: 'ConfirmBooking',
 			currentId: id

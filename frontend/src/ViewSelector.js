@@ -24,7 +24,6 @@ class ViewSelector extends React.Component{
 			loggedInAs: null
 		}
 		this.ccLoginClick = this.ccLoginClick.bind(this);
-		this.logOut = this.logOut.bind(this);
 		this.switchTab = this.switchTab.bind(this);
 		this.updateView = this.updateView.bind(this);
 		this.updateUserId = this.updateUserId.bind(this);
@@ -40,9 +39,9 @@ class ViewSelector extends React.Component{
 				<p>Inloggad som {this.state.loggedInAs.name.first} {this.state.loggedInAs.name.last}</p>
 			</div>
 		} else {
-			logOutBox = <div>LOGUTBOXJÄVEL</div>
+			//logOutBox = <div>LOGUTBOXJÄVEL</div>
 		}
-		
+
 		let navBar = <ul className="navBar">
 					<li><span className={this.state.tabs[0].class} onClick={this.switchTab} id="tab1">Logga in</span></li>
 					<li><span className={this.state.tabs[1].class} onClick={this.switchTab} id="tab2">Registrera</span></li>
@@ -55,17 +54,17 @@ class ViewSelector extends React.Component{
 				break;
 			case 'registerNewCC': view = <div className="mainContent">
 			{navBar}
-					<RegisterComponent updateView={this.updateView}/>
+					<RegisterComponent updateView={this.updateView} updateUserId={this.updateUserId} updateUserInfo={this.updateUserInfo}/>
 				</div>
 			break;
 
-			case 'UserView': view = <div>{logOutBox}<div className="mainContent"><UserView userId={this.state.userId}/></div></div>
+			case 'UserView': view = <div className="mainContent">{logOutBox}<UserView userId={this.state.userId}/></div>
 			break;
-			case 'AdminView': view = <div className="mainContent"><AdminView/></div>
+			case 'AdminView': view = <div className="mainContent">{logOutBox}<AdminView userId={this.state.userId}/></div>
+
 
 		}
 		return view;
-
 	}
 
 	ccLoginClick(ev){
@@ -74,11 +73,6 @@ class ViewSelector extends React.Component{
 		});
 	}
 
-	logOut(ev){
-		this.setState({
-			view: 'Login'
-		});
-	}
 	switchTab(ev){
 		console.log(ev.target.id);
 		let id = ev.target.id;
@@ -105,19 +99,21 @@ class ViewSelector extends React.Component{
 			view: str
 		});
 	}
-	
+
 	updateUserId(str){
 		this.setState({
 			userId: str
 		});
 	}
-	
+
 	logOutClick(ev){
+		localStorage.removeItem('userEmail');
+		localStorage.removeItem('userPw');
 		this.setState({
 			view: 'Login'
 		});
 	}
-	
+
 	updateUserInfo(user) {
 		this.setState({
 			loggedInAs: user
