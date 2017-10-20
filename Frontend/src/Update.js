@@ -94,6 +94,7 @@ class Update extends React.Component{
       }
     })
     .then(function (response) {
+      this.props.updateView('updateCars',response)
     })
     .catch(function (error) {
       console.log(error);

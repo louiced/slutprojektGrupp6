@@ -18,7 +18,7 @@ class ShowCars extends React.Component{
    this.handledriveLicFilter = this.handledriveLicFilter.bind(this);
    this.handlegearFilter = this.handlegearFilter.bind(this);
   }
-  
+
   handlemaxRentFilter(ev){
     this.setState({
       maxRentFilter: ev.target.value
@@ -103,7 +103,6 @@ class ShowCars extends React.Component{
        <input type="text" value={this.state.driveLicFilter} onChange={this.handledriveLicFilter} placeholder='Körkort'/>
      </div>
      <button className='btn' onClick={this.findCars}>Filtrera</button>
-		{/*<ul className='li'>{carList}</ul>*/}
 		<ul>{carList}</ul>
     </div>
   }
